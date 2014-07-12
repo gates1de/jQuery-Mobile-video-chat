@@ -36,7 +36,7 @@
 			<button type="button" onclick="onICE();">Receive ICE Candidates</button>
 		</p>
 
-		<script src="http://gateside-node.herokuapp.com:9001/socket.io/socket.io.js></script>
+		<script src="http://gateside-node.herokuapp.com:3000/socket.io/socket.io.js></script>
 		<script type="text/javascript">
 			var localVideo = document.getElementById('local-video');
 			var remoteVideo = document.getElementById('remote-video');
@@ -46,7 +46,7 @@
 			var mediaConstraints = {'mandatory': {'OfferToReceiveAudio':true, 'OfferToReceiveVideo':true }};
 
 			var socketReady = false;
-			var port = 9001;
+			var port = process.env.PORT || 9001;
 			var socket = io.connect('http://gateside-node.herokuapp.com:' + port + '/');
 			socket.on('connect', onOpened).on('message', onMessage);
 
