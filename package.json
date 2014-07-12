@@ -1,0 +1,23 @@
+{
+  "name": "gateside-node",
+  "version": "0.0.0",
+  "description": "This example app is first node app.",
+  "keywords": [
+    "example",
+    "node"
+  ],
+  "author": "gateside",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^3.14.0",
+    "logfmt": "^1.1.2",
+    "ws": "0.4.x",
+		"socket.io": "1.0.6"
+	},
+  "engines": {
+    "node": "0.10.x"
+  },
+  "scripts": {
+    "start": "node signaling.js"
+  }
+}
