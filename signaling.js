@@ -1,4 +1,4 @@
-var port = 9001;
+var port = 5000;
 var io = require('socket.io').listen(port);
 console.log((new Date()) + " Server is listening on port " + port);
  
