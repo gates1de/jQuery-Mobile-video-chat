@@ -49,8 +49,7 @@
   // ---- socket ------
   // create socket
   var socketReady = false;
-  var port = process.env.PORT || 3856;
-  var socket = io.connect('http://gateside-node.herokuapp.com:' + port + '/');
+  var socket = io.connect('/');
   // socket: channel connected
   socket.on('connect', onOpened)
         .on('message', onMessage);
