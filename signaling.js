@@ -6,16 +6,15 @@ var app = express();
 app.get('/', function(req, res) {
 	res.sendfile(__dirname + '/videoChat2.html');
 });
+app.set('port', port);
 
-//app.configure(function () {
-//	app.use(express.static(__dirname));
+//app.listen(port, function() {
+//	console.log('Listening on ' + port);
 //});
 
-app.listen(port, function() {
-	console.log('Listening on ' + port);
+var server = http.createServer(app).listen(app.get('port'), function(){
+	console.log('Express server listening on port ' + app.get('port'));
 });
-
-var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 console.log((new Date()) + " Server is listening on port " + port);
 
