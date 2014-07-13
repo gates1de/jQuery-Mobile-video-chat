@@ -11,10 +11,11 @@ app.get('/', function(req, res) {
 //	app.use(express.static(__dirname));
 //});
 
-var server = http.createServer(app).listen(app.get('port'), function() {
+app.listen(port, function() {
 	console.log('Listening on ' + port);
 });
 
+var server = http.createServer(app);
 var io = require('socket.io').listen(server);
 console.log((new Date()) + " Server is listening on port " + port);
 
