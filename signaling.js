@@ -5,7 +5,7 @@ var app = express();
 var server = http.createServer(app);
 
 app.get('/', function(req, res) {
-	res.sendfile(__dirname + '/index.html');
+	res.sendfile(__dirname + '/videoChat2.html');
 });
 
 //app.configure(function () {
