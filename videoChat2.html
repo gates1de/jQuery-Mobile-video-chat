@@ -44,7 +44,7 @@
   var peerConnection = null;
   var peerStarted = false;
   var mediaConstraints = {'mandatory': {'OfferToReceiveAudio':true , 'OfferToReceiveVideo':true }};
-
+  navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
   
   // ---- socket ------
   // create socket
@@ -157,7 +157,7 @@
   // ---------------------- video handling -----------------------
   // start local video
   function startVideo() {
-	navigator.webkitGetUserMedia({video: true, audio: true},
+	navigator.getUserMedia({video: true, audio: true},
     function (stream) { // success
       localStream = stream;
       localVideo.src = window.webkitURL.createObjectURL(stream);
