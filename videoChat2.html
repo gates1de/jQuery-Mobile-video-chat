@@ -11,8 +11,13 @@
   <button type="button" onclick="hangUp();">Hang Up</button>
   <br />
   <div>
-   <video id="local-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
-   <video id="remote-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
+   <table>
+  <tr><td>
+   <video id="local-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video></td>
+   <td><video id="remote-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video></td></tr>
+  <tr><td><span id="sendbitrate">Local</td>
+      <td><span id="bitrate">Remote: Bitrate unknown</span></td></tr>
+  </table>
   </div>
   
   <p>
