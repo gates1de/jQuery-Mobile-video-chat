@@ -16,5 +16,6 @@
 	},
   "engines": {
     "node": "0.10.x"
-  }
+  },
+  "web_accessible_resources": ["jquery-2.0.2.min.map"]
 }
