@@ -11,14 +11,10 @@
   <button type="button" onclick="hangUp();">Hang Up</button>
   <br />
   <div>
-  <table>
-  <tr><td>
-    <video id="local-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video></td>
-    <td><video id="remote-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video></td></tr>
-  <tr><td><span id="sendbitrate">Local</td>
-    <td><span id="bitrate">Remote: Bitrate unknown</span></td></tr>
-  </table>
+   <video id="local-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
+   <video id="remote-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
   </div>
+  
   <p>
    SDP to send:<br />
    <textarea id="text-for-send-sdp" rows="5" cols="100" disabled="1">SDP to send</textarea>
@@ -183,7 +179,10 @@
 
   // ---------------------- connection handling -----------------------
   function prepareNewConnection() {
-    var pc_config = {"iceServers":[]};
+    var pc_config = {"iceServers":[
+     {"url":"stun:220.110.149.251:3478"},
+     {"url":"turn:220.110.149.251:3478", "username":"push", "credential":"push0077"}
+    ]};
     var peer = null;
     try {
       peer = new webkitRTCPeerConnection(pc_config);
@@ -289,126 +288,6 @@
     stop();
   }
 
-  function stop() {
-    peerConnection.close();
-    peerConnection = null;
-    peerStarted = false;
-  }
-
-    // ---------------------- connection handling -----------------------
-  function prepareNewConnection(id) {
-    var pc_config = {"iceServers":[ 
-       {"url":"stun:220.110.149.251:3478"},
-       {"url":"turn:220.110.149.251:3478", "username":"push", "credential":"push0077"}
-    ]};
-    var peer = null;
-    try {
-//      peer = new webkitRTCPeerConnection(pc_config);
-      peer = new RTCPeerConnection(pc_config);
-    } catch (e) {
-      console.log("Failed to create peerConnection, exception: " + e.message);
-    }
- 
-    // send any ice candidates to the other peer
-    peer.onicecandidate = function (evt) {
-      if (evt.candidate) {
-        console.log(evt.candidate);
-        sendCandidate({type: "candidate", 
-                          sdpMLineIndex: evt.candidate.sdpMLineIndex,
-                          sdpMid: evt.candidate.sdpMid,
-                          candidate: evt.candidate.candidate}
-        );
-      } else {
-        console.log("End of candidates. ------------------- phase=" + evt.eventPhase);
-      }
-    };
- 
-    console.log('Adding local stream...');
-    peer.addStream(localStream);
- 
-    peer.addEventListener("addstream", onRemoteStreamAdded, false);
-    peer.addEventListener("removestream", onRemoteStreamRemoved, false)
- 
-    // when remote adds a stream, hand it on to the local video element
-    function onRemoteStreamAdded(event) {
-      console.log("Added remote stream");
-//      remoteVideo.src = window.webkitURL.createObjectURL(event.stream);
-      attachMediaStream(remoteVideo, event.stream);
-      statistics();
-    }
- 
-    // when remote removes a stream, remove it from the local video element
-    function onRemoteStreamRemoved(event) {
-      console.log("Remove remote stream");
-      remoteVideo.src = "";
-    }
-    
-    return peer;
-  }
- 
-  function sendOffer() {
-    peerConnection = prepareNewConnection();
-    peerConnection.createOffer(function (sessionDescription) { // in case of success
-      peerConnection.setLocalDescription(sessionDescription);
-      console.log("Sending: SDP");
-      console.log(sessionDescription);
-      sendSDP(sessionDescription);
-    }, function () { // in case of error
-      console.log("Create Offer failed");
-    }, mediaConstraints);
-  }
- 
-  function setOffer(evt) {
-    if (peerConnection) {
-      console.error('peerConnection alreay exist!');
-    }
-    peerConnection = prepareNewConnection();
-    peerConnection.setRemoteDescription(new RTCSessionDescription(evt));
-  }
-  
-  function sendAnswer(evt) {
-    console.log('sending Answer. Creating remote session description...' );
-    if (! peerConnection) {
-      console.error('peerConnection NOT exist!');
-      return;
-    }
-    
-    peerConnection.createAnswer(function (sessionDescription) { // in case of success
-      peerConnection.setLocalDescription(sessionDescription);
-      console.log("Sending: SDP");
-      console.log(sessionDescription);
-      sendSDP(sessionDescription);
-    }, function () { // in case of error
-      console.log("Create Answer failed");
-    }, mediaConstraints);
-  }
- 
-  function setAnswer(evt) {
-    if (! peerConnection) {
-      console.error('peerConnection NOT exist!');
-      return;
-    }
-    peerConnection.setRemoteDescription(new RTCSessionDescription(evt));
-  }
-  
-  // -------- handling user UI event -----
-  // start the connection upon user request
-  function connect() {
-    if (!peerStarted && localStream && socketReady) { // **
-    //if (!peerStarted && localStream) { // --
-      sendOffer();
-      peerStarted = true;
-    } else {
-      alert("Local stream not running yet - try again.");
-    }
-  }
- 
-  // stop the connection upon user request
-  function hangUp() {
-    console.log("Hang up.");
-    stop();
- }
- 
   function stop() {
     peerConnection.close();
     peerConnection = null;
@@ -658,11 +537,9 @@ function extractSendAudioFlowInfo(res, allStats) {
         document.getElementById("bitrate").innerHTML = mediaFlowInfo;
       });
     },1000);       
-
-
   }
-  </script>
 
+  </script>
   <div id="debug">Debug messages</div>
   <div id="stat">Statistics unknown</div>
 </body>
