@@ -4,7 +4,7 @@ var port = process.env.PORT || 3002;
 var app = express();
 
 app.get('/', function(req, res) {
-	res.sendfile(__dirname + '/videoChat2.html');
+	res.sendfile(__dirname + '/videoChat.html');
 });
 app.set('port', port);
 
