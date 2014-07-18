@@ -114,7 +114,7 @@
   var CR = String.fromCharCode(13);
   
   function onSDP() {
-    var text = $('text-for-send-sdp').val();
+    var text = textForSendSDP.value;
 	var evt = JSON.parse(text);
 	if (peerConnection) {
 	  onAnswer(evt);
@@ -128,7 +128,7 @@
   
   //--- multi ICE candidate ---
   function onICE() {
-    var text = $('text-for-send-ice').val();
+    var text = textForSendICE.value;
 	var arr = text.split(iceSeparator);
 	for (var i = 1, len = arr.length; i < len; i++) {
       var evt = JSON.parse(arr[i]);
@@ -189,7 +189,7 @@
       localStream = stream;
       localVideo.src = window.webkitURL.createObjectURL(stream);
       localVideo.play();
-	  localVideo.volume = 0;
+	 // localVideo.volume = 0;
     },
     function (error) { // error
       console.error('An error occurred: [CODE ' + error.code + ']');
