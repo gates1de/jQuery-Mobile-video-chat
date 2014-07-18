@@ -114,7 +114,7 @@
   var CR = String.fromCharCode(13);
   
   function onSDP() {
-    var text = textToReceiveSDP.value;
+    var text = $('text-for-send-sdp').val();
 	var evt = JSON.parse(text);
 	if (peerConnection) {
 	  onAnswer(evt);
