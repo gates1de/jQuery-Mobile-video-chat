@@ -32,7 +32,28 @@
 			<video id="local-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
 			<video id="remote-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
 		</div>
-	</div>
+  	<div id="display-none">
+		  <p>
+		   SDP to send:<br />
+		   <textarea id="text-for-send-sdp" rows="5" cols="100" disabled="1">SDP to send</textarea>
+		  </p>
+		  <p>
+		   SDP to receive:<br />
+		   <textarea id="text-for-receive-sdp" rows="5" cols="100"></textarea><br />
+		   <button class="ui-btn" onclick="onSDP();">Receive SDP</button>
+		  </p>
+		  
+		  <p>
+		   ICE Candidate to send:<br />
+		   <textarea id="text-for-send-ice" rows="5" cols="100" disabled="1">ICE Candidate to send</textarea>
+		  </p>
+		  <p>  
+		   ICE Candidates to receive:<br />
+		   <textarea id="text-for-receive-ice" rows="5" cols="100"></textarea><br />
+		   <button class="ui-btn" onclick="onICE();">Receive ICE Candidates</button>
+		  </p>
+		
+		</div>
 
   <div data-role="footer">
     <h3>Copyright 2014-201X, Yyy.Xxxxx</h3>
@@ -42,6 +63,10 @@
 <script src="/socket.io/socket.io.js"></script>
   
   <script>
+	$(function(){
+     // id="display-none" 内のdivを非表示
+     $("#display-none").css("display", "none");
+	});
   var localVideo = document.getElementById('local-video');
   var remoteVideo = document.getElementById('remote-video');
   var localStream = null;
