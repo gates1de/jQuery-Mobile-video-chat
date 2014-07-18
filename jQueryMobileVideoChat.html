@@ -184,7 +184,7 @@
   // ---------------------- video handling -----------------------
   // start local video
   function startVideo() {
-	navigator.getUserMedia({video: true, audio: true},
+	navigator.getUserMedia({video: true, audio: false},
     function (stream) { // success
       localStream = stream;
       localVideo.src = window.webkitURL.createObjectURL(stream);
