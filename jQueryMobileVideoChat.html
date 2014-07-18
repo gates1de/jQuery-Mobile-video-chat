@@ -128,7 +128,7 @@
   
   //--- multi ICE candidate ---
   function onICE() {
-    var text = textToReceiveICE.value;
+    var text = $('text-for-send-ice').val();
 	var arr = text.split(iceSeparator);
 	for (var i = 1, len = arr.length; i < len; i++) {
       var evt = JSON.parse(arr[i]);
