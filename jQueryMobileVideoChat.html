@@ -13,48 +13,26 @@
 <body>
 
 <!--ページ領域-->
-<div data-role="page" data-title="jQuery Mobile TIPS">
+<div data-role="page" data-title="jQuery Mobile Video Chat">
 
   <!--ヘッダー領域-->
   <div data-role="header">
-    <h1>jQuery Mobile TIPS</h1>
+    <h1>jQuery Mobile Video Chat</h1>
   </div>
 
   <div role="main" class="ui-content">
 		<div data-role="controlgroup" data-type="horizontal">
-			<button class="ui-btn" onclick="startVideo();">Start video</button>
-			<button class="ui-btn" onclick="stopVideo();">Stop video</button>
+			<button class="ui-btn" onclick="startVideo();">Video ON</button>
+			<button class="ui-btn" onclick="stopVideo();">Video OFF</button>
 		  <button class="ui-btn" onclick="connect();">Connect</button>
-		  <button class="ui-btn" onclick="hangUp();">Hang Up</button>
+		  <button class="ui-btn" onclick="exit();">Exit</button>
 		</div>  
 		<br />
 		<div data-role="content">
-			<video id="local-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
-			<video id="remote-video" autoplay style="width: 240px; height: 180px; border: 1px solid black;"></video>
+			<video id="local_video" autoplay style="width: 360px; height: 270px; border: 1px solid black;"></video>
+			<video id="remote_video" autoplay style="width: 360px; height: 270px; border: 1px solid red;"></video>
 		</div>
-  	<div id="display-none">
-		  <p>
-		   SDP to send:<br />
-		   <textarea id="text-for-send-sdp" rows="5" cols="100" disabled="1">SDP to send</textarea>
-		  </p>
-		  <p>
-		   SDP to receive:<br />
-		   <textarea id="text-for-receive-sdp" rows="5" cols="100"></textarea><br />
-		   <button class="ui-btn" onclick="onSDP();">Receive SDP</button>
-		  </p>
-		  
-		  <p>
-		   ICE Candidate to send:<br />
-		   <textarea id="text-for-send-ice" rows="5" cols="100" disabled="1">ICE Candidate to send</textarea>
-		  </p>
-		  <p>  
-		   ICE Candidates to receive:<br />
-		   <textarea id="text-for-receive-ice" rows="5" cols="100"></textarea><br />
-		   <button class="ui-btn" onclick="onICE();">Receive ICE Candidates</button>
-		  </p>
-		
-		</div>
-
+	</div>
   <div data-role="footer">
     <h3>Copyright 2014-201X, Yyy.Xxxxx</h3>
   </div>
@@ -67,8 +45,8 @@
      // id="display-none" 内のdivを非表示
      $("#display-none").css("display", "none");
 	});
-  var localVideo = document.getElementById('local-video');
-  var remoteVideo = document.getElementById('remote-video');
+  var localVideo = document.getElementById('local_video');
+  var remoteVideo = document.getElementById('remote_video');
   var localStream = null;
   var peerConnection = null;
   var peerStarted = false;
@@ -83,23 +61,23 @@
   socket.on('connect', onOpened)
         .on('message', onMessage);
 
-  function onOpened(evt) {
+  function onOpened(event) {
     console.log('socket opened.');
     socketReady = true;
   }
 
   // socket: accept connection request
-  function onMessage(evt) {
-    if (evt.type === 'offer') {
+  function onMessage(event) {
+    if (event.type === 'offer') {
       console.log("Received offer, set offer, sending answer....")
-      onOffer(evt);	  
-    } else if (evt.type === 'answer' && peerStarted) {
+      onOffer(event);	  
+    } else if (event.type === 'answer' && peerStarted) {
       console.log('Received answer, settinng answer SDP');
-	  onAnswer(evt);
-    } else if (evt.type === 'candidate' && peerStarted) {
+	  onAnswer(event);
+    } else if (event.type === 'candidate' && peerStarted) {
       console.log('Received ICE candidate...');
-	  onCandidate(evt);
-    } else if (evt.type === 'user dissconnected' && peerStarted) {
+	  onCandidate(event);
+    } else if (event.type === 'user dissconnected' && peerStarted) {
       console.log("disconnected");
       stop();
     }
@@ -119,12 +97,12 @@
   
   function onSDP() {
     var text = SendSDPValue;
-		var evt = JSON.parse(text);
+		var event = JSON.parse(text);
 		if (peerConnection) {
-		  onAnswer(evt);
+		  onAnswer(event);
 		}
 		else {
-		  onOffer(evt);
+		  onOffer(event);
 		}
 	
 		ReceiveSDPValue ="";
@@ -135,30 +113,30 @@
     var text = SendICEValue;
 		var arr = text.split(iceSeparator);
 		for (var i = 1, len = arr.length; i < len; i++) {
-      var evt = JSON.parse(arr[i]);
-		  onCandidate(evt);
+      var event = JSON.parse(arr[i]);
+		  onCandidate(event);
     }
 
 		ReceiveICEValue ="";
   }
   
   
-  function onOffer(evt) {
+  function onOffer(event) {
     console.log("Received offer...")
-		console.log(evt);
-    setOffer(evt);
-		sendAnswer(evt);
+		console.log(event);
+    setOffer(event);
+		sendAnswer(event);
 		peerStarted = true;  // ++
   }
   
-  function onAnswer(evt) {
+  function onAnswer(event) {
     console.log("Received Answer...")
-		console.log(evt);
-		setAnswer(evt);
+		console.log(event);
+		setAnswer(event);
   }
   
-  function onCandidate(evt) {
-    var candidate = new RTCIceCandidate({sdpMLineIndex:evt.sdpMLineIndex, sdpMid:evt.sdpMid, candidate:evt.candidate});
+  function onCandidate(event) {
+    var candidate = new RTCIceCandidate({sdpMLineIndex:event.sdpMLineIndex, sdpMid:event.sdpMid, candidate:event.candidate});
     console.log("Received Candidate...")
 		console.log(candidate);
     peerConnection.addIceCandidate(candidate);
@@ -222,16 +200,16 @@
     }
 
     // send any ice candidates to the other peer
-    peer.onicecandidate = function (evt) {
-      if (evt.candidate) {
-        console.log(evt.candidate);
+    peer.onicecandidate = function (event) {
+      if (event.candidate) {
+        console.log(event.candidate);
         sendCandidate({type: "candidate", 
-                          sdpMLineIndex: evt.candidate.sdpMLineIndex,
-                          sdpMid: evt.candidate.sdpMid,
-                          candidate: evt.candidate.candidate}
+                          sdpMLineIndex: event.candidate.sdpMLineIndex,
+                          sdpMid: event.candidate.sdpMid,
+                          candidate: event.candidate.candidate}
 		);
       } else {
-        console.log("End of candidates. ------------------- phase=" + evt.eventPhase);
+        console.log("End of candidates. ------------------- phase=" + event.eventPhase);
       }
     };
 
@@ -268,15 +246,15 @@
     }, mediaConstraints);
   }
 
-  function setOffer(evt) {
+  function setOffer(event) {
     if (peerConnection) {
 	  console.error('peerConnection alreay exist!');
 	}
     peerConnection = prepareNewConnection();
-    peerConnection.setRemoteDescription(new RTCSessionDescription(evt));
+    peerConnection.setRemoteDescription(new RTCSessionDescription(event));
   }
   
-  function sendAnswer(evt) {
+  function sendAnswer(event) {
     console.log('sending Answer. Creating remote session description...' );
 	if (! peerConnection) {
 	  console.error('peerConnection NOT exist!');
@@ -293,12 +271,12 @@
     }, mediaConstraints);
   }
 
-  function setAnswer(evt) {
+  function setAnswer(event) {
     if (! peerConnection) {
 	  console.error('peerConnection NOT exist!');
 	  return;
 	}
-	peerConnection.setRemoteDescription(new RTCSessionDescription(evt));
+	peerConnection.setRemoteDescription(new RTCSessionDescription(event));
   }
   
   // -------- handling user UI event -----
@@ -314,8 +292,8 @@
   }
 
   // stop the connection upon user request
-  function hangUp() {
-    console.log("Hang up.");
+  function exit() {
+    console.log("Exit.");
     stop();
   }
 
