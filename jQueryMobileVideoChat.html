@@ -106,57 +106,61 @@
   }
   
   // ----------------- handshake --------------
-  var textForSendSDP = document.getElementById('text-for-send-sdp');
-  var textForSendICE = document.getElementById('text-for-send-ice');
-  var textToReceiveSDP = document.getElementById('text-for-receive-sdp');
-  var textToReceiveICE = document.getElementById('text-for-receive-ice');
-  var iceSeparator = '------ ICE Candidate -------';
-  var CR = String.fromCharCode(13);
+  //var textForSendSDP = document.getElementById('text-for-send-sdp');
+  //var textForSendICE = document.getElementById('text-for-send-ice');
+  //var textToReceiveSDP = document.getElementById('text-for-receive-sdp');
+  //var textToReceiveICE = document.getElementById('text-for-receive-ice');
+  //var iceSeparator = '------ ICE Candidate -------';
+	var SendSDPValue;
+	var SendICEValue;
+	var ReceiveSDPValue;
+	var ReceiveICEValue;
+	var CR = String.fromCharCode(13);
   
   function onSDP() {
-    var text = textForSendSDP.value;
-	var evt = JSON.parse(text);
-	if (peerConnection) {
-	  onAnswer(evt);
-	}
-	else {
-	  onOffer(evt);
-	}
+    var text = SendSDPValue;
+		var evt = JSON.parse(text);
+		if (peerConnection) {
+		  onAnswer(evt);
+		}
+		else {
+		  onOffer(evt);
+		}
 	
-	textToReceiveSDP.value ="";
+		ReceiveSDPValue ="";
   }  
   
   //--- multi ICE candidate ---
   function onICE() {
-    var text = textForSendICE.value;
-	var arr = text.split(iceSeparator);
-	for (var i = 1, len = arr.length; i < len; i++) {
+    var text = SendICEValue;
+		var arr = text.split(iceSeparator);
+		for (var i = 1, len = arr.length; i < len; i++) {
       var evt = JSON.parse(arr[i]);
-	  onCandidate(evt);
+		  onCandidate(evt);
     }
 
-	textToReceiveICE.value ="";
+		ReceiveICEValue ="";
   }
   
   
   function onOffer(evt) {
     console.log("Received offer...")
-	console.log(evt);
+		console.log(evt);
     setOffer(evt);
-	sendAnswer(evt);
-	peerStarted = true;  // ++
+		sendAnswer(evt);
+		peerStarted = true;  // ++
   }
   
   function onAnswer(evt) {
     console.log("Received Answer...")
-	console.log(evt);
-	setAnswer(evt);
+		console.log(evt);
+		setAnswer(evt);
   }
   
   function onCandidate(evt) {
     var candidate = new RTCIceCandidate({sdpMLineIndex:evt.sdpMLineIndex, sdpMid:evt.sdpMid, candidate:evt.candidate});
     console.log("Received Candidate...")
-	console.log(candidate);
+		console.log(candidate);
     peerConnection.addIceCandidate(candidate);
   }
 
@@ -164,7 +168,7 @@
     var text = JSON.stringify(sdp);
 	console.log("---sending sdp text ---");
 	console.log(text);
-	textForSendSDP.value = text;
+	SendSDPValue = text;
 	
 	// send via socket
 	socket.json.send(sdp);
@@ -172,13 +176,13 @@
   
   function sendCandidate(candidate) {
     var text = JSON.stringify(candidate);
-	console.log("---sending candidate text ---");
-	console.log(text);
-	textForSendICE.value = (textForSendICE.value + CR + iceSeparator + CR + text + CR);
-	textForSendICE.scrollTop = textForSendICE.scrollHeight;
+		console.log("---sending candidate text ---");
+		console.log(text);
+		SendICEValue = (SendICEValue + CR + iceSeparator + CR + text + CR);
+		//textForSendICE.scrollTop = textForSendICE.scrollHeight;
 	
-	// send via socket
-	socket.json.send(candidate);
+		// send via socket
+		socket.json.send(candidate);
   }
   
   // ---------------------- video handling -----------------------
