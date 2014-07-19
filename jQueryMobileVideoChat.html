@@ -40,11 +40,11 @@
 </div>
 <script src="/socket.io/socket.io.js"></script>
   
-  <script>
-	$(function(){
-     // id="display-none" 内のdivを非表示
-     $("#display-none").css("display", "none");
-	});
+<script>
+//	$(function(){
+//     // id="display-none" 内のdivを非表示
+//     $("#display-none").css("display", "none");
+//	});
   var localVideo = document.getElementById('local_video');
   var remoteVideo = document.getElementById('remote_video');
   var localStream = null;
@@ -53,12 +53,10 @@
   var mediaConstraints = {'mandatory': {'OfferToReceiveAudio':true , 'OfferToReceiveVideo':true }};
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
   
-  // ---- socket ------
-  // create socket
   var socketReady = false;
   var socket = io.connect('/');
-  // socket: channel connected
-  socket.on('connect', onOpened)
+	
+	socket.on('connect', onOpened)
         .on('message', onMessage);
 
   function onOpened(event) {
@@ -66,7 +64,6 @@
     socketReady = true;
   }
 
-  // socket: accept connection request
   function onMessage(event) {
     if (event.type === 'offer') {
       console.log("Received offer, set offer, sending answer....")
@@ -83,11 +80,6 @@
     }
   }
   
-  // ----------------- handshake --------------
-  //var textForSendSDP = document.getElementById('text-for-send-sdp');
-  //var textForSendICE = document.getElementById('text-for-send-ice');
-  //var textToReceiveSDP = document.getElementById('text-for-receive-sdp');
-  //var textToReceiveICE = document.getElementById('text-for-receive-ice');
   var iceSeparator = '------ ICE Candidate -------';
 	var SendSDPValue;
 	var SendICEValue;
@@ -108,7 +100,6 @@
 		ReceiveSDPValue ="";
   }  
   
-  //--- multi ICE candidate ---
   function onICE() {
     var text = SendICEValue;
 		var arr = text.split(iceSeparator);
@@ -126,7 +117,7 @@
 		console.log(event);
     setOffer(event);
 		sendAnswer(event);
-		peerStarted = true;  // ++
+		peerStarted = true;
   }
   
   function onAnswer(event) {
@@ -144,12 +135,11 @@
 
   function sendSDP(sdp) {
     var text = JSON.stringify(sdp);
-	console.log("---sending sdp text ---");
-	console.log(text);
-	SendSDPValue = text;
+		console.log("---sending sdp text ---");
+		console.log(text);
+		SendSDPValue = text;
 	
-	// send via socket
-	socket.json.send(sdp);
+		socket.json.send(sdp);
   }
   
   function sendCandidate(candidate) {
@@ -157,36 +147,30 @@
 		console.log("---sending candidate text ---");
 		console.log(text);
 		SendICEValue = (SendICEValue + CR + iceSeparator + CR + text + CR);
-		//textForSendICE.scrollTop = textForSendICE.scrollHeight;
 	
-		// send via socket
 		socket.json.send(candidate);
   }
   
-  // ---------------------- video handling -----------------------
-  // start local video
   function startVideo() {
-	navigator.getUserMedia({video: true, audio: true},
-    function (stream) { // success
-      localStream = stream;
-      localVideo.src = window.webkitURL.createObjectURL(stream);
-      localVideo.play();
-	 // localVideo.volume = 0;
-    },
-    function (error) { // error
-      console.error('An error occurred: [CODE ' + error.code + ']');
-      return;
-    }
-	);
-  }
+		navigator.getUserMedia({video: true, audio: true},
+			function (stream) {
+				localStream = stream;
+	      localVideo.src = window.webkitURL.createObjectURL(stream);
+				localVideo.play();
+		 // localVideo.volume = 0;
+			},
+			function (error) {
+				console.error('An error occurred: [CODE ' + error.code + ']');
+				return;
+			}
+		);
+	}
 
-  // stop local video
   function stopVideo() {
     localVideo.src = "";
     localStream.stop();
   }
 
-  // ---------------------- connection handling -----------------------
   function prepareNewConnection() {
     var pc_config = {"iceServers":[
      {"url":"stun:220.110.149.251:3478"},
@@ -199,7 +183,6 @@
       console.log("Failed to create peerConnection, exception: " + e.message);
     }
 
-    // send any ice candidates to the other peer
     peer.onicecandidate = function (event) {
       if (event.candidate) {
         console.log(event.candidate);
@@ -219,13 +202,11 @@
     peer.addEventListener("addstream", onRemoteStreamAdded, false);
     peer.addEventListener("removestream", onRemoteStreamRemoved, false)
 
-    // when remote adds a stream, hand it on to the local video element
     function onRemoteStreamAdded(event) {
       console.log("Added remote stream");
       remoteVideo.src = window.webkitURL.createObjectURL(event.stream);
     }
 
-    // when remote removes a stream, remove it from the local video element
     function onRemoteStreamRemoved(event) {
       console.log("Remove remote stream");
       remoteVideo.src = "";
@@ -236,12 +217,12 @@
 
   function sendOffer() {
     peerConnection = prepareNewConnection();
-    peerConnection.createOffer(function (sessionDescription) { // in case of success
+    peerConnection.createOffer(function (sessionDescription) {
       peerConnection.setLocalDescription(sessionDescription);
       console.log("Sending: SDP");
       console.log(sessionDescription);
       sendSDP(sessionDescription);
-    }, function () { // in case of error
+    }, function () {
       console.log("Create Offer failed");
     }, mediaConstraints);
   }
@@ -261,13 +242,13 @@
 	  return;
 	}
 	
-    peerConnection.createAnswer(function (sessionDescription) { // in case of success
+    peerConnection.createAnswer(function (sessionDescription) {
       peerConnection.setLocalDescription(sessionDescription);
       console.log("Sending: SDP");
       console.log(sessionDescription);
       sendSDP(sessionDescription);
-    }, function () { // in case of error
-      console.log("Create Answer failed");
+		}, function () { 
+			console.log("Create Answer failed");
     }, mediaConstraints);
   }
 
@@ -279,19 +260,15 @@
 	peerConnection.setRemoteDescription(new RTCSessionDescription(event));
   }
   
-  // -------- handling user UI event -----
-  // start the connection upon user request
   function connect() {
-    if (!peerStarted && localStream && socketReady) { // **
-	//if (!peerStarted && localStream) { // --
-      sendOffer();
+		if (!peerStarted && localStream && socketReady) { 
+			sendOffer();
       peerStarted = true;
     } else {
-      alert("Local stream not running yet - try again.");
+      alert("接続エラー: 相手がいないか, ビデオが起動していないか, インターネット接続に問題があります.");
     }
   }
 
-  // stop the connection upon user request
   function exit() {
     console.log("Exit.");
     stop();
