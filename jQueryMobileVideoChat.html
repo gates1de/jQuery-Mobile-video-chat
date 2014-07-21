@@ -85,6 +85,7 @@
 	var SendICEValue;
 	var ReceiveSDPValue;
 	var ReceiveICEValue;
+	var SendCandidateText;
 	var CR = String.fromCharCode(13);
   
   function onSDP() {
@@ -101,13 +102,15 @@
   }  
   
   function onICE() {
-    var text = SendICEValue;
-		var arr = text.split(iceSeparator);
-		for (var i = 1, len = arr.length; i < len; i++) {
-      var event = JSON.parse(arr[i]);
-		  onCandidate(event);
-    }
-
+    //var text = SendICEValue;
+		var text = SendCandidateText;
+		//var arr = text.split(iceSeparator);
+		//for (var i = 1, len = arr.length; i < len; i++) {
+    //  var event = JSON.parse(arr[i]);
+		//  onCandidate(event);
+    //}
+		var event = JSON.parse(text);
+		onCandidate(event);
 		ReceiveICEValue ="";
   }
   
@@ -143,11 +146,11 @@
   }
   
   function sendCandidate(candidate) {
-    var text = JSON.stringify(candidate);
+    //var text = JSON.stringify(candidate);
+		SendCandidateText = JSON.stringify(candidate);
 		console.log("---sending candidate text ---");
-		console.log(text);
-		SendICEValue = (SendICEValue + CR + iceSeparator + CR + text + CR);
-	
+		console.log(SendCandidateText);
+		// SendICEValue = (SendICEValue + CR + iceSeparator + CR + text + CR);
 		socket.json.send(candidate);
   }
   
