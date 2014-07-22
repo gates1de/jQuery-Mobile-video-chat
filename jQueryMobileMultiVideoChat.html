@@ -191,8 +191,10 @@
  
   function isConnectPossible() {
     if (getConnectionCount() < MAX_CONNECTION_COUNT)
-      return true;
+      console.log("isConnectPossible is true.");
+			return true;
     else
+			console.log("isConnectPossible is false.");
       return false;
   }
  
