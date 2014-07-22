@@ -55,8 +55,8 @@ io.sockets.on('connection', function(socket) {
 			roomName = _room;
 		});
 	     
-	  if (roomname) {
-			socket.broadcast.to(roomname).emit(type, message);
+	  if (roomName) {
+			socket.broadcast.to(roomName).emit(type, message);
 		}
 	  else {
 			socket.broadcast.emit(type, message);
