@@ -259,9 +259,9 @@
     console.log('socket opened.');
     socketReady = true;
     
-    var roomname = getRoomName(); // 会議室名を取得する
-    socket.emit('enter', roomname);
-    console.log('enter to ' + roomname);
+    var roomName = getRoomName(); // 会議室名を取得する
+    socket.emit('enter', roomName);
+    console.log('enter to ' + roomName);
   }
  
   // socket: accept connection request
@@ -306,7 +306,7 @@
     }
   }
  
-  function getRoomName() { // たとえば、 URLに  ?roomname  とする
+  function getRoomName() { // たとえば、 URLに  ?roomName  とする
     var url = document.location.href;
     var args = url.split('?');
     if (args.length > 1) {
