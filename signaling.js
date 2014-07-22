@@ -4,7 +4,7 @@ var port = process.env.PORT || 3002;
 var app = express();
 
 app.get('/', function(req, res) {
-	res.sendfile(__dirname + '/jQueryMobileVideoChat.html');
+	res.sendfile(__dirname + '/jQueryMobileMultiVideoChat.html');
 });
 app.set('port', port);
 
