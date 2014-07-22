@@ -65,9 +65,11 @@ io.sockets.on('connection', function(socket) {
 	     
 	  if (roomName) {
 			socket.broadcast.to(roomName).emit(type, message);
+			console.log("emitMessage to room: " + roomName);
 		}
 	  else {
 			socket.broadcast.emit(type, message);
+			console.log("emitMessage");
 		}
 	}
 });
