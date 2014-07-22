@@ -273,6 +273,7 @@
   function onMessage(event) {
 		console.log("onMessage(event.type = " + event.type + ")");
     var id = event.from;
+		console.log("onMessage(id = " + id + ")");
     var target = event.sendto;
     var conn = getConnection(id);
  
@@ -288,7 +289,7 @@
  
       if (isConnectPossible()) {
         console.log("send response");
-				socket.json.send({type: "response"});
+				socket.json.send({type: "response", sendto: id});
       }
       else {
         console.warn('max connections. so ignore call'); 
