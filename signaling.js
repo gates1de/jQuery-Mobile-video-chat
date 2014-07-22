@@ -37,6 +37,7 @@ io.sockets.on('connection', function(socket) {
  
     // 送信先が指定されているか？
     var target = message.sendto;
+		console.log("target = " + target);
     if (target) {
     　　// 送信先が指定されていた場合は、その相手のみに送信
       socket.to(socket.id).json.emit('message', message);
