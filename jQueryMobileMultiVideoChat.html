@@ -422,7 +422,7 @@
       if (event.candidate) {
         console.log(event.candidate);
         sendCandidate({type: "candidate", 
-                          sendto: conn.id,
+                          //sendto: conn.id,
                           sdpMLineIndex: event.candidate.sdpMLineIndex,
                           sdpMid: event.candidate.sdpMid,
                           candidate: event.candidate.candidate});
