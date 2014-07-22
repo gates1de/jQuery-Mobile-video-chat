@@ -21,7 +21,7 @@ console.log((new Date()) + " Server is listening on port " + port);
 io.sockets.on('connection', function(socket) {
 	// 入室
   socket.on('enter', function(roomName) {
-  	socket.set('roomName', roomName);
+  	socket.set('roomname', roomName);
     socket.join(roomName);
   });
 
