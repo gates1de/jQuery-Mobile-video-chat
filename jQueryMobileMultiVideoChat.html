@@ -248,7 +248,7 @@
   // ---- socket ------
   // create socket
   var socketReady = false;
-  var port = 9001;
+  var port = process.env.PORT || 3002;
   var socket = io.connect('http://localhost:' + port + '/');
   
   // socket: channel connected
@@ -505,12 +505,14 @@
   // call others before connecting peer
   function call() {
     if (! isLocalStreamStarted()) {
-      alert("Local stream not running yet. Please [Start Video] or [Start Screen].");
-      return;
+      // alert("Local stream not running yet. Please [Start Video] or [Start Screen].");
+      alert("ビデオをオンにしてください.");
+			return;
     }
     if (! socketReady) {
-      alert("Socket is not connected to server. Please reload and try again.");
-      return;
+      // alert("Socket is not connected to server. Please reload and try again.");
+      alert("ネットワークにつながっていないか, 調子が悪いのでもう一度再読み込みしてください.");
+			return;
     }
  
     // call others, in same room
