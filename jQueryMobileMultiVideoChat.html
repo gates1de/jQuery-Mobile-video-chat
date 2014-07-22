@@ -289,7 +289,7 @@
  
       if (isConnectPossible()) {
         console.log("send response");
-				socket.json.send({type: "response", sendto: id});
+				socket.json.send({type: "response"});
       }
       else {
         console.warn('max connections. so ignore call'); 
