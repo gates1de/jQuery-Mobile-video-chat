@@ -53,7 +53,7 @@
   var localStream = null;
   var peerConnection = null;
   var peerStarted = false;
-  var mediaConstraints = {'mandatory': {'OfferToReceiveAudio':true , 'OfferToReceiveVideo':true }};
+  var mediaConstraints = {'mandatory': {'OfferToReceiveAudio':false , 'OfferToReceiveVideo':true }};
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 	 
 	// ---- multi people video & audio ----
@@ -380,7 +380,7 @@
   // ---------------------- video handling -----------------------
   // start local video
   function startVideo() {
-    navigator.getUserMedia({video: true, audio: true},
+    navigator.getUserMedia({video: true, audio: false},
      function (stream) { // success
       localStream = stream;
       localVideo.src = window.webkitURL.createObjectURL(stream);
