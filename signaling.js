@@ -3,7 +3,7 @@ var express = require('express');
 var port = process.env.PORT || 3002;
 var app = express();
 
-app.get('/', function(req, res) {
+/* app.get('/', function(req, res) {
 	res.sendfile(__dirname + '/jQueryMobileMultiVideoChat.html');
 });
 app.set('port', port);
@@ -17,11 +17,14 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 });
 var io = require('socket.io').listen(server);
 console.log((new Date()) + " Server is listening on port " + port);
+*/
+var io = require('socket.io').listen(port);
+console.log((new Date()) + " Server is listening on port " + port);
 
 io.sockets.on('connection', function(socket) {
 	// 入室
   socket.on('enter', function(roomName) {
-  	socket.set('roomname', roomName);
+  	socket.set('roomName', roomName);
     socket.join(roomName);
   });
 
