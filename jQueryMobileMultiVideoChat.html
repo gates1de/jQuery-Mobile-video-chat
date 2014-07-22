@@ -267,20 +267,23 @@
  
   // socket: accept connection request
   function onMessage(event) {
+		console.log("onMessage(event.type = " + event.type + ")");
     var id = event.from;
     var target = event.sendto;
     var conn = getConnection(id);
  
     if (event.type === 'call') {
       if (! isLocalStreamStarted()) {
-        return;
+        console.log("isLocalStream not started.");
+				return;
       }
       if (conn) {
+				console.log("already connected.");
         return;  // already connected
       }
  
       if (isConnectPossible()) {
-        console.log("send responese");
+        console.log("send response");
 				socket.json.send({type: "response", sendto: id });
       }
       else {
