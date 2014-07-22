@@ -288,7 +288,8 @@
     }
     else if (event.type === 'response') {
       sendOffer(id);
-      return;
+      console.log("Send offer.");
+			return;
     } else if (event.type === 'offer') {
       console.log("Received offer, set offer, sending answer....")
       onOffer(event);      
