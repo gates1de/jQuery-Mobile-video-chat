@@ -190,13 +190,15 @@
   }
  
   function isConnectPossible() {
-    if (getConnectionCount() < MAX_CONNECTION_COUNT)
+    if (getConnectionCount() < MAX_CONNECTION_COUNT) {
       console.log("isConnectPossible is true.");
 			return true;
-    else
+		}
+    else {
 			console.log("isConnectPossible is false.");
       return false;
-  }
+  	}
+	}
  
   function getConnectionIndex(id_to_lookup) {
     var index = 0;
