@@ -3,7 +3,7 @@ var express = require('express');
 var port = process.env.PORT || 3002;
 var app = express();
 
-/* app.get('/', function(req, res) {
+app.get('/', function(req, res) {
 	res.sendfile(__dirname + '/jQueryMobileMultiVideoChat.html');
 });
 app.set('port', port);
@@ -17,15 +17,16 @@ var server = http.createServer(app).listen(app.get('port'), function(){
 });
 var io = require('socket.io').listen(server);
 console.log((new Date()) + " Server is listening on port " + port);
-*/
-var io = require('socket.io').listen(port);
-console.log((new Date()) + " Server is listening on port " + port);
+
+//var io = require('socket.io').listen(port);
+//console.log((new Date()) + " Server is listening on port " + port);
 
 io.sockets.on('connection', function(socket) {
 	// 入室
   socket.on('enter', function(roomName) {
-  	socket.set('roomName', roomName);
-    socket.join(roomName);
+  	//socket.set('roomName', roomName);
+    socket.roomName = roomName;
+		socket.join(roomName);
   });
 
 	socket.on('message', function(message) {
@@ -54,9 +55,12 @@ io.sockets.on('connection', function(socket) {
 	// 会議室名が指定されていたら、室内だけに通知
 	function emitMessage(type, message) {
 	  var roomName;
-	  socket.get('roomName', function(err, _room) {
+		roomName = socket.roomName;
+	  /*
+  	socket.get('roomName', function(err, _room) {
 			roomName = _room;
 		});
+		*/
 	     
 	  if (roomName) {
 			socket.broadcast.to(roomName).emit(type, message);
