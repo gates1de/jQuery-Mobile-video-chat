@@ -40,7 +40,7 @@ io.sockets.on('connection', function(socket) {
 		console.log("target = " + target);
     if (message.from) {
     　　// 送信先が指定されていた場合は、その相手のみに送信
-      socket.to(socket.id).json.emit('message', message);
+      socket.broadcast.to(socket.id).json.emit('message', message);
       console.log("message send." + socket.id);
 			return;
     }
