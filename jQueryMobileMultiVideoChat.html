@@ -487,7 +487,8 @@
   function sendAnswer(event) {
     console.log('sending Answer. Creating remote session description...' );
     var id = event.from;
-    var conn = getConnection(id);
+    console.log("event.from = id = " + id);
+		var conn = getConnection(id);
     if (! conn) {
       console.error('peerConnection not exist!');
       return
@@ -497,7 +498,7 @@
       // in case of success
       conn.iceReady = true;
       conn.peerconnection.setLocalDescription(sessionDescription);
-      sessionDescription.sendto = id;
+      //sessionDescription.sendto = id;
       sendSDP(sessionDescription);
     }, function () { // in case of error
       console.log("Create Answer failed");
