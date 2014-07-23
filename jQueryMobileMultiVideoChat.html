@@ -301,6 +301,7 @@
       if (isConnectPossible()) {
         console.log("send response");
 				socket.json.send({type: "response"});
+				addVideoTag();	
       }
       else {
         console.warn('max connections. so ignore call'); 
@@ -555,7 +556,6 @@
     // call others, in same room
     console.log("call others in same room, before offer");
     socket.json.send({type: "call"});
-		addVideoTag();	
 	}
   
   // stop the connection upon user request
