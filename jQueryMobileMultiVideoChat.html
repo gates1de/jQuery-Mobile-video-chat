@@ -160,8 +160,8 @@
   }
 
 	function displayVideo() {
-		for(var i = 0; i < getVideoCountInUse; i++) {
-			console.log((i+1) + "回目の映像表示");
+		for(var i = 1; i <= getVideoCountInUse; i++) {
+			console.log(i + "回目の映像表示");
 			$("video:hidden:first").fadeIn("slow");
 		}
 		return null;
