@@ -252,7 +252,13 @@
     }
   }
  
-  
+	function addVideoTag() {
+		var remote_video_num = getConnectionCount() + 1;
+		console.log("remote_video_num = " + remote_video_num);
+		$('#all_video').append('<video id="remote_video' + remote_video_num + '" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
+		pushVideoStandBy(getVideoForRemote(remote_video_num));
+	}
+
   // ---- socket ------
   // create socket
   var socketReady = false;
@@ -294,10 +300,6 @@
  
       if (isConnectPossible()) {
         console.log("send response");
-				var remote_video_num = getConnectionCount() + 1;
-				console.log("remote_video_num = " + remote_video_num);
-				$('#all_video').append('<video id="remote_video' + remote_video_num + '" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
-				pushVideoStandBy(getVideoForRemote(remote_video_num));
 				socket.json.send({type: "response"});
       }
       else {
@@ -306,11 +308,8 @@
       return;
     }
 		else if (event.type === 'response') {
-			var remote_video_num = getConnectionCount() + 1;
-			console.log("remote_video_num = " + remote_video_num);
-			$('#all_video').append('<video id="remote_video' + remote_video_num + '" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
-			pushVideoStandBy(getVideoForRemote(remote_video_num));
-      if(localStream) { 
+			if(localStream) {
+				addVideoTag();
 				sendOffer(id);
       	console.log("Send offer.");
 				return;
@@ -556,7 +555,8 @@
     // call others, in same room
     console.log("call others in same room, before offer");
     socket.json.send({type: "call"});
-  }
+		addVideoTag();	
+	}
   
   // stop the connection upon user request
   function exit() {
