@@ -120,6 +120,7 @@
       console.log("videoElement.src=" + videoElement.src);
       pushVideoStandBy(videoElement);
 			$("#" + id).fadeOut("1000");
+			videoElement.style.display = 'none';
     }
     else {
       console.warn('warning --- no video element using with id=' + id);
@@ -130,8 +131,6 @@
     var element = null;
     for (var id in videoElementsInUse) {
       detachVideo(id);
-			console.log("video id = " + id);
-			$("#" + id).fadeOut("1000");
     }
   }
  
@@ -326,7 +325,10 @@
       //stop();
       detachVideo(id); // force detach video
       stopConnection(id);
-    }
+    } else if (event.type === 'bye') {
+			detachVideo(id);	
+      stopConnection(id);
+		}
   }
  
   function getRoomName() { // たとえば、 URLに  ?roomName  とする
