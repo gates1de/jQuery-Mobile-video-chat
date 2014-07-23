@@ -415,7 +415,7 @@
     conn.id = id;
     conn.peerconnection = peer;
     peer.id = id;
-    console.log("my conn.id = " + conn.id);
+    console.log("other conn.id = " + conn.id);
 		addConnection(id, conn);
  
     // send any ice candidates to the other peer
@@ -423,7 +423,7 @@
       if (event.candidate) {
         console.log(event.candidate);
         sendCandidate({type: "candidate", 
-                          // sendto: conn.id,
+                          sendto: conn.id,
                           sdpMLineIndex: event.candidate.sdpMLineIndex,
                           sdpMid: event.candidate.sdpMid,
                           candidate: event.candidate.candidate});
