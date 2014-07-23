@@ -103,7 +103,7 @@
       videoElement.src = window.URL.createObjectURL(stream);
       console.log("videoElement.src=" + videoElement.src);
       pushVideoInUse(id, videoElement);
-      videoElement.style.display = 'block';
+      //videoElement.style.display = 'block';
 		  displayVideo();
     }
     else {
@@ -160,7 +160,7 @@
   }
 
 	function displayVideo() {
-		for(var i = 1; i <= getVideoCountInUse; i++) {
+		for(var i = 1; i <= getVideoCountInUse(); i++) {
 			console.log(i + "回目の映像表示");
 			$("video:hidden:first").fadeIn("slow");
 		}
