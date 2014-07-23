@@ -44,8 +44,8 @@
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
-	$(document).ready(function () {
-  	$("video:hidden:first").fadeIn("slow");
+	$(document).ready(function() {
+		displayVideo();
 	});
 //	$(function(){
 //     // id="display-none" 内のdivを非表示
@@ -160,7 +160,13 @@
       return false;
     }
   }
- 
+
+	function displayVideo() {
+		for(var i = 0; i < getVideoCountInUse; i++) {
+			$("video:hidden:first").fadeIn("slow");
+		}
+		return null;
+	} 
   // -------------- multi connections --------------------
   var MAX_CONNECTION_COUNT = 3;
   var connections = {}; // Connection hash
