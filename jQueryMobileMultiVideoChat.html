@@ -426,7 +426,7 @@
       if (event.candidate) {
         // console.log(event.candidate + id);
         sendCandidate({type: "candidate", 
-                          sendto: id,
+                          sendto: conn.id,
                           sdpMLineIndex: event.candidate.sdpMLineIndex,
                           sdpMid: event.candidate.sdpMid,
                           candidate: event.candidate.candidate});
