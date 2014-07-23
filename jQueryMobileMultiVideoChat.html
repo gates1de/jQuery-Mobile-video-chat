@@ -300,9 +300,14 @@
       return;
     }
     else if (event.type === 'response') {
-      sendOffer(id);
-      // console.log("Send offer.");
-			return;
+      if(localStream) {
+				sendOffer(id);
+      	// console.log("Send offer.");
+				return;
+			}
+			else {
+				console.log("localStream does not exist.");
+			}
     } else if (event.type === 'offer') {
       console.log("Received offer, set offer, sending answer....")
       onOffer(event);      
