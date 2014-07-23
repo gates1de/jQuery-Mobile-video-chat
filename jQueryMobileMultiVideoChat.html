@@ -44,9 +44,6 @@
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
-	$(document).ready(function() {
-		displayVideo();
-	});
 //	$(function(){
 //     // id="display-none" 内のdivを非表示
 //     $("#display-none").css("display", "none");
@@ -106,7 +103,8 @@
       videoElement.src = window.URL.createObjectURL(stream);
       console.log("videoElement.src=" + videoElement.src);
       pushVideoInUse(id, videoElement);
-      videoElement.style.display = 'block';
+		  displayVideo();
+      //videoElement.style.display = 'block';
     }
     else {
       console.error('--- no video element stand by.');
