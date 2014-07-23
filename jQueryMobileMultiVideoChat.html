@@ -73,7 +73,7 @@
   // ---- video element management ---
   function pushVideoStandBy(element) {
     videoElementsStandBy[element.id] = element;
-		console.log('element.id = ' + element.id);
+		// console.log('element.id = ' + element.id);
   }
  
   function popVideoStandBy() {
@@ -369,7 +369,7 @@
   function sendSDP(sdp) {
     var text = JSON.stringify(sdp);
     console.log("---sending sdp text ---");
-    // console.log(text);
+    console.log(text);
     socket.json.send(sdp);
   }
   
