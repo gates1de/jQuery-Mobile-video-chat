@@ -366,14 +366,14 @@
   function sendSDP(sdp) {
     var text = JSON.stringify(sdp);
     console.log("---sending sdp text ---");
-    console.log(text);
+    // console.log(text);
     socket.json.send(sdp);
   }
   
   function sendCandidate(candidate) {
     var text = JSON.stringify(candidate);
     console.log("---sending candidate text ---");
-    console.log(text);
+    // console.log(text);
     socket.json.send(candidate);
   }
   
@@ -415,7 +415,7 @@
     conn.id = id;
     conn.peerconnection = peer;
     peer.id = id;
-    console.log("conn.id = " + conn.id);
+    console.log("my conn.id = " + conn.id);
 		addConnection(id, conn);
  
     // send any ice candidates to the other peer
@@ -423,7 +423,7 @@
       if (event.candidate) {
         console.log(event.candidate);
         sendCandidate({type: "candidate", 
-                          //sendto: conn.id,
+                          sendto: conn.id,
                           sdpMLineIndex: event.candidate.sdpMLineIndex,
                           sdpMid: event.candidate.sdpMid,
                           candidate: event.candidate.candidate});
@@ -464,7 +464,7 @@
     conn.peerconnection.createOffer(function (sessionDescription) { // in case of success
       conn.iceReady = true;
       conn.peerconnection.setLocalDescription(sessionDescription);
-      //sessionDescription.sendto = id;
+      sessionDescription.sendto = id;
       sendSDP(sessionDescription);
     }, function () { // in case of error
       console.log("Create Offer failed");
@@ -497,7 +497,7 @@
       // in case of success
       conn.iceReady = true;
       conn.peerconnection.setLocalDescription(sessionDescription);
-      //sessionDescription.sendto = id;
+      sessionDescription.sendto = id;
       sendSDP(sessionDescription);
     }, function () { // in case of error
       console.log("Create Answer failed");
