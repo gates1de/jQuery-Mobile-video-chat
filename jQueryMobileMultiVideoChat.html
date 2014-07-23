@@ -424,7 +424,7 @@
     // send any ice candidates to the other peer
     peer.onicecandidate = function (event) {
       if (event.candidate) {
-        console.log(event.candidate);
+        console.log(event.candidate + id);
         sendCandidate({type: "candidate", 
                           // sendto: conn.id,
                           sdpMLineIndex: event.candidate.sdpMLineIndex,
