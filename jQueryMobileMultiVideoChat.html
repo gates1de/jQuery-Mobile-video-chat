@@ -30,7 +30,6 @@
 		<br />
 		<div data-role="content" id="all_video">
 			<video id="local_video" autoplay style="width: 300px; height: 225px; border: 1px solid black;"></video>
-			<!-- <video id="remote_video" autoplay style="width: 300px; height: 225px; border: 1px solid red;"></video> -->
 			<video id="remote_video0" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>
    		<video id="remote_video1" autoplay style="width: 300px; height: 225px; border: 1px solid blue; display:none"></video>
    		<video id="remote_video2" autoplay style="width: 300px; height: 225px; border: 1px solid green; display:none" ></video>
@@ -44,9 +43,6 @@
 <script src="/socket.io/socket.io.js"></script>
 
 <script>
-	$(document).ready(function() {
-		$('#all_video').append('<video id="remote_video3" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
-	});
 //	$(function(){
 //     // id="display-none" 内のdivを非表示
 //     $("#display-none").css("display", "none");
@@ -270,7 +266,9 @@
     console.log('socket opened.');
     socketReady = true;
     
-    var roomName = getRoomName(); // 会議室名を取得する
+		$('#all_video').append('<video id="remote_video3" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
+    
+		var roomName = getRoomName(); // 会議室名を取得する
     socket.emit('enter', roomName);
 		socket.on('enter', function(data) {
 			console.log(data);
