@@ -266,6 +266,9 @@
     
     var roomName = getRoomName(); // 会議室名を取得する
     socket.emit('enter', roomName);
+		socket.on('enter', function(data) {
+			console.log(data);
+		});
     console.log('enter to ' + roomName);
   }
  
@@ -444,7 +447,10 @@
       console.log("Added remote stream");
       attachVideo(this.id, event.stream);
       //remoteVideo.src = window.webkitURL.createObjectURL(event.stream);
-    }
+    	if(!event.stream) {
+				console.log("not exist event.stream!");
+			}
+		}
  
     // when remote removes a stream, remove it from the local video element
     function onRemoteStreamRemoved(event) {
