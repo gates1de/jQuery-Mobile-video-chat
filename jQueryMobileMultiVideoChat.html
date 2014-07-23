@@ -504,7 +504,7 @@
       // in case of success
       conn.iceReady = true;
       conn.peerconnection.setLocalDescription(sessionDescription);
-      //sessionDescription.sendto = id;
+      sessionDescription.sendto = id;
       sendSDP(sessionDescription);
     }, function () { // in case of error
       console.log("Create Answer failed");
