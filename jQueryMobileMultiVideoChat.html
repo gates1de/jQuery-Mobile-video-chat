@@ -310,7 +310,6 @@
     }
 		else if (event.type === 'response') {
 			if(localStream) {
-				addVideoTag();
 				sendOffer(id);
       	console.log("Send offer.");
 				return;
@@ -463,6 +462,7 @@
     // when remote adds a stream, hand it on to the local video element
     function onRemoteStreamAdded(event) {
       console.log("Added remote stream");
+			addVideoTag();	
       attachVideo(this.id, event.stream);
       //remoteVideo.src = window.webkitURL.createObjectURL(event.stream);
     	if(!event.stream) {
