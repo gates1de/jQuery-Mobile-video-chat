@@ -58,9 +58,9 @@
 	// ---- multi people video & audio ----
   var videoElementsInUse = {};
   var videoElementsStandBy = {};
-  pushVideoStandBy(getVideoForRemote(0));
-  pushVideoStandBy(getVideoForRemote(1));
-  pushVideoStandBy(getVideoForRemote(2));
+  //pushVideoStandBy(getVideoForRemote(0));
+  //pushVideoStandBy(getVideoForRemote(1));
+  //pushVideoStandBy(getVideoForRemote(2));
  
  
   function getVideoForRemote(index) {
@@ -266,8 +266,6 @@
     console.log('socket opened.');
     socketReady = true;
     
-		$('#all_video').append('<video id="remote_video3" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
-    
 		var roomName = getRoomName(); // 会議室名を取得する
     socket.emit('enter', roomName);
 		socket.on('enter', function(data) {
@@ -283,7 +281,12 @@
 		console.log("Message from id = " + id);
     var target = event.sendto;
     var conn = getConnection(id);
- 
+
+		var remote_video_num = getConnectionCount() - 1;
+		console.log("remote_video_num = " + remote_video_num);
+		$('#all_video').append('<video id="remote_video' + remote_video_num + '" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
+    
+		pushVideoStandBy(getVideoForRemote(remote_video_num));
     if (event.type === 'call') {
       if (! isLocalStreamStarted()) {
         console.log("isLocalStream not started.");
