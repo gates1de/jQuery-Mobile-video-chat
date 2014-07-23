@@ -282,11 +282,6 @@
     var target = event.sendto;
     var conn = getConnection(id);
 
-		var remote_video_num = getConnectionCount() - 1;
-		console.log("remote_video_num = " + remote_video_num);
-		$('#all_video').append('<video id="remote_video' + remote_video_num + '" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
-    
-		pushVideoStandBy(getVideoForRemote(remote_video_num));
     if (event.type === 'call') {
       if (! isLocalStreamStarted()) {
         console.log("isLocalStream not started.");
@@ -308,6 +303,11 @@
     }
     else if (event.type === 'response') {
       if(localStream) {
+				var remote_video_num = getConnectionCount() - 1;
+				console.log("remote_video_num = " + remote_video_num);
+				$('#all_video').append('<video id="remote_video' + remote_video_num + '" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
+				pushVideoStandBy(getVideoForRemote(remote_video_num));
+    
 				sendOffer(id);
       	// console.log("Send offer.");
 				return;
