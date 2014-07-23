@@ -119,6 +119,7 @@
       videoElement.src = "";
       console.log("videoElement.src=" + videoElement.src);
       pushVideoStandBy(videoElement);
+			$("#" + id).fadeOut("1000");
     }
     else {
       console.warn('warning --- no video element using with id=' + id);
@@ -129,6 +130,7 @@
     var element = null;
     for (var id in videoElementsInUse) {
       detachVideo(id);
+			console.log("video id = " + id);
 			$("#" + id).fadeOut("1000");
     }
   }
