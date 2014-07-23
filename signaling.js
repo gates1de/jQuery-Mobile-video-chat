@@ -41,7 +41,7 @@ io.sockets.on('connection', function(socket) {
 		console.log("target = " + target);
     if (target) {
     　　// 送信先が指定されていた場合は、その相手のみに送信
-      socket.to(socket.id).json.emit('message', message);
+      socket.to(target).json.emit('message', message);
       console.log("message send." + socket.id);
 			return;
     }
