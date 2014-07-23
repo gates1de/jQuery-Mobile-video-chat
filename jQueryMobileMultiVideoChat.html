@@ -103,8 +103,8 @@
       videoElement.src = window.URL.createObjectURL(stream);
       console.log("videoElement.src=" + videoElement.src);
       pushVideoInUse(id, videoElement);
+      videoElement.style.display = 'block';
 		  displayVideo();
-      //videoElement.style.display = 'block';
     }
     else {
       console.error('--- no video element stand by.');
@@ -161,6 +161,7 @@
 
 	function displayVideo() {
 		for(var i = 0; i < getVideoCountInUse; i++) {
+			console.log((i+1) + "回目の映像表示");
 			$("video:hidden:first").fadeIn("slow");
 		}
 		return null;
