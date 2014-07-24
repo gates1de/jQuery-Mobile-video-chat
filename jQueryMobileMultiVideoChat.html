@@ -274,6 +274,8 @@
   socket.on('connect', onOpened)
         .on('message', onMessage);
 
+	socket.on('disconnect', function() {});
+
   function onOpened(event) {
     console.log('socket opened.');
     socketReady = true;
@@ -284,10 +286,6 @@
 			console.trace();
 		});
     console.log('enter to ' + roomName);
-  
-		socket.on('disconnect', function(data) {
-			console.trace();
-		});
 	}
  
   // socket: accept connection request
