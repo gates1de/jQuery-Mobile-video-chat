@@ -58,7 +58,7 @@ io.sockets.on('connection', function(socket) {
 		//io.sockets.emit('disconnect');
 		//socket.broadcast.to(socket.roomName).emit('disconnect');
 		emitMessage('disconnect', message);
-		console.log('disconnect room name = ' + socket.roomName);
+		//console.log('disconnect room name = ' + socket.roomName);
 	});
 
 	// 会議室名が指定されていたら、室内だけに通知

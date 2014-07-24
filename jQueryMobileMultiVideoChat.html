@@ -281,7 +281,7 @@
 		roomName = getRoomName(); // 会議室名を取得する
     socket.emit('enter', roomName);
 		socket.on('enter', function(data) {
-			console.log(data);
+			console.trace();
 		});
     console.log('enter to ' + roomName);
   
