@@ -331,7 +331,7 @@
     } else if (event.type === 'candidate' && isPeerStarted()) { // **
       console.log('Received ICE candidate...');
       onCandidate(event);
-    } else if (event.type === 'user disconnected' && isPeerStarted()) { // **
+    } else if (event.type === 'user disconnected') { // **
       console.log("disconnected");
       //stop();
       detachVideo(id); // force detach video
