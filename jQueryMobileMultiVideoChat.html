@@ -272,8 +272,7 @@
   var roomName;
   // socket: channel connected
   socket.on('connect', onOpened)
-        .on('message', onMessage)
-				.on('disconnect', closedConnection);
+        .on('message', onMessage);
 
   function onOpened(event) {
     console.log('socket opened.');
@@ -285,7 +284,11 @@
 			console.log(data);
 		});
     console.log('enter to ' + roomName);
-  }
+  
+		socket.on('disconnect', function(data) {
+			console.log("disconnect" + data.from);
+		});
+	}
  
   // socket: accept connection request
   function onMessage(event) {
