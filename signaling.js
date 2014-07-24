@@ -54,9 +54,9 @@ io.sockets.on('connection', function(socket) {
 		emitMessage('message', message);
 	});
 		 
-	socket.on('disconnect', function() {
+	socket.on('disconnect', function(message) {
 		//socket.broadcast.to(socket.roomName).emit('user disconnected');
-		emitMessage('user disconnected');
+		emitMessage('user disconnected', message);
 		console.log('disconnect');
 	});
 
@@ -69,7 +69,6 @@ io.sockets.on('connection', function(socket) {
 			roomName = _room;
 		});
 		*/
-	     
 	  if (roomName) {
 			socket.broadcast.to(roomName).emit(type, message);
 			console.log("emitMessage to room: " + roomName);
