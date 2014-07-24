@@ -55,8 +55,8 @@ io.sockets.on('connection', function(socket) {
 	});
 		 
 	socket.on('disconnect', function() {
-		socket.broadcast.to(socket.roomName).emit('user disconnected');
-		//emitMessage('user disconnected');
+		//socket.broadcast.to(socket.roomName).emit('user disconnected');
+		emitMessage('user disconnected');
 		console.log('disconnect');
 	});
 
