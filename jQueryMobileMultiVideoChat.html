@@ -273,9 +273,6 @@
   // socket: channel connected
   socket.on('connect', onOpened)
         .on('message', onMessage);
-	socket.on('disconnect', function() {
-		console.log("disconnect");
-	});
 
   function onOpened(event) {
     console.log('socket opened.');
@@ -568,7 +565,8 @@
   // stop the connection upon user request
   function exit() {
     console.log("exit.");
-    socket.json.send({type: "bye"});
+    //socket.json.send({type: "bye"});
+		socket.emit('disconnect', function() {});
 		socket.emit('exit', roomName);
     detachAllVideo();
     stopAllConnections();
