@@ -300,6 +300,7 @@
  
       if (isConnectPossible()) {
         console.log("send response");
+				addVideoTag();	
 				socket.json.send({type: "response"});
       }
       else {
@@ -309,7 +310,6 @@
     }
 		else if (event.type === 'response') {
 			if(localStream) {
-				addVideoTag();	
 				sendOffer(id);
       	console.log("Send offer.");
 				return;
