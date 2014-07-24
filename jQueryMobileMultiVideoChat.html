@@ -272,8 +272,11 @@
   var roomName;
   // socket: channel connected
   socket.on('connect', onOpened)
-        .on('message', onMessage)
-				.on('disconnect', onMessage);
+        .on('message', onMessage);
+	
+	socket.on('disconnect', function() {
+  	console.log("user disconnected");
+	});
 
   function onOpened(event) {
     console.log('socket opened.');
