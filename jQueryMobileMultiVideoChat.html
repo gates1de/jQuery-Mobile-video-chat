@@ -273,7 +273,7 @@
   // socket: channel connected
   socket.on('connect', onOpened)
         .on('message', onMessage)
-				.on('disconnect', onClosed);
+				.on('disconnect', onMessage);
 
   function onOpened(event) {
     console.log('socket opened.');
@@ -289,7 +289,7 @@
  
   // socket: accept connection request
   function onMessage(event) {
-		// console.log("onMessage(event.type = " + event.type + ")");
+		console.log("onMessage(event.type = " + event.type + ")");
     var id = event.from;
 		console.log("Message from id = " + id);
     var target = event.sendto;
