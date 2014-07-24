@@ -59,10 +59,6 @@
 	var remote_video_num = 1;
   var videoElementsInUse = {};
   var videoElementsStandBy = {};
-  //pushVideoStandBy(getVideoForRemote(0));
-  //pushVideoStandBy(getVideoForRemote(1));
-  //pushVideoStandBy(getVideoForRemote(2));
- 
  
   function getVideoForRemote(index) {
     var elementID = 'remote_video' + index;
@@ -120,9 +116,9 @@
       videoElement.src = "";
       console.log("videoElement.src=" + videoElement.src);
       pushVideoStandBy(videoElement);
-			$("#" + id).fadeOut("1000");
-			videoElement.style.display = 'none';
-    	//removeVideoTag(id);
+			$("#" + videoElement.id).fadeOut("1000");
+			// videoElement.style.display = 'none';
+    	removeVideoTag(videoElement.id);
 		}
     else {
       console.warn('warning --- no video element using with id=' + id);
