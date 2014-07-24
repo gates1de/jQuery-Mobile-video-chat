@@ -567,7 +567,9 @@
     socket.json.send({type: "bye"});
     detachAllVideo();
     stopAllConnections();
-		$('div').data('role').attr('disabled', 'disabled');
+		$(function() {
+			$('div').data('role').attr('disabled', 'disabled');
+		});
 	} 
 </script>
 </body>
