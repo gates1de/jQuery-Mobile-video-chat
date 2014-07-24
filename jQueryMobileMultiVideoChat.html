@@ -273,7 +273,8 @@
   // socket: channel connected
   socket.on('connect', onOpened)
         .on('message', onMessage);
- 
+	socket.on('disconnect', onMessage);
+
   function onOpened(event) {
     console.log('socket opened.');
     socketReady = true;
