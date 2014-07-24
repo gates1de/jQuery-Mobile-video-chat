@@ -254,10 +254,12 @@
   }
  
 	function addVideoTag() {
-		var remote_video_num = getConnectionCount() + 1;
+		// var remote_video_num = getConnectionCount();
+		var remote_video_num = 1;
 		console.log("remote_video_num = " + remote_video_num);
 		$('#all_video').append('<video id="remote_video' + remote_video_num + '" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
 		pushVideoStandBy(getVideoForRemote(remote_video_num));
+		remote_video_num++;
 	}
 
   // ---- socket ------
