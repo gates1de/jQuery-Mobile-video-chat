@@ -56,6 +56,7 @@ io.sockets.on('connection', function(socket) {
 		 
 	socket.on('disconnect', function(message) {
 		//socket.broadcast.to(socket.roomName).emit('user disconnected');
+		socket.json.send({type: "user disconnected"});
 		emitMessage('user disconnected', message);
 		console.log('disconnect');
 	});
