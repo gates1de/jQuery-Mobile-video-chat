@@ -122,7 +122,8 @@
       pushVideoStandBy(videoElement);
 			$("#" + id).fadeOut("1000");
 			videoElement.style.display = 'none';
-    }
+    	removeVideoTag(id);
+		}
     else {
       console.warn('warning --- no video element using with id=' + id);
     }
@@ -163,7 +164,7 @@
   }
 
   // -------------- multi connections --------------------
-  var MAX_CONNECTION_COUNT = 3;
+  var MAX_CONNECTION_COUNT = 5;
   var connections = {}; // Connection hash
   function Connection() { // Connection Class
     var self = this;
@@ -255,11 +256,16 @@
   }
  
 	function addVideoTag() {
-		// var remote_video_num = getConnectionCount();
 		console.log("remote_video_num = " + remote_video_num);
 		$('#all_video').append('<video id="remote_video' + remote_video_num + '" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
 		pushVideoStandBy(getVideoForRemote(remote_video_num));
 		remote_video_num++;
+	}
+
+	function removeVideoTag() {
+		console.log("remove remote_video" + id);
+		$('#remote_video' + id).remove();
+		remote_video_num--;
 	}
 
   // ---- socket ------
