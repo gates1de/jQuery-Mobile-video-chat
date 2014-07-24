@@ -29,6 +29,10 @@ io.sockets.on('connection', function(socket) {
     socket.roomName = roomName;
 		socket.join(roomName);
   });
+	
+	socket.on('exit', function(roomName) {
+		socket.leave(roomName);
+	});
 
 	socket.on('message', function(message) {
 		// socket.broadcast.emit('message', message);

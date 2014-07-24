@@ -565,6 +565,7 @@
   function exit() {
     console.log("exit.");
     socket.json.send({type: "bye"});
+		socket.emit('exit', roomName);
     detachAllVideo();
     stopAllConnections();
 		$(function() {
