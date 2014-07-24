@@ -258,9 +258,9 @@
 		remote_video_num++;
 	}
 
-	function removeVideoTag(id) {
-		console.log("remove remote_video" + id);
-		$('#remote_video' + id).remove();
+	function removeVideoTag(video_id) {
+		console.log("remove remote_video" + video_id);
+		$(video_id).remove();
 		remote_video_num--;
 	}
 
