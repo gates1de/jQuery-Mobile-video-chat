@@ -331,7 +331,7 @@
     } else if (event.type === 'candidate' && isPeerStarted()) { // **
       console.log('Received ICE candidate...');
       onCandidate(event);
-    } else if (event.type === 'user disconnected') { // **
+    } else if (event.type === 'user disconnected' && isPeerStarted()) { // **
       console.log("disconnected");
       //stop();
       detachVideo(id); // force detach video
@@ -566,7 +566,7 @@
   function exit() {
     console.log("exit.");
     //socket.json.send({type: "bye"});
-		socket.emit('disconnect', function() {});
+		socket.json.send({type: "user disconnected"}});
 		socket.emit('exit', roomName);
     detachAllVideo();
     stopAllConnections();
