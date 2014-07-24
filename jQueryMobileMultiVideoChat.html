@@ -344,11 +344,11 @@
 		}
   }
 
-	function onClosed(event) {
-		console.log(event.from + "disconnected");
-		if(event.from) {
-			detachVideo(event.from);  
-			stopConnection(event.from);
+	function onClosed(id) {
+		console.log(id + " disconnected");
+		if(id) {
+			detachVideo(id);  
+			stopConnection(id);
 			return;
 		}
 		else {
