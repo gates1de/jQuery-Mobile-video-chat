@@ -32,6 +32,7 @@ io.sockets.on('connection', function(socket) {
 
 	socket.on('setName', function(userName) {
 		socket.userName = userName;
+		console.log("userName = " + socket.userName);
 		socket.emit('setName', socket.userName);
 	});
 	
