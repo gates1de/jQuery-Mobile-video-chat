@@ -273,7 +273,7 @@
   // socket: channel connected
   socket.on('connect', onOpened)
         .on('message', onMessage)
-				.on('disconnect', onClosed);
+				.on('disconnect', closedConnection);
 
   function onOpened(event) {
     console.log('socket opened.');
@@ -343,11 +343,16 @@
 		}
   }
 
-	function onClosed(event) {
+	function closedConnection() {
 		console.log(event.from + "disconnected");
-		//detachVideo(event.from);  
-		//stopConnection(event.from);
-		return;
+		if(event.from) {
+			detachVideo(event.from);  
+			stopConnection(event.from);
+			return;
+		}
+		else {
+			console.log("正常に接続を消去できませんでした.");
+		}
  	}
 
   function getRoomName() { // たとえば、 URLに  ?roomName  とする
