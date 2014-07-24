@@ -22,10 +22,10 @@
 
   <div role="main" class="ui-content">
 		<div data-role="controlgroup" data-type="horizontal" data-inline="true" data-mini="true">
-			<button class="ui-btn" onclick="startVideo();">Video ON</button>
-			<button class="ui-btn" onclick="stopVideo();">Video OFF</button>
-		  <button class="ui-btn" onclick="call();">Connect</button>
-		  <button class="ui-btn" onclick="exit();">Exit</button>
+			<button class="ui-btn" id="video_on" onclick="startVideo();">Video ON</button>
+			<button class="ui-btn" id="video_off" onclick="stopVideo();">Video OFF</button>
+		  <button class="ui-btn" id="connect" onclick="call();">Connect</button>
+		  <button class="ui-btn" id="exit" onclick="exit();">Exit</button>
 		</div>  
 		<br />
 		<div data-role="content" id="all_video">
@@ -568,7 +568,10 @@
     detachAllVideo();
     stopAllConnections();
 		$(function() {
-			$('div').data('role').attr('disabled', 'disabled');
+			$('#video_on').attr('disabled', 'disabled');
+			$('#video_off').attr('disabled', 'disabled');
+			$('#connect').attr('disabled', 'disabled');
+			$('#exit').attr('disabled', 'disabled');
 		});
 	} 
 </script>
