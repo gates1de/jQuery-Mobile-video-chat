@@ -352,7 +352,9 @@
 		console.log(id + " disconnected");
 		if(id) {
 			detachVideo(id);  
-			stopConnection(id);
+      setTimeout(function() {
+				stopConnection(id);
+			}, 3000);
 			return;
 		}
 		else {
