@@ -272,9 +272,8 @@
   var roomName;
   // socket: channel connected
   socket.on('connect', onOpened)
-        .on('message', onMessage);
-	
-	socket.on('disconnect', onClosed);
+        .on('message', onMessage)
+				.on('disconnect', onClosed);
 
   function onOpened(event) {
     console.log('socket opened.');
@@ -344,8 +343,8 @@
 		}
   }
 
-	function onClosed() {
-		console.log("disconnected");
+	function onClosed(event) {
+		console.log(event.from + "disconnected");
 		//detachVideo(event.from);  
 		//stopConnection(event.from);
 		return;
