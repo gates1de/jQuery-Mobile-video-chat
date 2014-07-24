@@ -101,7 +101,7 @@
       videoElement.src = window.URL.createObjectURL(stream);
       console.log("videoElement.src=" + videoElement.src);
       pushVideoInUse(id, videoElement);
-			$("video:hidden:first").fadeIn("1000");
+			$("video:hidden:first").show("slide", {direction: "left"}, 1000); //fadeIn("1000");
     }
     else {
       console.error('--- no video element stand by.');
