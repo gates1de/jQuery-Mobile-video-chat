@@ -272,7 +272,8 @@
   var roomName;
   // socket: channel connected
   socket.on('connect', onOpened)
-        .on('message', onMessage);
+        .on('message', onMessage)
+				.on('disconnect', onClosed);
 
   function onOpened(event) {
     console.log('socket opened.');
@@ -341,7 +342,13 @@
       stopConnection(id);
 		}
   }
- 
+
+	function onClosed(event) {
+		console.log("disconnected");
+		detachVideo(event.from);  
+		stopConnection(event.from);
+ 	}
+
   function getRoomName() { // たとえば、 URLに  ?roomName  とする
     var url = document.location.href;
     var args = url.split('?');
