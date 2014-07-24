@@ -301,7 +301,6 @@
       if (isConnectPossible()) {
         console.log("send response");
 				socket.json.send({type: "response"});
-				addVideoTag();	
       }
       else {
         console.warn('max connections. so ignore call'); 
@@ -310,6 +309,7 @@
     }
 		else if (event.type === 'response') {
 			if(localStream) {
+				addVideoTag();	
 				sendOffer(id);
       	console.log("Send offer.");
 				return;
