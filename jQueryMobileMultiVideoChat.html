@@ -57,6 +57,7 @@
 	 
 	// ---- multi people video & audio ----
 	var remote_video_num = 1;
+	var removed_video_num = 0;
   var videoElementsInUse = {};
   var videoElementsStandBy = {};
  
@@ -100,7 +101,6 @@
       videoElement.src = window.URL.createObjectURL(stream);
       console.log("videoElement.src=" + videoElement.src);
       pushVideoInUse(id, videoElement);
-      //videoElement.style.display = 'block';
 			$("video:hidden:first").fadeIn("1000");
     }
     else {
@@ -117,7 +117,6 @@
       console.log("videoElement.src=" + videoElement.src);
       //pushVideoStandBy(videoElement);
 			$("#" + videoElement.id).fadeOut("1000");
-			// videoElement.style.display = 'none';
     	removeVideoTag(videoElement.id);
 		}
     else {
@@ -252,8 +251,9 @@
   }
  
 	function addVideoTag() {
-		console.log("remote_video_num = " + remote_video_num);
-		$('#all_video').append('<video id="remote_video' + remote_video_num + '" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
+		var num = remote_video_num + removed_video_num;
+		console.log("remote_video_num = " + num);
+		$('#all_video').append('<video id="remote_video' + num + '" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
 		pushVideoStandBy(getVideoForRemote(remote_video_num));
 		remote_video_num++;
 	}
@@ -262,6 +262,7 @@
 		console.log("remove " + video_id);
 		$('#' + video_id).remove();
 		remote_video_num--;
+		removed_video_num++;
 	}
 
   // ---- socket ------
