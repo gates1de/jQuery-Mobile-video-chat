@@ -274,9 +274,7 @@
   socket.on('connect', onOpened)
         .on('message', onMessage);
 
-	socket.on('disconnected', function() {
-		console.log("disconnected");
-	});
+	socket.on('disconnected', onClosed);
 
   function onOpened(event) {
     console.log('socket opened.');
@@ -346,7 +344,7 @@
 		}
   }
 
-	function closedConnection() {
+	function onClosed(event) {
 		console.log(event.from + "disconnected");
 		if(event.from) {
 			detachVideo(event.from);  
