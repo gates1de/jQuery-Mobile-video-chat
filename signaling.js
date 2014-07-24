@@ -56,7 +56,7 @@ io.sockets.on('connection', function(socket) {
 		 
 	socket.on('disconnect', function(message) {
 		message.from = socket.id;
-		console.log("message from: " + message.from);
+		console.log("message from: " + socket.id);
 		emitMessage('disconnected', message);
 	});
 
