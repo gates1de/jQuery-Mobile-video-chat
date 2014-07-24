@@ -57,6 +57,7 @@ io.sockets.on('connection', function(socket) {
 	socket.on('disconnect', function() {
 		// socket.broadcast.emit('user disconnected');
 		emitMessage('user disconnected');
+		console.log('disconnect');
 	});
 
 	// 会議室名が指定されていたら、室内だけに通知
