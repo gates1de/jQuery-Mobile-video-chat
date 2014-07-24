@@ -343,10 +343,10 @@
 		}
   }
 
-	function onClosed(event) {
+	function onClosed() {
 		console.log("disconnected");
-		detachVideo(event.from);  
-		stopConnection(event.from);
+		//detachVideo(event.from);  
+		//stopConnection(event.from);
  	}
 
   function getRoomName() { // たとえば、 URLに  ?roomName  とする
