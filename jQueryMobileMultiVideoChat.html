@@ -112,11 +112,11 @@
     console.log('try to detach video. id=' + id);
     var videoElement = popVideoInUse(id);
     if (videoElement) {
+			$("#" + videoElement.id).fadeOut("1500");
       videoElement.pause();
       videoElement.src = "";
       console.log("videoElement.src=" + videoElement.src);
       //pushVideoStandBy(videoElement);
-			$("#" + videoElement.id).fadeOut("1500");
     	removeVideoTag(videoElement.id);
 		}
     else {
