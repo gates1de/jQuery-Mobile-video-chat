@@ -274,7 +274,9 @@
   socket.on('connect', onOpened)
         .on('message', onMessage);
 
-	//socket.on('disconnect', function() {});
+	socket.on('disconnected', function() {
+		console.log("disconnected");
+	});
 
   function onOpened(event) {
     console.log('socket opened.');
@@ -283,7 +285,7 @@
 		roomName = getRoomName(); // 会議室名を取得する
     socket.emit('enter', roomName);
 		socket.on('enter', function(data) {
-			console.trace();
+			console.log(data);
 		});
     console.log('enter to ' + roomName);
 	}
