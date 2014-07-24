@@ -117,7 +117,7 @@
       videoElement.src = "";
       console.log("videoElement.src=" + videoElement.src);
       //pushVideoStandBy(videoElement);
-    	//removeVideoTag(videoElement.id);
+    	removeVideoTag(videoElement.id);
 		}
     else {
       console.warn('warning --- no video element using with id=' + id);
@@ -339,7 +339,9 @@
       console.log("disconnected");
       //stop();
       detachVideo(id); // force detach video
-      stopConnection(id);
+      setTimeout(function() {
+				stopConnection(id);
+			}, 3000);
     } else if (event.type === 'bye') {
 			detachVideo(id);	
       stopConnection(id);
