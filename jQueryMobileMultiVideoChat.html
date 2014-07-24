@@ -259,8 +259,8 @@
 	}
 
 	function removeVideoTag(video_id) {
-		console.log("remove remote_video" + video_id);
-		$(video_id).remove();
+		console.log("remove " + video_id);
+		$('#' + video_id).remove();
 		remote_video_num--;
 	}
 
