@@ -116,7 +116,7 @@
       videoElement.src = "";
       console.log("videoElement.src=" + videoElement.src);
       //pushVideoStandBy(videoElement);
-			$("#" + videoElement.id).fadeOut("1000");
+			$("#" + videoElement.id).fadeOut("1500");
     	removeVideoTag(videoElement.id);
 		}
     else {
@@ -260,7 +260,9 @@
 
 	function removeVideoTag(video_id) {
 		console.log("remove " + video_id);
-		$('#' + video_id).remove();
+		setTimeout(function() {
+			$('#' + video_id).remove();
+		}, 1500));
 		remote_video_num--;
 		removed_video_num++;
 	}
