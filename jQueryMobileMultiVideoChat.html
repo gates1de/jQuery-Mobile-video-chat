@@ -300,7 +300,6 @@
  
       if (isConnectPossible()) {
         console.log("send response");
-				addVideoTag();	
 				socket.json.send({type: "response"});
       }
       else {
