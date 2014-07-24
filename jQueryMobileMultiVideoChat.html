@@ -274,10 +274,7 @@
   socket.on('connect', onOpened)
         .on('message', onMessage);
 	
-	socket.on('disconnect', function() {
-  	console.log("disconnected");
-		return;
-	});
+	socket.on('disconnect', onClosed);
 
   function onOpened(event) {
     console.log('socket opened.');
@@ -351,6 +348,7 @@
 		console.log("disconnected");
 		//detachVideo(event.from);  
 		//stopConnection(event.from);
+		return;
  	}
 
   function getRoomName() { // たとえば、 URLに  ?roomName  とする
