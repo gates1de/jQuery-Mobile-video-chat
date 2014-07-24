@@ -55,7 +55,8 @@ io.sockets.on('connection', function(socket) {
 	});
 		 
 	socket.on('disconnect', function(message) {
-		emitMessage('user disconnected', message);
+		io.sockets.emit('user disconnected');
+		//emitMessage('user disconnected', message);
 		console.log('disconnect');
 	});
 
