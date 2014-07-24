@@ -112,7 +112,7 @@
     console.log('try to detach video. id=' + id);
     var videoElement = popVideoInUse(id);
     if (videoElement) {
-			$("#" + videoElement.id).fadeOut("1500");
+			// $("#" + videoElement.id).fadeOut("1500");
       videoElement.pause();
       videoElement.src = "";
       console.log("videoElement.src=" + videoElement.src);
@@ -260,9 +260,7 @@
 
 	function removeVideoTag(video_id) {
 		console.log("remove " + video_id);
-		setTimeout(function() {
-			$('#' + video_id).remove();
-		}, 3000);
+		$('#' + video_id).remove();
 		remote_video_num--;
 		removed_video_num++;
 	}
@@ -286,6 +284,11 @@
     socket.emit('enter', roomName);
 		socket.on('enter', function(data) {
 			console.log(data);
+		});
+
+		socket.emit('setUserName', getUserName());
+		socket.on('setUserName', function(data) {
+			console.log("your user_name is " + data);
 		});
     console.log('enter to ' + roomName);
 	}
@@ -339,9 +342,7 @@
       console.log("disconnected");
       //stop();
       detachVideo(id); // force detach video
-      setTimeout(function() {
-				stopConnection(id);
-			}, 3000);
+			stopConnection(id);
     } else if (event.type === 'bye') {
 			detachVideo(id);	
       stopConnection(id);
@@ -352,9 +353,7 @@
 		console.log(id + " disconnected");
 		if(id) {
 			detachVideo(id);  
-      setTimeout(function() {
-				stopConnection(id);
-			}, 3000);
+			stopConnection(id);
 			return;
 		}
 		else {
@@ -373,6 +372,18 @@
     }
     return "_defaultroom";
   }
+
+	function getUserName() {
+		var url = document.location.href;
+		var args = url.split('user_name=');
+		if (args.length > 1) {
+			var user_name = args[1];
+			if (user_name != "") {
+				return user_name;
+			}
+		}
+		return "名無し"
+	}
   
   function onOffer(event) {
     console.log("Received offer...")

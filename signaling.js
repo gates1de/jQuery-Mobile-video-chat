@@ -29,6 +29,11 @@ io.sockets.on('connection', function(socket) {
     socket.roomName = roomName;
 		socket.join(roomName);
   });
+
+	socket.on('setName', function(userName) {
+		socket.userName = userName;
+		socket.emit('setName', socket.userName);
+	});
 	
 	socket.on('exit', function(roomName) {
 		socket.leave(roomName);
