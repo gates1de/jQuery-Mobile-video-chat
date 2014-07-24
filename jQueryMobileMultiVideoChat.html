@@ -21,7 +21,7 @@
   </div>
 
   <div role="main" class="ui-content">
-		<div data-role="controlgroup" data-type="horizontal" data-inline="true" data-mini="true" id="control_button">
+		<div data-role="controlgroup" data-type="horizontal" data-inline="true" data-mini="true">
 			<button class="ui-btn" onclick="startVideo();">Video ON</button>
 			<button class="ui-btn" onclick="stopVideo();">Video OFF</button>
 		  <button class="ui-btn" onclick="call();">Connect</button>
@@ -567,7 +567,7 @@
     socket.json.send({type: "bye"});
     detachAllVideo();
     stopAllConnections();
-		$(#control_button).attr('disabled', 'disabled);
+		$('div').data('role').attr('disabled', 'disabled);
 	} 
 </script>
 </body>
