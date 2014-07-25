@@ -446,8 +446,10 @@ width:400px;
   // ---------------------- video handling -----------------------
   // start local video
   function startVideo() {
-		$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: 400px; height: 320px;"></video>' + userName  + '</center></div></div></div>'); 
+		if(localVideo != null) {
+			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: 400px; height: 320px;"></video>' + userName  + '</center></div></div></div>'); 
 		localVideo = document.getElementById('local_video');
+		}
 		navigator.getUserMedia({video: true, audio: false},
     	function (stream) { // success
       	localStream = stream;
