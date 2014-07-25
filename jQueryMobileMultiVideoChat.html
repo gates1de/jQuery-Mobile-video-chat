@@ -53,6 +53,10 @@ width:270px;
 }
 </style>
 <script>
+  var roomName;
+	var userName;
+	var socket_id;
+	var remoteUserName;
   var localVideo = document.getElementById('local_video');
   var localStream = null;
   var peerConnection = null;
@@ -278,10 +282,6 @@ width:270px;
   // create socket
   var socketReady = false;
   var socket = io.connect('/');
-  var roomName;
-	var userName;
-	var socket_id;
-	var remoteUserName;
   // socket: channel connected
   socket.on('connect', onOpened)
         .on('message', onMessage);
