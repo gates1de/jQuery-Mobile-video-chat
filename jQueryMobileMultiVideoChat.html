@@ -369,7 +369,8 @@
 
   function getRoomName() { // たとえば、 URLに  ?roomName  とする
     var url = document.location.href;
-    var args = url.split('?');
+    var args1 = url.split('?');
+		var args2 = args1.split('user_name='
     if (args.length > 1) {
       var room = args[1];
       if (room != "") {
@@ -380,15 +381,16 @@
   }
 
 	function getUserName() {
-		var url = document.location.href;
-		var args = url.split('user_name=');
-		if (args.length > 1) {
-			var user_name = args[1];
-			if (user_name != "") {
-				return user_name;
-			}
-		}
-		return "名無し"
+		key = "user_name".replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");  
+   	var regex = new RegExp("[\\?&]" + key + "=([^&#]*)");  
+   	var qs = regex.exec(window.location.href);  
+   	if(qs == null) {  
+   		return "名無し";
+		}  
+   	else {  
+			console.log("your user name is " + qs[1]);
+   		return qs[1];
+		}  
 	}
   
   function onOffer(event) {
