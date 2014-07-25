@@ -370,9 +370,9 @@
   function getRoomName() { // たとえば、 URLに  ?roomName  とする
     var url = document.location.href;
     var args1 = url.split('?');
-		var args2 = args1.split('user_name='
+		var args2 = args1.split('user_name=');
     if (args2.length > 1) {
-      var room = args[1];
+      var room = args[0];
       if (room != "") {
         return room;
       }
