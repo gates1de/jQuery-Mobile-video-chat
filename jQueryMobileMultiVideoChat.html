@@ -262,7 +262,7 @@ width:270px;
 		var position = $('#remote_video' + num).position();
 		var text_position_left = position.left + 20;
 		var text_position_top = position.top + 10;
-		$('#name_block').append('<div class="ui-block-a" id="remote_video' + num + '"><div class="ui-bar ui-bar-a">' + user_name  + '</div></div>'); 
+		$('#name_block').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-a">' + user_name  + '</div></div>'); 
 		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
@@ -270,6 +270,7 @@ width:270px;
 	function removeVideoTag(video_id) {
 		console.log("remove " + video_id);
 		$('#' + video_id).remove();
+		$('#user_name_' + video_id).remove();
 		remote_video_num--;
 		removed_video_num++;
 	}
