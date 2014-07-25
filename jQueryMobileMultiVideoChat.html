@@ -28,7 +28,7 @@
 		  <button class="ui-btn" id="exit" onclick="exit();">Exit</button>
 		</div>  
 		<br />
-		<div data-role="content" id="all_video">
+		<div data-role="content" data-inline="true" id="all_video">
 			<div class="ui-grid-c" id="name_block"> 
 			</div>
 			<video id="local_video" autoplay style="width: 300px; height: 225px; border: 1px solid black;"></video>
@@ -262,7 +262,7 @@ width:270px;
 		var position = $('#remote_video' + num).position();
 		var text_position_left = position.left + 20;
 		var text_position_top = position.top + 10;
-		$('#name_block').append('<div class="ui-block-a"><div class="ui-bar ui-bar-a">' + user_name  + '</div></div>'); 
+		$('#name_block').append('<div class="ui-block-a" id="remote_video' + num + '"><div class="ui-bar ui-bar-a">' + user_name  + '</div></div>'); 
 		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
