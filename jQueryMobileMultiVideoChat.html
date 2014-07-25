@@ -455,6 +455,10 @@
       localVideo.src = window.webkitURL.createObjectURL(stream);
       localVideo.play();
       localVideo.volume = 0;
+			var position = $('#local_video').position();
+			var text_position_left = position.left + 20;
+			var text_position_top = position.top + 10;
+			$('#all_video').append('<h2 style="left: ' + text_position_left + '; top: ' + text_position_top + '";>' + userName + 'さん</h2>');
      },
      function (error) { // error
       console.error('An error occurred:');
