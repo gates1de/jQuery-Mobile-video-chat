@@ -29,7 +29,7 @@
 		</div>  
 		<br />
 		<div data-role="content" data-type="horizontal" data-inline="true" id="all_video">
-			<video id="local_video" autoplay style="width: 270px; height: 220px; border: 1px solid black;"></video>
+			<video id="local_video" autoplay style="width: 270px; height: 200px; border: 1px solid black;"></video>
 		</div>
 	</div>
   <div data-role="footer">
@@ -256,11 +256,11 @@ width:235px;
 	function addVideoTag(user_name) {
 		var num = remote_video_num + removed_video_num;
 		console.log("remote user name = " + user_name);
-		$('#all_video').append('<video id="remote_video' + num + '" autoplay style="width: 270px; height: 220px; border: 1px solid red; display:none;"></video>');
+		// $('#all_video').append('<video id="remote_video' + num + '" autoplay style="width: 270px; height: 200px; border: 1px solid red; display:none;"></video>');
 		var position = $('#remote_video' + num).position();
 		var text_position_left = position.left + 20;
 		var text_position_top = position.top + 10;
-		$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-a">' + user_name  + '</div></div></div>'); 
+		$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-a">' + user_name  + '<video id="remote_video' + num + '" autoplay style="width: 270px; height: 200px; border: 1px solid red; display:none;"></video></div></div></div>'); 
 		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
@@ -460,7 +460,7 @@ width:235px;
 			var position = $('#local_video').position();
 			var text_position_left = position.left + 20;
 			var text_position_top = position.top + 10;
-			$('#name_block').append('<div class="ui-block-a"><div class="ui-bar ui-bar-a">' + userName  + '</div></div>'); 
+			// $('#name_block').append('<div class="ui-block-a"><div class="ui-bar ui-bar-a">' + userName  + '</div></div>'); 
 			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a">' + userName  + '</div></div></div>'); 
      },
      function (error) { // error
