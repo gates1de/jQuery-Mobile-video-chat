@@ -65,7 +65,7 @@ width:400px;
 
 	window.onload = function() {	
 		startVideo();
-		setTimeout(call(), 5000);
+		setTimeout(call(), 10000);
 	}	
  
   function getVideoForRemote(index) {
@@ -363,6 +363,7 @@ width:400px;
   }
 
 	function onClosed(id) {
+		console.log(id + " disconnected");
 		if(id == socket_id) {
 			console.log(id + " disconnected");
 			detachVideo(id);  
