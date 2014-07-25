@@ -102,7 +102,11 @@
       console.log("videoElement.src=" + videoElement.src);
       pushVideoInUse(id, videoElement);
 			$("video:hidden:first").fadeIn("1500");
-    }
+    	var ans = $(videoElement).position();
+			var myLeft = ans.left;
+			var myTop = ans.top;
+			alert("left:"+ myLeft +"  top:"+myTop);
+		}
     else {
       console.error('--- no video element stand by.');
     }
@@ -270,6 +274,7 @@
   var socketReady = false;
   var socket = io.connect('/');
   var roomName;
+	var userName;
   // socket: channel connected
   socket.on('connect', onOpened)
         .on('message', onMessage);
@@ -289,6 +294,7 @@
 		socket.emit('setUserName', getUserName());
 		socket.on('setUserName', function(data) {
 			console.log("your user_name is " + data);
+			userName = data;
 		});
     console.log('enter to ' + roomName);
 	}
@@ -436,7 +442,11 @@
   // ---------------------- video handling -----------------------
   // start local video
   function startVideo() {
-    navigator.getUserMedia({video: true, audio: false},
+    var ans = $('#local_video').position();
+		var myLeft = ans.left;
+		var myTop = ans.top;
+		alert("left:"+ myLeft +"  top:"+myTop);
+		navigator.getUserMedia({video: true, audio: false},
      function (stream) { // success
       localStream = stream;
       localVideo.src = window.webkitURL.createObjectURL(stream);
