@@ -30,10 +30,10 @@ io.sockets.on('connection', function(socket) {
 		socket.join(roomName);
   });
 
-	socket.on('setName', function(userName) {
+	socket.on('setUserName', function(userName) {
 		socket.userName = userName;
 		console.log("userName = " + socket.userName);
-		socket.emit('setName', socket.userName);
+		socket.emit('setUserName', socket.userName);
 	});
 	
 	socket.on('exit', function(roomName) {
