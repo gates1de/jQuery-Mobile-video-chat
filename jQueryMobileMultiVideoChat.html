@@ -254,6 +254,10 @@
 		var num = remote_video_num + removed_video_num;
 		console.log("remote_video_num = " + num);
 		$('#all_video').append('<video id="remote_video' + num + '" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
+		var position = $('#remote_video' + num).position();
+		var text_position_left = position.left + 20;
+		var text_position_top = position.top + 10;
+		$('#all_video').append('<h2 style="left: ' + text_position_left + '; top: ' + text_position_top + '";>' + userName + 'さん</h2>');
 		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
@@ -354,8 +358,8 @@
   }
 
 	function onClosed(id) {
-		console.log(id + " disconnected");
 		if(id == socket.id) {
+			console.log(id + " disconnected");
 			detachVideo(id);  
 			stopConnection(id);
 			return;
