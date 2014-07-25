@@ -371,7 +371,7 @@
     var url = document.location.href;
     var args1 = url.split('?');
 		var args2 = args1.split('user_name='
-    if (args.length > 1) {
+    if (args2.length > 1) {
       var room = args[1];
       if (room != "") {
         return room;
@@ -384,7 +384,7 @@
 		key = "user_name".replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");  
    	var regex = new RegExp("[\\?&]" + key + "=([^&#]*)");  
    	var qs = regex.exec(window.location.href);  
-   	if(qs == null) {  
+   	if (qs == null) {  
    		return "名無し";
 		}  
    	else {  
