@@ -63,12 +63,9 @@ width:400px;
   var videoElementsInUse = {};
   var videoElementsStandBy = {};
 
-	$(document).ready(function() {
+	window.onload = function() {	
 		startVideo();
-	});
-
-	window.onload = function() {
-		call();
+		setTimeout(call(), 1000);
 	}	
  
   function getVideoForRemote(index) {
