@@ -29,8 +29,7 @@
 		</div>  
 		<br />
 		<div data-role="content" id="all_video">
-			<div class="ui-grid-c"> 
-				<div class="ui-block-a"><div class="ui-bar ui-bar-a">Aブロック</div></div> 
+			<div class="ui-grid-c" id="name_block"> 
 			</div>
 			<video id="local_video" autoplay style="width: 300px; height: 225px; border: 1px solid black;"></video>
 		</div>
@@ -464,8 +463,7 @@ width:270px;
 			var position = $('#local_video').position();
 			var text_position_left = position.left + 20;
 			var text_position_top = position.top + 10;
-			console.log("create user name text");
-			$('#all_video').append('<h2 style="left: ' + text_position_left + '; top: ' + text_position_top + '";>' + userName + 'さん</h2>');
+			$('#name_block').append('<div class="ui-block-a"><div class="ui-bar ui-bar-a">' + userName  + '</div></div>'); 
      },
      function (error) { // error
       console.error('An error occurred:');
