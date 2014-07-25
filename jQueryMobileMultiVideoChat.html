@@ -102,10 +102,6 @@
       console.log("videoElement.src=" + videoElement.src);
       pushVideoInUse(id, videoElement);
 			$("video:hidden:first").fadeIn("1500");
-    	var ans = $(videoElement).position();
-			var myLeft = ans.left;
-			var myTop = ans.top;
-			alert("left:"+ myLeft +"  top:"+myTop);
 		}
     else {
       console.error('--- no video element stand by.');
@@ -447,10 +443,6 @@
   // ---------------------- video handling -----------------------
   // start local video
   function startVideo() {
-    var ans = $('#local_video').position();
-		var myLeft = ans.left;
-		var myTop = ans.top;
-		alert("left:"+ myLeft +"  top:"+myTop);
 		navigator.getUserMedia({video: true, audio: false},
      function (stream) { // success
       localStream = stream;
