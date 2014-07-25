@@ -46,7 +46,8 @@ io.sockets.on('connection', function(socket) {
 		// 送信元のidをメッセージに追加（相手が分かるように）
     message.from = socket.id;
 		message.userName = socket.userName; 
-    // 送信先が指定されているか？
+    console.log("messanger is " + message.userName);
+		// 送信先が指定されているか？
     var target = message.sendto;
 		console.log("target = " + target);
     if (target) {
