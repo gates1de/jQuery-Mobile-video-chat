@@ -279,8 +279,9 @@ width:400px;
   var socket = io.connect('/');
   var roomName;
 	var userName = getUserName();
-	var socket_id;
 	var remoteUserName;
+	var socketId;
+	var remoteSocketId;
   // socket: channel connected
   socket.on('connect', onOpened)
         .on('message', onMessage);
@@ -295,7 +296,7 @@ width:400px;
     socket.emit('enter', roomName);
 		socket.on('enter', function(data) {
 			console.log("your socket.id = " + data);
-			socket_id = data;
+			socketId = data;
 		});
 
 		socket.emit('setUserName', getUserName());
@@ -364,7 +365,8 @@ width:400px;
 
 	function onClosed(id) {
 		console.log(id + " disconnected");
-		if(id == socket_id) {
+		console.log(socketId + " disconnected");
+		if(id == socketId) {
 			console.log(id + " disconnected");
 			detachVideo(id);  
 			stopConnection(id);
