@@ -271,6 +271,7 @@
   var socket = io.connect('/');
   var roomName;
 	var userName;
+	var socket_id;
   // socket: channel connected
   socket.on('connect', onOpened)
         .on('message', onMessage);
@@ -284,7 +285,8 @@
 		roomName = getRoomName(); // 会議室名を取得する
     socket.emit('enter', roomName);
 		socket.on('enter', function(data) {
-			console.log(data);
+			console.log("your socket.id = " + data);
+			socket_id = data;
 		});
 
 		socket.emit('setUserName', getUserName());
@@ -353,14 +355,12 @@
 
 	function onClosed(id) {
 		console.log(id + " disconnected");
-		if(id) {
+		if(id == socket.id) {
 			detachVideo(id);  
 			stopConnection(id);
 			return;
 		}
-		else {
-			console.log("正常に接続を消去できませんでした.");
-		}
+		return false;
  	}
 
   function getRoomName() { // たとえば、 URLに  ?roomName  とする

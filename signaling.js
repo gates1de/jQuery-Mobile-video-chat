@@ -25,7 +25,7 @@ io.sockets.on('connection', function(socket) {
 	// 入室
   socket.on('enter', function(roomName) {
   	//socket.set('roomName', roomName);
-  	socket.emit('enter', 'your id = ' + socket.id);
+  	socket.emit('enter', socket.id);
     socket.roomName = roomName;
 		socket.join(roomName);
   });
