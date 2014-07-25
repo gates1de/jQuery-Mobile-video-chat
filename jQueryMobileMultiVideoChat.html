@@ -63,8 +63,11 @@ width:400px;
   var videoElementsInUse = {};
   var videoElementsStandBy = {};
 
-	window.onload = function() {
+	$(document).ready(function() {
 		startVideo();
+	});
+
+	window.onload = function() {
 		call();
 	}	
  
