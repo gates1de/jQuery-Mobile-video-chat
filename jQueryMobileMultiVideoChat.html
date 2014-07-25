@@ -62,6 +62,10 @@ width:400px;
 	var removed_video_num = 0;
   var videoElementsInUse = {};
   var videoElementsStandBy = {};
+
+	window.onload = function() {
+		startVideo();
+	}	
  
   function getVideoForRemote(index) {
     var elementID = 'remote_video' + index;
@@ -446,7 +450,7 @@ width:400px;
   // ---------------------- video handling -----------------------
   // start local video
   function startVideo() {
-		if(localVideo != null) {
+		if(localVideo == null) {
 			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: 400px; height: 320px;"></video>' + userName  + '</center></div></div></div>'); 
 		localVideo = document.getElementById('local_video');
 		}
