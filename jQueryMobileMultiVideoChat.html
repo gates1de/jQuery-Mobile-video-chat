@@ -93,8 +93,8 @@
     return element;
   }
  
-  function attachVideo(id, stream) {
-		addVideoTag();	
+  function attachVideo(id, stream, user_name) {
+		addVideoTag(user_name);	
     console.log('try to attach video. id=' + id);
     var videoElement = popVideoStandBy();
     if (videoElement) {
@@ -250,14 +250,14 @@
     }
   }
  
-	function addVideoTag() {
+	function addVideoTag(user_name) {
 		var num = remote_video_num + removed_video_num;
 		console.log("remote_video_num = " + num);
 		$('#all_video').append('<video id="remote_video' + num + '" autoplay style="width: 300px; height: 225px; border: 1px solid red; display:none;"></video>');
-		var position = $('#remote_video' + num).position();
+		var position = $('#remote_video' + num).offset();
 		var text_position_left = position.left + 20;
 		var text_position_top = position.top + 10;
-		$('#all_video').append('<h2 style="left: ' + text_position_left + '; top: ' + text_position_top + '";>' + userName + 'さん</h2>');
+		$('#all_video').append('<h2 style="left: ' + text_position_left + '; top: ' + text_position_top + '";>' + user_name + 'さん</h2>');
 		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
@@ -305,6 +305,7 @@
   function onMessage(event) {
 		console.log("onMessage(event.type = " + event.type + ")");
     var id = event.from;
+		var user_name = event.userName;
 		console.log("Message from id = " + id);
     var target = event.sendto;
     var conn = getConnection(id);
@@ -509,7 +510,7 @@
     // when remote adds a stream, hand it on to the local video element
     function onRemoteStreamAdded(event) {
       console.log("Added remote stream");
-      attachVideo(this.id, event.stream);
+      attachVideo(this.id, event.stream, event.userName);
       //remoteVideo.src = window.webkitURL.createObjectURL(event.stream);
     	if(!event.stream) {
 				console.log("not exist event.stream!");
