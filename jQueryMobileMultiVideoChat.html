@@ -116,7 +116,7 @@ width:400px;
   }
  
   function detachVideo(id) {
-    console.log('try to detach video. id=' + id);
+    //console.log('try to detach video. id=' + id);
     var videoElement = popVideoInUse(id);
     if (videoElement) {
 			// $("#" + videoElement.id).fadeOut("1500");
@@ -125,9 +125,10 @@ width:400px;
       console.log("videoElement.src=" + videoElement.src);
       //pushVideoStandBy(videoElement);
     	removeVideoTag(videoElement.id);
+			console.log("disconnected user id = " + id);
 		}
     else {
-      console.warn('warning --- no video element using with id=' + id);
+      // console.warn('warning --- no video element using with id=' + id);
     }
   }
  
@@ -364,15 +365,9 @@ width:400px;
   }
 
 	function onClosed(id) {
-		console.log(id + " disconnected");
-		console.log(socketId + " disconnected");
-		if(id == socketId) {
-			console.log(id + " disconnected");
-			detachVideo(id);  
-			stopConnection(id);
-			return;
-		}
-		return false;
+		detachVideo(id);  
+		stopConnection(id);
+		return;
  	}
 
   function getRoomName() { // たとえば、 URLに  ?roomName  とする
