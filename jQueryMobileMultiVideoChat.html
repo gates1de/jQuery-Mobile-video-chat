@@ -16,8 +16,7 @@
 <div data-role="page" data-title="jQuery Mobile Video Chat">
 
   <!--ヘッダー領域-->
-  <div data-role="header">
-    <h1>jQuery Mobile Video Chat</h1>
+  <div data-role="header" id="room_name">
   </div>
 
   <div role="main" class="ui-content">
@@ -393,9 +392,10 @@ width:400px;
    	if (qs == null) {  
    		document.location = "http://temp-gateside-app.herokuapp.com/regist.php";
 		}  
-   	else {  
-   		return qs[1];
-		}  
+   	else {
+			$('#room_name').append('<h1>' + qs[1] + '</h1>');
+		}
+		return null; 
 	}
 
 	function getUserName() {
