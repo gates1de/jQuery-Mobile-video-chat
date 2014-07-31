@@ -66,8 +66,10 @@ background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#81a
 		startVideo();
 		setTimeout("call()", 2000);
 	}	
- 
-  function getVideoForRemote(index) {
+	var css_width = window.outerWidth * 0.3;
+	var css_height = window.outerHeight * 0.3;
+  
+	function getVideoForRemote(index) {
     var elementID = 'remote_video' + index;
     var element = document.getElementById(elementID);
     return element;
@@ -105,7 +107,9 @@ background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#81a
     var videoElement = popVideoStandBy();
     if (videoElement) {
       videoElement.src = window.URL.createObjectURL(stream);
-      console.log("videoElement.src=" + videoElement.src);
+      videoElement.width = css_width;
+			videoElement.height = css_height;
+			console.log("videoElement.src=" + videoElement.src);
       pushVideoInUse(id, videoElement);
 			$("video:hidden:first").fadeIn("1500");
 		}
@@ -260,11 +264,7 @@ background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#81a
 	function addVideoTag(user_name) {
 		var num = remote_video_num + removed_video_num;
 		console.log("remote user name = " + user_name);
-		var width = window.outerWidth * 0.3;
-		var height = window.outerHeight * 0.3;
-		$('.ui-bar-a').css("width", width + "px");
-		$('.ui-bar-a').css("height", height + "px");
-		// $('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-a"><center><video id="remote_video' + num + '" autoplay style="width: ' + width  + 'px; height: ' + height + 'px; display:none;"></video>' + user_name  + '</center></div></div></div>'); 
+		// $('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-a"><center><video id="remote_video' + num + '" autoplay style="width: ' + css_width  + 'px; height: ' + css_height + 'px; display:none;"></video>' + user_name  + '</center></div></div></div>'); 
 		$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-a"><center><video id="remote_video' + num + '" autoplay display:none;"></video>' + user_name  + '</center></div></div></div>'); 
 		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
@@ -470,9 +470,9 @@ background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#81a
   // start local video
   function startVideo() {
 		if(localVideo == null) {
-			var width = window.outerWidth * 0.3;
-			var height = window.outerHeight * 0.3;
-			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: ' + width + 'px; height: '+ height +'px;"></video>' + userName  + '</center></div></div></div>'); 
+			$('.ui-bar-a').css("width", css_width + "px");
+			$('.ui-bar-a').css("height", css_height + "px");
+			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: ' + css_width + 'px; height: '+ css_height +'px;"></video>' + userName  + '</center></div></div></div>'); 
 		localVideo = document.getElementById('local_video');
 		}
 		navigator.getUserMedia({video: true, audio: true},
