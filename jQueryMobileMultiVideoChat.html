@@ -381,6 +381,9 @@ width:400px;
      		if (room != "") {
         	return room;
       	}
+				else {
+   				document.location = "http://temp-gateside-app.herokuapp.com/regist.php";		
+				}
     	}
 		}
     return "_defaultroom";
@@ -390,7 +393,7 @@ width:400px;
 		key = "room_name".replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");  
    	var regex = new RegExp("[\\?&]" + key + "=([^&#]*)");  
    	var qs = regex.exec(window.location.href);  
-   	if (qs == null) {  
+   	if (qs == null || qs[1] == "") {  
    		document.location = "http://temp-gateside-app.herokuapp.com/regist.php";
 		}  
    	else {
@@ -403,9 +406,8 @@ width:400px;
 		key = "user_name".replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");  
    	var regex = new RegExp("[\\?&]" + key + "=([^&#]*)");  
    	var qs = regex.exec(window.location.href);  
-   	if (qs == null) {  
-   		return "名無し";
-		}  
+   	if (qs == null || qs[1] == "") {  
+   		document.location = "http://temp-gateside-app.herokuapp.com/regist.php";
    	else {  
    		return decodeURI(qs[1]);
 		}  
