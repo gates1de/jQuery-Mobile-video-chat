@@ -44,19 +44,19 @@
 	x = 120; // マウスと画像の縦方向の距離
 	y = 100; // マウスと画像の横方向の距離
 	var flag = false;
-	window.document.onmousemove = dragVideo;
+	window.document.onmousemove = dragTag;
 	window.document.onmouseup = dragOff;
 	function dragOn(n) {
 	  flag = true; 
-	  videoName = n;
+	  tagName = n;
 	}
 	function dragOff() {
 	  flag = false;
 	}
-	function dragVideo() {
+	function dragTag() {
 	  if(!flag) return;
-	  document.getElementById(videoName).style.top = event.y - y;
-	  document.getElementById(videoName).style.left = event.x - x;
+	  document.getElementById(tagName).style.top = event.y - y;
+	  document.getElementById(tagName).style.left = event.x - x;
 	  return false;
 	}
 
@@ -482,7 +482,7 @@
   // start local video
   function startVideo() {
 		if(localVideo == null) {
-			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: 240px; height: 200px; position:absolute;"></video>' + userName  + '</center></div></div></div>'); 
+			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" style="position:absolute;" id="user_name_local_video" onmousedown="dragOn('user_name_local_video')"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: 240px; height: 200px;"></video>' + userName  + '</center></div></div></div>'); 
 		localVideo = document.getElementById('local_video');
 		}
 		navigator.getUserMedia({video: true, audio: true},
