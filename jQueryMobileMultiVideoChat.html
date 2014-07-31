@@ -479,6 +479,31 @@
       	return;
      	}
     );
+
+		var e = document.getElementById('user_name_local_video');
+		var flag;
+		var clickOffsetTop;
+		var clickOffsetLeft;
+
+		e.onmousedown = function(evt){
+			flag = 'on';
+			evt = (evt) || window.event;
+			clickOffsetTop = evt.clientY - e.offsetTop;
+			clickOffsetLeft = evt.clientX - e.offsetLeft;
+			if(!document.all){
+				window.getSelection().removeAllRanges();
+			}
+		}
+		document.onmouseup = function(){
+			flag = 'off';
+		}
+		document.onmousemove = function(evt){
+			evt = (evt) || window.event;
+			if(flag == 'on'){
+				e.style.top = evt.clientY - clickOffsetTop + 'px';
+				e.style.left = evt.clientX - clickOffsetLeft + 'px';
+			}
+		}		
   }
  
   // stop local video
