@@ -293,7 +293,7 @@ width:400px;
     console.log('socket opened.');
     socketReady = true;
     
-		roomName = getRoomName(); // 会議室名を取得する
+		roomName = getRoom(); // 会議室名を取得する
     socket.emit('enter', roomName);
 		socket.on('enter', function(data) {
 			console.log("your socket.id = " + data);
@@ -370,9 +370,9 @@ width:400px;
 		return;
  	}
 
-  function getRoomName() { // たとえば、 URLに  ?roomName  とする
+  function getRoom() { 
     var url = document.location.href;
-    var args1 = url.split('?room_name=');
+    var args1 = url.split('?room=');
     if (args1.length > 1) {
       var split_string = args1[1];
 			var args2 = split_string.split('&user_name=');
@@ -385,6 +385,18 @@ width:400px;
 		}
     return "_defaultroom";
   }
+
+	function getRoomName() {
+		key = "room_name".replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");  
+   	var regex = new RegExp("[\\?&]" + key + "=([^&#]*)");  
+   	var qs = regex.exec(window.location.href);  
+   	if (qs == null) {  
+   		document.location = "http://temp-gateside-app.herokuapp.com/regist.php";
+		}  
+   	else {  
+   		return qs[1];
+		}  
+	}
 
 	function getUserName() {
 		key = "user_name".replace(/[\[]/,"\\\[").replace(/[\]]/,"\\\]");  
