@@ -257,7 +257,7 @@
 	function addVideoTag(user_name) {
 		var num = remote_video_num + removed_video_num;
 		console.log("remote user name = " + user_name);
-		$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_remote_video' + num + '" draggable="true"><div class="ui-bar ui-bar-b"><center><video id="remote_video' + num + '" autoplay style="width: 400px; height: 320px; display:none;"></video>' + user_name  + '</center></div></div></div>'); 
+		$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b"><center><video id="remote_video' + num + '" autoplay style=" display:none;"></video>' + user_name  + '</center></div></div></div>'); 
 		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
