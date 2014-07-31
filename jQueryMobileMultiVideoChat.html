@@ -102,7 +102,7 @@
       var ui_height = $(".ui-bar-b").height();
 			console.log("ui_width = " + ui_width);
 			$("#" + videoElement.id).width(ui_width);
-			$("#" + videoElement.id).height(ui_height + 50);
+			$("#" + videoElement.id).height(ui_height * 1.10);
 			console.log("videoElement.src=" + videoElement.src);
       pushVideoInUse(id, videoElement);
 			$("video:hidden:first").fadeIn("1500");
@@ -364,7 +364,7 @@
 	function onClosed(id) {
 		detachVideo(id);  
 		stopConnection(id);
-		setTimeout("window.close()", 2000);
+		return;
  	}
 
   function getRoom() { 
@@ -636,6 +636,7 @@
 			$('#connect').attr('disabled', 'disabled');
 			$('#exit').attr('disabled', 'disabled');
 		});
+		setTimeout("window.close()", 2000);
 	} 
 </script>
 </body>
