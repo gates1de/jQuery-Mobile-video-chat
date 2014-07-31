@@ -261,7 +261,9 @@ width:400px;
 	function addVideoTag(user_name) {
 		var num = remote_video_num + removed_video_num;
 		console.log("remote user name = " + user_name);
-		$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-a"><center><video id="remote_video' + num + '" autoplay style="width: 400px; height: 320px; display:none;"></video>' + user_name  + '</center></div></div></div>'); 
+		var width = window.outerWidth * 0.4;
+		var height = window.outerHeight * 0.4;
+		$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-a"><center><video id="remote_video' + num + '" autoplay style="width: ' + width  + 'px; height: ' + height + 'px; display:none;"></video>' + user_name  + '</center></div></div></div>'); 
 		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
@@ -466,7 +468,9 @@ width:400px;
   // start local video
   function startVideo() {
 		if(localVideo == null) {
-			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: 400px; height: 320px;"></video>' + userName  + '</center></div></div></div>'); 
+			var width = window.outerWidth * 0.5;
+			var height = window.outerHeight * 0.5;
+			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: ' + width + 'px; height: '+ height +'px;"></video>' + userName  + '</center></div></div></div>'); 
 		localVideo = document.getElementById('local_video');
 		}
 		navigator.getUserMedia({video: true, audio: true},
