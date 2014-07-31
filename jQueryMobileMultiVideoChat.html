@@ -11,8 +11,10 @@
 <link rel="stylesheet" type="text/css" media="only screen and (min-device-width:480px)"
 	href="https://temp-gateside-app.herokuapp.com/layout/pc.css"/>
 <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
-<script src="//code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js">
-</script>
+<script src="//code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
+<link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css">
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 </head>
 <body>
 
@@ -58,31 +60,6 @@
 		getRoomName();
 		startVideo();
 		setTimeout("call()", 2000);
-		
-		var e; 
-		var flag;
-		var clickOffsetTop;
-		var clickOffsetLeft;
-
-		e.onmousedown = function(evt){
-			flag = 'on';
-			evt = (evt) || window.event;
-			clickOffsetTop = evt.clientY - e.offsetTop;
-			clickOffsetLeft = evt.clientX - e.offsetLeft;
-			if(!document.all){
-				window.getSelection().removeAllRanges();
-			}
-		}
-		document.onmouseup = function(){
-			flag = 'off';
-		}
-		document.onmousemove = function(evt){
-			evt = (evt) || window.event;
-			if(flag == 'on'){
-				e.style.top = evt.clientY - clickOffsetTop + 'px';
-				e.style.left = evt.clientX - clickOffsetLeft + 'px';
-			}
-		}		
 	}	
   
 	function getVideoForRemote(index) {
@@ -490,7 +467,7 @@
 		if(localVideo == null) {
 			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" style="position: absolute;" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: 240px; height: 200px;"></video>' + userName  + '</center></div></div></div>'); 
 		localVideo = document.getElementById('local_video');
-		e = document.getElementById('user_name_local_video');
+		jQuery("#user_name_local_video").draggable();
 		}
 		navigator.getUserMedia({video: true, audio: true},
     	function (stream) { // success
