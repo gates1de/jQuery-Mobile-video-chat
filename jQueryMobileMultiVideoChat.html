@@ -59,8 +59,6 @@
 		startVideo();
 		setTimeout("call()", 2000);
 	}	
-	var css_width = window.outerWidth * 0.3;
-	var css_height = window.outerHeight * 0.3;
   
 	function getVideoForRemote(index) {
     var elementID = 'remote_video' + index;
@@ -100,8 +98,10 @@
     var videoElement = popVideoStandBy();
     if (videoElement) {
       videoElement.src = window.URL.createObjectURL(stream);
-      videoElement.width = 400;
-			videoElement.height = 320;
+      var ui_width = $(".ui-bar-n").width();
+      var ui_height = $(".ui-bar-n").height();
+			videoElement.width = ui_width;
+			videoElement.height = ui_height + 20;;
 			console.log("videoElement.src=" + videoElement.src);
       pushVideoInUse(id, videoElement);
 			$("video:hidden:first").fadeIn("1500");
