@@ -34,7 +34,7 @@
 		<div data-role="content" data-type="horizontal" data-inline="true" id="all_video">
 		</div>
 	</div>
-  <div data-role="footer">
+  <div data-role="footer" data-position="fixed" data-fullscreen="true">
     <h3>Copyright 2014-201X, Yyy.Xxxxx</h3>
   </div>
 
@@ -488,7 +488,7 @@
   // start local video
   function startVideo() {
 		if(localVideo == null) {
-			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: 240px; height: 200px;"></video>' + userName  + '</center></div></div></div>'); 
+			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" style="position: absolute;" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: 240px; height: 200px;"></video>' + userName  + '</center></div></div></div>'); 
 		localVideo = document.getElementById('local_video');
 		e = document.getElementById('user_name_local_video');
 		}
