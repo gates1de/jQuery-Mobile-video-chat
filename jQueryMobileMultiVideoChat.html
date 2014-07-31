@@ -372,7 +372,7 @@ width:400px;
 
   function getRoomName() { // たとえば、 URLに  ?roomName  とする
     var url = document.location.href;
-    var args1 = url.split('?');
+    var args1 = url.split('?room_name=');
     if (args1.length > 1) {
       var split_string = args1[1];
 			var args2 = split_string.split('&user_name=');
