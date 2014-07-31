@@ -41,25 +41,6 @@
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script charset="UTF-8">
-	x = 120; // マウスと画像の縦方向の距離
-	y = 100; // マウスと画像の横方向の距離
-	var flag = false;
-	window.document.onmousemove = dragTag;
-	window.document.onmouseup = dragOff;
-	function dragOn() {
-	  flag = true; 
-	  // tagName = n;
-	}
-	function dragOff() {
-	  flag = false;
-	}
-	function dragTag() {
-	  if(!flag) return;
-	  document.getElementById("user_name_local_video").style.top = event.y - y;
-	  document.getElementById("user_name_local_video").style.left = event.x - x;
-	  return false;
-	}
-
   var localVideo = null;
   var localStream = null;
   var peerConnection = null;
@@ -482,7 +463,7 @@
   // start local video
   function startVideo() {
 		if(localVideo == null) {
-			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" style="position:absolute;" id="user_name_local_video" onmousedown="dragOn()"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: 240px; height: 200px;"></video>' + userName  + '</center></div></div></div>'); 
+			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: 240px; height: 200px;"></video>' + userName  + '</center></div></div></div>'); 
 		localVideo = document.getElementById('local_video');
 		}
 		navigator.getUserMedia({video: true, audio: true},
