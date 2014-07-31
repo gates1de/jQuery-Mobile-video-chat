@@ -394,7 +394,7 @@ width:400px;
    		document.location = "http://temp-gateside-app.herokuapp.com/regist.php";
 		}  
    	else {
-			$('#room_name').append('<center><h1>' + qs[1] + 'のルーム</h1></center>');
+			$('#room_name').append('<center><h1>' + decodeURI(qs[1]) + 'のルーム</h1></center>');
 		}
 		return null; 
 	}
@@ -407,7 +407,7 @@ width:400px;
    		return "名無し";
 		}  
    	else {  
-   		return qs[1];
+   		return decodeURI(qs[1]);
 		}  
 	}
   
