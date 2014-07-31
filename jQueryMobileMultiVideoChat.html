@@ -98,10 +98,11 @@
     var videoElement = popVideoStandBy();
     if (videoElement) {
       videoElement.src = window.URL.createObjectURL(stream);
-      var ui_width = $(".ui-bar-n").width();
-      var ui_height = $(".ui-bar-n").height();
-			videoElement.width = ui_width;
-			videoElement.height = ui_height + 20;;
+      var ui_width = $(".ui-bar-a").width();
+      var ui_height = $(".ui-bar-a").height();
+			console.log("ui_width = " + ui_width);
+			$("#" + videoElement.id).width(ui_width);
+			$("#" + videoElement.id).height(ui_height + 20);
 			console.log("videoElement.src=" + videoElement.src);
       pushVideoInUse(id, videoElement);
 			$("video:hidden:first").fadeIn("1500");
