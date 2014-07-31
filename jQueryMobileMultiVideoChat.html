@@ -45,7 +45,6 @@ font-weight: bold;
 text-shadow: 0 -1px 1px #254f7a;
 background-image: -moz-linear-gradient(top,#81a8ce,#5e87b0);
 background-image: -webkit-gradient(linear,left top,left bottom,color-stop(0,#81a8ce),color-stop(1,#5e87b0));
-width:400px;
 }
 </style>
 <script charset="UTF-8">
@@ -261,9 +260,12 @@ width:400px;
 	function addVideoTag(user_name) {
 		var num = remote_video_num + removed_video_num;
 		console.log("remote user name = " + user_name);
-		var width = window.outerWidth * 0.4;
-		var height = window.outerHeight * 0.4;
-		$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-a"><center><video id="remote_video' + num + '" autoplay style="width: ' + width  + 'px; height: ' + height + 'px; display:none;"></video>' + user_name  + '</center></div></div></div>'); 
+		var width = window.outerWidth * 0.3;
+		var height = window.outerHeight * 0.3;
+		$('.ui-bar-a').css("width", width + "px");
+		$('.ui-bar-a').css("height", height + "px");
+		// $('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-a"><center><video id="remote_video' + num + '" autoplay style="width: ' + width  + 'px; height: ' + height + 'px; display:none;"></video>' + user_name  + '</center></div></div></div>'); 
+		$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-a"><center><video id="remote_video' + num + '" autoplay display:none;"></video>' + user_name  + '</center></div></div></div>'); 
 		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
@@ -468,8 +470,8 @@ width:400px;
   // start local video
   function startVideo() {
 		if(localVideo == null) {
-			var width = window.outerWidth * 0.5;
-			var height = window.outerHeight * 0.5;
+			var width = window.outerWidth * 0.3;
+			var height = window.outerHeight * 0.3;
 			$('#all_video').append('<div class="ui-grid-c"><div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: ' + width + 'px; height: '+ height +'px;"></video>' + userName  + '</center></div></div></div>'); 
 		localVideo = document.getElementById('local_video');
 		}
