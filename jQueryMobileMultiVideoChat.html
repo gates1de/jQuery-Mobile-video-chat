@@ -408,6 +408,7 @@ width:400px;
    	var qs = regex.exec(window.location.href);  
    	if (qs == null || qs[1] == "") {  
    		document.location = "http://temp-gateside-app.herokuapp.com/regist.php";
+		}
    	else {  
    		return decodeURI(qs[1]);
 		}  
