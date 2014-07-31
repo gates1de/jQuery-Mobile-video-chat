@@ -36,7 +36,7 @@
 		<div data-role="content" data-type="horizontal" data-inline="true" id="all_video">
 		</div>
 	</div>
-  <div data-role="footer" data-position="fixed" data-fullscreen="true">
+  <div data-role="footer">
     <h3>Copyright 2014-201X, Yyy.Xxxxx</h3>
   </div>
 
@@ -108,6 +108,7 @@
 			console.log("videoElement.src=" + videoElement.src);
       pushVideoInUse(id, videoElement);
 			$("video:hidden:first").fadeIn("1500");
+			jQuery("#" + videoElement.id).draggable();
 		}
     else {
       console.error('--- no video element stand by.');
