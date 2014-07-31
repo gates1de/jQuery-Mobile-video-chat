@@ -63,8 +63,9 @@ width:400px;
   var videoElementsStandBy = {};
 
 	window.onload = function() {	
+		getRoomName();
 		startVideo();
-		setTimeout("call()", 1000);
+		setTimeout("call()", 2000);
 	}	
  
   function getVideoForRemote(index) {
@@ -393,7 +394,7 @@ width:400px;
    		document.location = "http://temp-gateside-app.herokuapp.com/regist.php";
 		}  
    	else {
-			$('#room_name').append('<h1>' + qs[1] + '</h1>');
+			$('#room_name').append('<h1>' + qs[1] + 'のルーム</h1>');
 		}
 		return null; 
 	}
