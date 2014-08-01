@@ -62,9 +62,10 @@ footer{
 	var removed_video_num = 0;
   var videoElementsInUse = {};
   var videoElementsStandBy = {};
+	var remoteVideoStyle = getComputedStyle(".ui-bar-b", "");
+	var remoteVideoWidth = remoteVideoStyle.width;
+	var remoteVideoHeight = remoteVideoStyle.height;
 
-	var remoteVideoWidth = document.defaultView.getComputedStyle(".ui-bar-b", null).getPropertyValue("width");
-	var remoteVideoHeight = document.defaultView.getComputedStyle(".ui-bar-b", null).getPropertyValue("height");
 	console.log("reomteVideoWidth = " + remoteVideoWidth + ", remoteVideoHeight = " + remoteVideoHeight);
 	window.onload = function() {	
 		getRoomName();
