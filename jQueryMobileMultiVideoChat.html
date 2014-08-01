@@ -268,7 +268,7 @@ footer{
 		var num = remote_video_num + removed_video_num;
 		console.log("remote user name = " + user_name);
 		$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b"><center><video id="remote_video' + num + '" autoplay style=" display:none;"></video>' + user_name  + '</center></div></div>'); 
-		$("#user_name_remote_video" + num).draggable().resizable().trigger("mouseover");
+		$("#user_name_remote_video" + num).resizable().draggable().trigger("mouseover");
 		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
@@ -477,7 +477,7 @@ footer{
 		$('#all_video').append('<div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: 240px; height: 200px;"></video>' + userName  + '</center></div></div>'); 
 
 		localVideo = document.getElementById('local_video');
-		$("#user_name_local_video").draggable().resizable().trigger("mouseover");
+		$("#user_name_local_video").resizable().draggable().trigger("mouseover");
 		}
 		navigator.getUserMedia({video: true, audio: true},
     	function (stream) { // success
