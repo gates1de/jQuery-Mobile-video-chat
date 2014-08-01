@@ -110,11 +110,11 @@ footer{
     var videoElement = popVideoStandBy();
     if (videoElement) {
       videoElement.src = window.URL.createObjectURL(stream);
-      var ui_width = $(".ui-bar-b").width();
-      var ui_height = $(".ui-bar-b").height();
+      var ui_width = remoteVideoWidth;
+      var ui_height = remoteVideoHeight;
 			console.log("ui_width = " + ui_width);
 			$("#" + videoElement.id).width(ui_width);
-			$("#" + videoElement.id).height(ui_height - 40);
+			$("#" + videoElement.id).height(ui_height - 20);
 			console.log("videoElement.src=" + videoElement.src);
 			pushVideoInUse(id, videoElement);
 			$("video:hidden:first").fadeIn("1500");
@@ -272,8 +272,8 @@ footer{
 		console.log("remote user name = " + user_name);
 		if(removed_video_num != 0 && num == 1) {
 			$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + num + '"><center><video id="remote_video' + num + '" autoplay style=" display:none;"></video>' + user_name  + '</center></div></div>'); 
-			remoteVideoWidth = $(".ui-bar-b").width;
-			remoteVideoHeight = $(".ui-bar-b").height;
+			remoteVideoWidth = $(".ui-bar-b").width();
+			remoteVideoHeight = $(".ui-bar-b").height();
 		}
 		else {
 			$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + num + '"><center><video id="remote_video' + num + '" autoplay style="width: ' + remoteVideoWidth + '; height: ' + remoteVideoHeight + '; display:none;"></video>' + user_name  + '</center></div></div>'); 
