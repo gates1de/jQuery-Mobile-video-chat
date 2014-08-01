@@ -65,7 +65,6 @@ footer{
 	var remoteVideoWidth;
 	var remoteVideoHeight;
 
-	console.log("reomteVideoWidth = " + remoteVideoWidth + ", remoteVideoHeight = " + remoteVideoHeight);
 	window.onload = function() {	
 		getRoomName();
 		startVideo();
@@ -270,7 +269,7 @@ footer{
 	function addVideoTag(user_name) {
 		var num = remote_video_num + removed_video_num;
 		console.log("remote user name = " + user_name);
-		if(removed_video_num != 0 && num == 1) {
+		if(removed_video_num == 0 && num == 1) {
 			$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + num + '"><center><video id="remote_video' + num + '" autoplay style=" display:none;"></video>' + user_name  + '</center></div></div>'); 
 			remoteVideoWidth = $("#remote_ui-bar" + num).width();
 			remoteVideoHeight = $("#remote_ui-bar" + num).height();
