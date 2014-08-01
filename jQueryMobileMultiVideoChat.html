@@ -274,6 +274,7 @@ footer{
 			$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + num + '"><center><video id="remote_video' + num + '" autoplay style=" display:none;"></video>' + user_name  + '</center></div></div>'); 
 			remoteVideoWidth = $(".ui-bar-b").width();
 			remoteVideoHeight = $(".ui-bar-b").height();
+			console.log("remoteVideoWidth = " + remoteVideoWidth + ", remoteVideoHeight = " + remoteVideoHeight);
 		}
 		else {
 			$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + num + '"><center><video id="remote_video' + num + '" autoplay style="width: ' + remoteVideoWidth + '; height: ' + remoteVideoHeight + '; display:none;"></video>' + user_name  + '</center></div></div>'); 
