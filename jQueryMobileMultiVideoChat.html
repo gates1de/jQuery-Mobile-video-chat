@@ -269,7 +269,7 @@ footer{
 		console.log("remote user name = " + user_name);
 		$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b"><center><video id="remote_video' + num + '" autoplay style=" display:none;"></video>' + user_name  + '</center></div></div>'); 
 		$("#user_name_remote_video" + num).draggable();
-		$(".ui-bar-a").resizable({ alsoResize: '#remote_video' + num });
+		$(".ui-bar-b").resizable({ alsoResize: '#remote_video' + num });
 		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
