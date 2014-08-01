@@ -269,7 +269,7 @@ footer{
 		console.log("remote user name = " + user_name);
 		$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b"><center><video id="remote_video' + num + '" autoplay style=" display:none;"></video>' + user_name  + '</center></div></div>'); 
 		$("#user_name_remote_video" + num).draggable();
-		$(".ui-bar-a").resizable();
+		$(".ui-bar-a").resizable({ alsoResize: '#remote_video' + num });
 		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
@@ -479,7 +479,7 @@ footer{
 
 		localVideo = document.getElementById('local_video');
 		$("#user_name_local_video").draggable();
-		$(".ui-bar-a").resizable();
+		$(".ui-bar-a").resizable({ alsoResize: '#local_video' });
 		}
 		navigator.getUserMedia({video: true, audio: true},
     	function (stream) { // success
