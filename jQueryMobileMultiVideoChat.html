@@ -63,6 +63,9 @@ footer{
   var videoElementsInUse = {};
   var videoElementsStandBy = {};
 
+	var remoteVideoWidth = $('.ui-bar-b').css('width');
+	var remoteVideoHeight = $('.ui-bar-b').css('height');
+	console.log("reomteVideoWidth = " + remoteVideoWidth + ", remoteVideoHeight = " + remoteVideoHeight);
 	window.onload = function() {	
 		getRoomName();
 		startVideo();
@@ -266,6 +269,7 @@ footer{
  
 	function addVideoTag(user_name) {
 		var num = remote_video_num + removed_video_num;
+		
 		console.log("remote user name = " + user_name);
 		$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + num + '"><center><video id="remote_video' + num + '" autoplay style=" display:none;"></video>' + user_name  + '</center></div></div>'); 
 		$("#user_name_remote_video" + num).draggable();
