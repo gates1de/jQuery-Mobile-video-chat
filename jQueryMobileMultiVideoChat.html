@@ -62,9 +62,8 @@ footer{
 	var removed_video_num = 0;
   var videoElementsInUse = {};
   var videoElementsStandBy = {};
-	var remoteVideoStyle = getComputedStyle(".ui-bar-b", "");
-	var remoteVideoWidth = remoteVideoStyle.width;
-	var remoteVideoHeight = remoteVideoStyle.height;
+	var remoteVideoWidth;
+	var remoteVideoHeight;
 
 	console.log("reomteVideoWidth = " + remoteVideoWidth + ", remoteVideoHeight = " + remoteVideoHeight);
 	window.onload = function() {	
@@ -270,9 +269,15 @@ footer{
  
 	function addVideoTag(user_name) {
 		var num = remote_video_num + removed_video_num;
-		
 		console.log("remote user name = " + user_name);
-		$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + num + '"><center><video id="remote_video' + num + '" autoplay style=" display:none;"></video>' + user_name  + '</center></div></div>'); 
+		if(removed_video_num != 0 && num == 1) {
+			$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + num + '"><center><video id="remote_video' + num + '" autoplay style=" display:none;"></video>' + user_name  + '</center></div></div>'); 
+			remoteVideoWidth = $(".ui-bar-b").width;
+			remoteVideoHeight = $(".ui-bar-b").height;
+		}
+		else {
+			$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + num + '"><center><video id="remote_video' + num + '" autoplay style="width: ' + remoteVideoWidth + '; height: ' + remoteVideoHeight + '; display:none;"></video>' + user_name  + '</center></div></div>'); 
+		}
 		$("#user_name_remote_video" + num).draggable();
 		$("#remote_ui-bar" + num).resizable({ alsoResize: '#remote_video' + num });
 		pushVideoStandBy(getVideoForRemote(num));
