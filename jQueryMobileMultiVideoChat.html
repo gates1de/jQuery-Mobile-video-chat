@@ -10,7 +10,7 @@
 	href="https://temp-gateside-app.herokuapp.com/layout/sp.css"/>
 <link rel="stylesheet" type="text/css" media="only screen and (min-device-width:480px)"
 	href="https://temp-gateside-app.herokuapp.com/layout/pc.css"/>
-<script src="https://temp-gateside-app.herokuapp.com/jquery.ui.touch-punch.min.js"></script>
+<script src="https://temp-gateside-app.herokuapp.com/jquery.ui.touch-punch.js"></script>
 <script src="//code.jquery.com/jquery-1.10.2.min.js"></script>
 <script src="//code.jquery.com/mobile/1.4.0/jquery.mobile-1.4.0.min.js"></script>
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css">
@@ -107,7 +107,7 @@
 			$("#" + videoElement.id).width(ui_width);
 			$("#" + videoElement.id).height(ui_height -20);
 			console.log("videoElement.src=" + videoElement.src);
-      pushVideoInUse(id, videoElement);
+			pushVideoInUse(id, videoElement);
 			$("video:hidden:first").fadeIn("1500");
 		}
     else {
@@ -262,7 +262,8 @@
 		var num = remote_video_num + removed_video_num;
 		console.log("remote user name = " + user_name);
 		$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b"><center><video id="remote_video' + num + '" autoplay style=" display:none;"></video>' + user_name  + '</center></div></div>'); 
-		jQuery("#user_name_remote_video" + num).draggable();
+		$("#user_name_remote_video" + num).draggable();
+    $("#user_name_remote_video" + num).resizeable();
 		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
@@ -471,7 +472,8 @@
 		$('#all_video').append('<div class="ui-block-a" id="user_name_local_video"><div class="ui-bar ui-bar-a"><center><video id="local_video" autoplay style="width: 240px; height: 200px;"></video>' + userName  + '</center></div></div>'); 
 
 		localVideo = document.getElementById('local_video');
-		jQuery("#user_name_local_video").draggable();
+		$("#user_name_local_video").draggable();
+		$("#user_name_local_video").resizeable();
 		}
 		navigator.getUserMedia({video: true, audio: true},
     	function (stream) { // success
