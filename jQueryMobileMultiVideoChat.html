@@ -662,7 +662,252 @@ footer{
 			$('#exit').attr('disabled', 'disabled');
 		});
 		setTimeout("window.open('about:blank','_self').close()", 2000);
-	} 
+	}
+
+  var timestampPrev = 0;
+  var a_timestampPrev = 0;
+  var sv_timestampPrev = 0;
+  var sa_timestampPrev = 0;
+  var bytesPrev = 0;
+  var a_bytesPrev = 0;
+  var sv_bytesPrev = 0;
+  var sa_bytesPrev = 0;
+  
+  function AugumentedStatsResponse(response) {
+    this.response = response;
+    this.addressPairMap = [];
+  }
+
+  AugumentedStatsResponse.prototype.collectAddressPairs = function(componentId) {
+    if (!this.addressPairMap[componentId]) {
+      this.addressPairMap[componentId] = [];
+      for (var i = 0; i < this.response.result().length; ++i) {
+        var res = this.response.result()[i];
+        if (res.type == 'googCandidatePair' &&
+            res.stat('googChannelId') == componentId) {
+          this.addressPairMap[componentId].push(res);
+        }
+      }
+    }
+    return this.addressPairMap[componentId];
+  }
+
+  AugumentedStatsResponse.prototype.result = function() {
+    return this.response.result();
+  }
+
+  AugumentedStatsResponse.prototype.get = function(key) {
+    return this.response[key];
+  }
+
+
+function extractVideoFlowInfo(res, allStats) {
+  var description = '';
+  var bytesNow = res.stat('bytesReceived');
+  if (timestampPrev > 0) {
+    var bitRate = Math.round((bytesNow - bytesPrev) * 8 /
+                             (res.timestamp - timestampPrev));
+    description = bitRate + ' kbps received';
+  }
+  timestampPrev = res.timestamp;
+  bytesPrev = bytesNow;
+  if (res.stat('transportId')) {
+    component = allStats.get(res.stat('transportId'));
+    if (component) {
+      addresses = allStats.collectAddressPairs(component.id);
+      if (addresses.length > 0) {
+        description += ' from IP ';
+        description += addresses[0].stat('googRemoteAddress');
+      } else {
+        description += ' no address';
+      }
+    } else {
+      description += ' No component stats';
+    }
+  } else {
+    description += ' No component ID';
+  }
+  return description;
+}
+
+function extractSendVideoFlowInfo(res, allStats) {
+  var description = '';
+  var sv_bytesNow = res.stat('bytesSent');
+  if (sv_timestampPrev > 0) {
+    var bitRate = Math.round((sv_bytesNow - sv_bytesPrev) * 8 /
+                             (res.timestamp - sv_timestampPrev));
+    description = bitRate + ' kbps sent';
+  }
+  sv_timestampPrev = res.timestamp;
+  sv_bytesPrev = sv_bytesNow;
+  if (res.stat('transportId')) {
+    component = allStats.get(res.stat('transportId'));
+    if (component) {
+      addresses = allStats.collectAddressPairs(component.id);
+      if (addresses.length > 0) {
+        description += ' from IP ';
+        description += addresses[0].stat('googLocalAddress');
+      } else {
+        description += ' no address';
+      }
+    } else {
+      description += ' No component stats';
+    }
+  } else {
+    description += ' No component ID';
+  }
+  return description;
+}
+
+function extractAudioFlowInfo(res, allStats) {
+  var description = '';
+  var a_bytesNow = res.stat('bytesReceived');
+  if (a_timestampPrev > 0) {
+    var bitRate = Math.round((a_bytesNow - a_bytesPrev) * 8 /
+                             (res.timestamp - a_timestampPrev));
+    description = bitRate + ' kbps received';
+  }
+  a_timestampPrev = res.timestamp;
+  a_bytesPrev = a_bytesNow;
+  if (res.stat('transportId')) {
+    component = allStats.get(res.stat('transportId'));
+    if (component) {
+      addresses = allStats.collectAddressPairs(component.id);
+      if (addresses.length > 0) {
+        description += ' from IP ';
+        description += addresses[0].stat('googRemoteAddress');
+      } else {
+        description += ' no address';
+      }
+    } else {
+      description += ' No component stats';
+    }
+  } else {
+    description += ' No component ID';
+  }
+  return description;
+}
+
+
+function extractSendAudioFlowInfo(res, allStats) {
+  var description = '';
+  var sa_bytesNow = res.stat('bytesSent');
+  if (sa_timestampPrev > 0) {
+    var bitRate = Math.round((sa_bytesNow - sa_bytesPrev) * 8 /
+                             (res.timestamp - sa_timestampPrev));
+    description = bitRate + ' kbps sent';
+  }
+  sa_timestampPrev = res.timestamp;
+  sa_bytesPrev = sa_bytesNow;
+  if (res.stat('transportId')) {
+    component = allStats.get(res.stat('transportId'));
+    if (component) {
+      addresses = allStats.collectAddressPairs(component.id);
+      if (addresses.length > 0) {
+        description += ' from IP ';
+        description += addresses[0].stat('googLocalAddress');
+      } else {
+        description += ' no address';
+      }
+    } else {
+      description += ' No component stats';
+    }
+  } else {
+    description += ' No component ID';
+  }
+  return description;
+}
+
+  function dumpStats(obj) {
+    var statsString = 'Timestamp:';
+    statsString += obj.timestamp;
+    if (obj.id) {
+       statsString += "<br>id ";
+       statsString += obj.id;
+    }
+    if (obj.type) {
+       statsString += " type ";
+       statsString += obj.type;
+    }
+    if (obj.names) {
+      names = obj.names();
+      for (var i = 0; i < names.length; ++i) {
+         statsString += '<br>';
+         statsString += names[i];
+         statsString += ':';
+         statsString += obj.stat(names[i]);
+      }
+    } else {
+      if (obj.stat('audioOutputLevel')) {
+        statsString += "audioOutputLevel: ";
+        statsString += obj.stat('audioOutputLevel');
+        statsString += "<br>";
+      }
+    }
+    return statsString;
+  }
+
+  function statistics() {
+    setInterval(function() {
+      peerConnection.getStats(function(report) {
+        stats = new AugumentedStatsResponse(report);
+        var statsString = '';
+        var results = stats.result();
+        var videoFlowInfo = 'No bitrate stats';
+        var audioFlowInfo = 'No bitrate stats';
+        for (var i = 0; i < results.length; ++i) {
+          var res = results[i];
+          statsString += '<h3>Report ';
+          statsString += i;
+          statsString += '</h3>';
+          if (!res.local || res.local === res) {
+            statsString += dumpStats(res);
+            // The bandwidth info for video is in a type ssrc stats record
+            // with googFrameHeightReceived defined.
+            // Should check for mediatype = video, but this is not
+            // implemented yet.
+            if (res.type == 'ssrc' && res.stat('googFrameHeightReceived')) {
+              // This is the video flow.
+              videoFlowInfo = extractVideoFlowInfo(res, stats);
+            }
+            if (res.type == 'ssrc' && res.stat('audioOutputLevel')) {
+              // This may be the audio flow.
+              audioFlowInfo = extractAudioFlowInfo(res, stats);
+            }
+            if (res.type == 'ssrc' && res.stat('googFrameHeightInput')) {
+              sendvideoFlowInfo = extractSendVideoFlowInfo(res, stats);
+            }
+            if (res.type == 'ssrc' && res.stat('audioInputLevel')) {
+              sendaudioFlowInfo = extractSendAudioFlowInfo(res, stats);
+            }
+          } else {
+            // Pre-227.0.1445 (188719) browser
+            if (res.local) {
+              statsString += "<p>Local ";
+              statsString += dumpStats(res.local);
+            }
+            if (res.remote) {
+              statsString += "<p>Remote ";
+              statsString += dumpStats(res.remote);
+            }
+          }
+        }
+        document.getElementById("stat").innerHTML = statsString;
+        var mediaFlowInfo = "audio: ";
+        mediaFlowInfo += audioFlowInfo;
+        mediaFlowInfo += "<br>";
+        mediaFlowInfo += "video: ";
+        mediaFlowInfo += videoFlowInfo;
+        var sendmediaFlowInfo = "audio: ";
+        sendmediaFlowInfo += sendaudioFlowInfo;
+        sendmediaFlowInfo += "<br>";
+        sendmediaFlowInfo += "video: ";
+        sendmediaFlowInfo += sendvideoFlowInfo;
+        document.getElementById("sendbitrate").innerHTML = sendmediaFlowInfo;
+        document.getElementById("bitrate").innerHTML = mediaFlowInfo;
+      });
+    },1000);       
+  } 
 </script>
 </body>
 </html>
