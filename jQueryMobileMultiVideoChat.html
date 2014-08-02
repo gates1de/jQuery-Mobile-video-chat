@@ -688,7 +688,8 @@ footer{
   AugumentedStatsResponse.prototype.collectAddressPairs = function(componentId) {
     if (!this.addressPairMap[componentId]) {
       this.addressPairMap[componentId] = [];
-      for (var i = 0; i < this.response.result().length; ++i) {
+			console.log("this.response.result().length = " + this.response.result().length);
+			for (var i = 0; i < this.response.result().length; ++i) {
         var res = this.response.result()[i];
         if (res.type == 'googCandidatePair' &&
             res.stat('googChannelId') == componentId) {
@@ -703,7 +704,8 @@ footer{
     return this.response.result();
   }
 
-  AugumentedStatsResponse.prototype.get = function(key) {
+	AugumentedStatsResponse.prototype.get = function(key) {
+		console.log("key = " + key);
     return this.response[key];
   }
 
@@ -733,7 +735,8 @@ function extractVideoFlowInfo(res, allStats) {
     }
   } else {
     description += ' No component ID';
-  }
+	}
+	console.log("video description = " + description);
   return description;
 }
 
@@ -763,6 +766,7 @@ function extractSendVideoFlowInfo(res, allStats) {
   } else {
     description += ' No component ID';
   }
+	console.log("send video description = " + description);
   return description;
 }
 
@@ -792,6 +796,7 @@ function extractAudioFlowInfo(res, allStats) {
   } else {
     description += ' No component ID';
   }
+	console.log("audio description = " + description);
   return description;
 }
 
@@ -822,6 +827,7 @@ function extractSendAudioFlowInfo(res, allStats) {
   } else {
     description += ' No component ID';
   }
+	console.log("send audio description = " + description);
   return description;
 }
 
