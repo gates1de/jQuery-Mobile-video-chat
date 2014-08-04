@@ -401,6 +401,7 @@ footer{
 	function onClosed(id) {
 		detachVideo(id);  
 		stopConnection(id);
+		console.log("onClosed");
 		return;
  	}
 
@@ -510,7 +511,7 @@ footer{
 		navigator.getUserMedia({video: true, audio: true},
     	function (stream) { // success
       	localStream = stream;
-      	// localVideo.src = window.webkitURL.createObjectURL(stream);
+      	// eocalVideo.src = window.webkitURL.createObjectURL(stream);
       	attachMediaStream(localVideo, stream);
 				localVideo.play();
       	localVideo.volume = 0;
@@ -565,7 +566,7 @@ footer{
 	function jointWindow() {
 		if(jointFlag == 0) {
 			saveLocalVideo = localVideo.src;
-			var local_window = localVideo;
+			var local_window = $('#local_video')[0];
 			navigator.getUserMedia(
 				{video: 
 					{mandatory: {chromeMediaSource: 'screen'}}},
@@ -627,7 +628,7 @@ footer{
     peer.addStream(localStream);
  
     peer.addEventListener("addstream", onRemoteStreamAdded, false);
-    peer.addEventListener("removestream", onRemoteStreamRemoved, false)
+    peer.addEventListener("[0]removestream", onRemoteStreamRemoved, false)
  
     // when remote adds a stream, hand it on to the local video element
     function onRemoteStreamAdded(event) {
