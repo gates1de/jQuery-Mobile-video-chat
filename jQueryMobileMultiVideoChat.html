@@ -531,8 +531,8 @@ footer{
 		if(saveLocalVideo != null) {
 			localVideo.src = saveLocalVideo;
 			startVideo();
+			call();
 			// sendOffer(socketId);
-    	socket.json.send({type: "call"});
 			saveLocalVideo = null;
 		}
 	}
@@ -540,7 +540,7 @@ footer{
 	function jointWindow() {
 		if(jointFlag == 0) {
 			saveLocalVideo = localVideo.src;
-			var local_window = localVideo[0];
+			var local_window = localVideo;
 			navigator.getUserMedia(
 				{video: 
 					{mandatory: {chromeMediaSource: 'screen'}}},
@@ -737,7 +737,6 @@ footer{
   AugumentedStatsResponse.prototype.collectAddressPairs = function(componentId) {
     if (!this.addressPairMap[componentId]) {
       this.addressPairMap[componentId] = [];
-			console.log("this.response.result().length = " + this.response.result().length);
 			for (var i = 0; i < this.response.result().length; ++i) {
         var res = this.response.result()[i];
         if (res.type == 'googCandidatePair' &&
@@ -754,7 +753,6 @@ footer{
   }
 
 	AugumentedStatsResponse.prototype.get = function(key) {
-		console.log("key = " + key);
     return this.response[key];
   }
 
@@ -785,7 +783,6 @@ function extractVideoFlowInfo(res, allStats) {
   } else {
     description += ' No component ID';
 	}
-	console.log("video description = " + description);
   return description;
 }
 
@@ -815,7 +812,6 @@ function extractSendVideoFlowInfo(res, allStats) {
   } else {
     description += ' No component ID';
   }
-	console.log("send video description = " + description);
   return description;
 }
 
@@ -845,7 +841,6 @@ function extractAudioFlowInfo(res, allStats) {
   } else {
     description += ' No component ID';
   }
-	console.log("audio description = " + description);
   return description;
 }
 
@@ -876,7 +871,6 @@ function extractSendAudioFlowInfo(res, allStats) {
   } else {
     description += ' No component ID';
   }
-	console.log("send audio description = " + description);
   return description;
 }
 
