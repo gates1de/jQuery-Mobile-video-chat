@@ -538,8 +538,8 @@ footer{
     if (videoElementsInUse[id]) {
       videoElementsInUse[id].pause();
 			videoElementsInUse[id].style.display = 'none';
-			videoElementsStandBy[videoElementsInUse[id]].pause();
-			videoElementsStandBy[videoElementsInUse[id]].style.display = 'none';
+			videoElementsStandBy[videoElementsInUse[id].id].pause();
+			videoElementsStandBy[videoElementsInUse[id].id].style.display = 'none';
 		}
   }
 
@@ -558,8 +558,8 @@ footer{
 		if (videoElementsInUse[id]) {
 			videoElementsInUse[id].style.display = 'block';
       videoElementsInUse[id].play();
-			videoElementsStandBy[videoElementsInUse[id]].style.display = 'block';
-			videoElementsStandBy[videoElementsInUse[id]].play();
+			videoElementsStandBy[videoElementsInUse[id].id].style.display = 'block';
+			videoElementsStandBy[videoElementsInUse[id].id].play();
     	//pushVideoInUse(id, videoElement);
 		}
 	}
