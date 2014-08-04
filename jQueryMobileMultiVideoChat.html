@@ -16,6 +16,7 @@
 <link rel="stylesheet" href="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/themes/ui-lightness/jquery-ui.css">
 <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.3/jquery-ui.min.js"></script>
 <script src="https://temp-gateside-app.herokuapp.com/jquery.ui.touch-punch.min.js"></script>
+<script src="https://webrtc.googlecode.com/svn/stable/samples/js/base/adapter.js"></script>
 </head>
 <body>
 
@@ -115,7 +116,8 @@ footer{
     console.log('try to attach video. id=' + id);
     var videoElement = popVideoStandBy();
     if (videoElement) {
-      videoElement.src = window.URL.createObjectURL(stream);
+      // videoElement.src = window.URL.createObjectURL(stream);
+			attachMediaStream(videoElement, stream);
       var ui_width = remoteVideoWidth;
       var ui_height = remoteVideoHeight;
 			console.log("ui_width = " + ui_width);
@@ -501,8 +503,9 @@ footer{
 		navigator.getUserMedia({video: true, audio: true},
     	function (stream) { // success
       	localStream = stream;
-      	localVideo.src = window.webkitURL.createObjectURL(stream);
-      	localVideo.play();
+      	// localVideo.src = window.webkitURL.createObjectURL(stream);
+      	attachMediaStream(localVideo, stream);
+				localVideo.play();
       	localVideo.volume = 0;
      	},
      	function (error) { // error
@@ -565,6 +568,7 @@ footer{
     	if(!event.stream) {
 				console.log("not exist event.stream!");
 			}
+			peerConnection = conn;
 			statistics();
 		}
  
@@ -592,7 +596,6 @@ footer{
       console.log("Create Offer failed");
     }, mediaConstraints);
     conn.iceReady = true;
-		peerConnection = conn;
   }
  
   function setOffer(event) {
