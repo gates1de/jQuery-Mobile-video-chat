@@ -528,7 +528,8 @@ footer{
 																		{"url":"turn:turn.220.110.149.250:3478", "username":"yourid", "credential":"yourpassword"} ]};
     var peer = null;
     try {
-      peer = new webkitRTCPeerConnection(pc_config);
+      //peer = new webkitRTCPeerConnection(pc_config);
+			peer = new RTCPeerConnection(pc_config);
     } catch (e) {
       console.log("Failed to create PeerConnection, exception: " + e.message);
     }
