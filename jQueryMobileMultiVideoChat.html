@@ -536,9 +536,10 @@ footer{
   function stopRemoteVideo(id) {
     //var videoElement = popVideoInUse(id);
     if (videoElementsInUse[id]) {
-      videoElementInUse[id].pause();
-			videoElementInUse[id].style.display = 'none';
-    	//pushVideoInUse(id, videoElement);
+      videoElementsInUse[id].pause();
+			videoElementsInUse[id].style.display = 'none';
+			videoElementsStandBy[videoElementsInUse[id]].pause();
+			videoElementsStandBy[videoElementsInUse[id]].style.display = 'none';
 		}
   }
 
@@ -554,9 +555,11 @@ footer{
 	function restartRemoteVideo(id) {
     //var videoElement = popVideoInUse(id);
     //console.log("videoElement.src = " + videoElement.src);
-		if (videoElementInUse[id]) {
-			videoElementInUse[id].style.display = 'block';
-      videoElementInUse[id].play();
+		if (videoElementsInUse[id]) {
+			videoElementsInUse[id].style.display = 'block';
+      videoElementsInUse[id].play();
+			videoElementsStandBy[videoElementsInUse[id]].style.display = 'block';
+			videoElementsStandBy[videoElementsInUse[id]].play();
     	//pushVideoInUse(id, videoElement);
 		}
 	}
