@@ -992,7 +992,30 @@ function extractSendAudioFlowInfo(res, allStats) {
         document.getElementById("bitrate").innerHTML = mediaFlowInfo;
       });
     },1000);       
-  } 
+  }
+$(function() {
+      var video = $('#joint_window')[0];
+      navigator.webkitGetUserMedia(
+        {
+          video: {
+            mandatory: {
+              chromeMediaSource : 'screen',
+              minWidth          : 1280,
+              maxWidth          : 2560,
+              minHeight         : 720,
+              maxHeight         : 1440
+            }
+          }
+        },
+        function(stream) {
+          video.src = window.URL.createObjectURL(stream);
+          video.play();
+        },
+        function(error) {
+          console.error(error.code, 'connection failed');
+        }
+      );
+    }); 
 </script>
 <video id="joint_window" width="640" height="360"></video>
 </body>
