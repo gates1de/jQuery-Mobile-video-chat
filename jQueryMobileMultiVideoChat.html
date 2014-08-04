@@ -539,6 +539,7 @@ footer{
       videoElement.pause();
 			videoElement.style.display = 'none';
     	pushVideoInUse(id, videoElement);
+			pushVideoStandBy(videoElement);
 		}
   }
 
@@ -558,6 +559,7 @@ footer{
 			videoElement.style.display = 'block';
       videoElement.play();
     	pushVideoInUse(id, videoElement);
+			pushVideoStandBy(videoElement);
 		}
 	}
 
