@@ -579,7 +579,7 @@ footer{
   function sendOffer(id) {
     var conn = getConnection(id);
     if (!conn) {
-      conn = prepareNewConnection(id);
+      conn = prepareNewConnection(id);	
     }
  
     conn.peerconnection.createOffer(function (sessionDescription) { // in case of success
@@ -591,6 +591,7 @@ footer{
       console.log("Create Offer failed");
     }, mediaConstraints);
     conn.iceReady = true;
+		peerConnection = conn;
   }
  
   function setOffer(event) {
