@@ -554,7 +554,8 @@ footer{
 
 	function restartRemoteVideo(id) {
     var videoElement = popVideoInUse(id);
-    if (videoElement) {
+    console.log("videoElement.id = " + videoElement.id);
+		if (videoElement) {
       videoElement.play();
 			videoElement.style.display = 'block';
       pushVideoStandBy(videoElement);
