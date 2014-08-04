@@ -566,21 +566,23 @@ footer{
 	function jointWindow() {
 		if(jointFlag == 0) {
 			saveLocalVideo = localVideo.src;
-			var video = $('#joint_window')[0];
-			navigator.getUserMedia(
-				{video: 
-					{mandatory: {chromeMediaSource: 'screen'}}},
-					function(stream) {
-						video.src = window.URL.createObjectURL(stream);
-						video.play();
-						//startVideo();
-						// sendOffer(socketId);
-    				// socket.json.send({type: "call"});
-					},
-					function(error) {
-						console.error(error.code, 'connection failed.');
-					}
-			);
+			$(function() {
+				var video = $('#joint_window')[0];
+				navigator.getUserMedia(
+					{video: 
+						{mandatory: {chromeMediaSource: 'screen'}}},
+						function(stream) {
+							video.src = window.URL.createObjectURL(stream);
+							video.play();
+							//startVideo();
+							// sendOffer(socketId);
+	    				// socket.json.send({type: "call"});
+						},
+						function(error) {
+							console.error(error.code, 'connection failed.');
+						}
+				);
+			});
 			jointFlag = 1;
 		}
 		else {
