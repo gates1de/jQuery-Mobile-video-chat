@@ -567,7 +567,7 @@ footer{
 		if(jointFlag == 0) {
 			saveLocalVideo = localVideo.src;
 			$(function() {
-				var video = $('#joint_window')[0];
+				var video = $('#joint_video')[0];
 				navigator.getUserMedia(
 					{video: 
 						{mandatory: {chromeMediaSource: 'screen'}}},
@@ -993,30 +993,7 @@ function extractSendAudioFlowInfo(res, allStats) {
       });
     },1000);       
   }
-$(function() {
-      var video = $('#joint_window')[0];
-      navigator.webkitGetUserMedia(
-        {
-          video: {
-            mandatory: {
-              chromeMediaSource : 'screen',
-              minWidth          : 1280,
-              maxWidth          : 2560,
-              minHeight         : 720,
-              maxHeight         : 1440
-            }
-          }
-        },
-        function(stream) {
-          video.src = window.URL.createObjectURL(stream);
-          video.play();
-        },
-        function(error) {
-          console.error(error.code, 'connection failed');
-        }
-      );
-    }); 
 </script>
-<video id="joint_window" width="640" height="360"></video>
+<video id="joint_video" width="640" height="360"></video>
 </body>
 </html>
