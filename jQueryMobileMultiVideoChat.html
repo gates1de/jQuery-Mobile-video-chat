@@ -540,7 +540,7 @@ footer{
   function stopRemoteVideo(id) {
     var videoElement = popVideoInUse(id);
     if (videoElement) {
-    	pushVideoStandBy(videoElement);
+    	//pushVideoStandBy(videoElement);
       videoElement.pause();
 			videoElement.style.display = 'none';
 		}
@@ -559,7 +559,7 @@ footer{
     var videoElement = popVideoInUse(id);
     console.log("videoElement.id = " + videoElement.id);
 		if (videoElement) {
-    	pushVideoStandBy(videoElement);
+    	//pushVideoStandBy(videoElement);
 			videoElement.style.display = 'block';
       videoElement.play();
 		}
