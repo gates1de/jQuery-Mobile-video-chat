@@ -384,7 +384,6 @@ footer{
       console.log('Received ICE candidate...');
       onCandidate(event);
 		}	else if (event.type === 'video_on' && isPeerStarted()) {
-			console.log("restartRemoteVideo");
 			restartRemoteVideo(id);
 		}	else if (event.type === 'video_off' && isPeerStarted()) {
 			stopRemoteVideo(id);
@@ -397,7 +396,6 @@ footer{
 			detachVideo(id);	
       stopConnection(id);
 		}
-		console.log("onMessage end");
   }
 
 	function onClosed(id) {
@@ -542,7 +540,7 @@ footer{
   function stopRemoteVideo(id) {
     var videoElement = popVideoInUse(id);
     if (videoElement) {
-    	//pushVideoStandBy(videoElement);
+    	pushVideoInUse(id, videoElement);
       videoElement.pause();
 			videoElement.style.display = 'none';
 		}
@@ -559,9 +557,9 @@ footer{
 
 	function restartRemoteVideo(id) {
     var videoElement = popVideoInUse(id);
-    console.log("videoElement.id = " + videoElement.id);
+    console.log("videoElement.src = " + videoElement.src);
 		if (videoElement) {
-    	//pushVideoStandBy(videoElement);
+    	pushVideoInUse(id, videoElement);
 			videoElement.style.display = 'block';
       videoElement.play();
 		}
