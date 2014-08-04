@@ -531,6 +531,7 @@ footer{
 		if(saveLocalVideo != null) {
 			localVideo.src = saveLocalVideo;
 			startVideo();
+			sendOffer(socketId);
 			saveLocalVideo = null;
 		}
 	}
@@ -540,11 +541,12 @@ footer{
 			saveLocalVideo = localVideo.src;
 			var local_window = localVideo[0];
 			navigator.getUserMedia(
-				{local_window: 
+				{video: 
 					{mandatory: {chromeMediaSource: 'screen'}}},
 					function(stream) {
 						local_window.src = window.URL.createObjectURL(stream);
-						local_window.play();
+						startVideo();
+						sendOffer(socketId);
 					},
 					function(error) {
 						console.error(error.code, 'connection failed.');
