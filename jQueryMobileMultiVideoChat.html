@@ -399,10 +399,12 @@ footer{
   }
 
 	function onClosed(id) {
-		detachVideo(id);  
-		stopConnection(id);
-		console.log("onClosed");
-		return;
+		if(stopFlag != 1) { 
+			detachVideo(id);
+			stopConnection(id);
+			console.log("onClosed");
+			return;
+		}
  	}
 
   function getRoom() { 
