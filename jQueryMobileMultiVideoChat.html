@@ -534,12 +534,11 @@ footer{
  
   // stop remote video
   function stopRemoteVideo(id) {
-    var videoElement = popVideoInUse(id);
-    if (videoElement) {
-      videoElement.pause();
-			videoElement.style.display = 'none';
-    	pushVideoInUse(id, videoElement);
-			pushVideoStandBy(videoElement);
+    //var videoElement = popVideoInUse(id);
+    if (videoElementsInUse[id]) {
+      videoElementInUse[id].pause();
+			videoElementInUse[id].style.display = 'none';
+    	//pushVideoInUse(id, videoElement);
 		}
   }
 
@@ -553,13 +552,12 @@ footer{
 	}
 
 	function restartRemoteVideo(id) {
-    var videoElement = popVideoInUse(id);
-    console.log("videoElement.src = " + videoElement.src);
-		if (videoElement) {
-			videoElement.style.display = 'block';
-      videoElement.play();
-    	pushVideoInUse(id, videoElement);
-			pushVideoStandBy(videoElement);
+    //var videoElement = popVideoInUse(id);
+    //console.log("videoElement.src = " + videoElement.src);
+		if (videoElementInUse[id]) {
+			videoElementInUse[id].style.display = 'block';
+      videoElementInUse[id].play();
+    	//pushVideoInUse(id, videoElement);
 		}
 	}
 
