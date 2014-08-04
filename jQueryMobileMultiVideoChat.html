@@ -29,9 +29,9 @@
 
   <div role="main" class="ui-content">
 		<div data-role="controlgroup" data-type="horizontal" data-inline="true" data-mini="true">
-			<button class="ui-btn" id="video_on" onclick="startVideo();">Video ON</button>
+			<button class="ui-btn" id="video_on" onclick="restartVideo();">Video ON</button>
 			<button class="ui-btn" id="video_off" onclick="stopVideo();">Video OFF</button>
-		  <button class="ui-btn" id="connect" onclick="call();">Connect</button>
+		  <button class="ui-btn" id="画面共有" onclick="jointWindow()();">Connect</button>
 		  <button class="ui-btn" id="exit" onclick="exit();">Exit</button>
 		</div>  
 		<br />
@@ -60,7 +60,9 @@ footer{
 <script charset="UTF-8">
   var localVideo = null;
   var localStream = null;
-  var peerConnection = null;
+	var saveLocalVideo = null;
+  var jointFlag = 0;
+	var peerConnection = null;
   var peerStarted = false;
   var mediaConstraints = {'mandatory': {'OfferToReceiveAudio':true , 'OfferToReceiveVideo':true }};
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
@@ -518,9 +520,46 @@ footer{
  
   // stop local video
   function stopVideo() {
-    localVideo.src = "";
-    localStream.stop();
+		if(localVideo.src != "") {
+			saveLocalVideo = localVideo.src;
+  	  localVideo.src = "";
+   		localStream.stop();
+		}
   }
+
+	function restartVideo() {
+		if(saveLocalVideo != null) {
+			localVideo.src = saveLocalVideo;
+			localVideo.play();
+			saveLocalVideo = null;
+		}
+	}
+
+	function jointWindow() {
+		if(jointFlag == 0) {
+			saveLocalVideo = localVideo.src;
+			var local_window = localVideo[0];
+			navigator.getUserMedia(
+				{local_window: 
+					{mandatory: {chromeMediaSource: 'screen'}}},
+					function(stream) {
+						local_window.src = window.URL.createObjectURL(stream);
+						local_window.play();
+					},
+					function(error) {
+						console.error(error.code, 'connection failed.');
+					}
+			);
+			jointFlag = 1;
+		}
+		else {
+			localVideo.src = saveLocalVideo;
+			localVideo.play();
+			jointFlag = 0;
+			saveLocalVideo = null;
+		}
+	}
+									
  
   // ---------------------- connection handling -----------------------
   function prepareNewConnection(id) {
