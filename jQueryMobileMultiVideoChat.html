@@ -531,7 +531,8 @@ footer{
 		if(saveLocalVideo != null) {
 			localVideo.src = saveLocalVideo;
 			startVideo();
-			sendOffer(socketId);
+			// sendOffer(socketId);
+    	socket.json.send({type: "call"});
 			saveLocalVideo = null;
 		}
 	}
@@ -546,7 +547,8 @@ footer{
 					function(stream) {
 						local_window.src = window.URL.createObjectURL(stream);
 						startVideo();
-						sendOffer(socketId);
+						// sendOffer(socketId);
+    				socket.json.send({type: "call"});
 					},
 					function(error) {
 						console.error(error.code, 'connection failed.');
