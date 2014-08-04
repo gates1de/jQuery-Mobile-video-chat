@@ -31,7 +31,6 @@
 		<div data-role="controlgroup" data-type="horizontal" data-inline="true" data-mini="true">
 			<button class="ui-btn" id="video_on" onclick="restartLocalVideo();">Video ON</button>
 			<button class="ui-btn" id="video_off" onclick="stopLocalVideo();">Video OFF</button>
-		  <button class="ui-btn" id="joint_window" onclick="jointWindow();">画面共有</button>
 		  <button class="ui-btn" id="exit" onclick="exit();">Exit</button>
 		</div>  
 		<br />
@@ -61,7 +60,6 @@ footer{
   var localVideo = null;
   var localStream = null;
 	var saveLocalVideo = null;
-  var jointFlag = 0;
 	var stopFlag = 0;
 	var peerConnection = null;
   var peerStarted = false;
@@ -563,42 +561,6 @@ footer{
 		}
 	}
 
-	function jointWindow() {
-		if(jointFlag == 0) {
-			saveLocalVideo = localVideo.src;
-			$(function() {
-      	var video = $('#joint_video')[0];
-      	navigator.webkitGetUserMedia(
-      	  {
-      	    video: {
-      	      mandatory: {
-      	        chromeMediaSource : 'screen',
-      	        minWidth          : 640,
-      	        maxWidth          : 320,
-      	        minHeight         : 360,
-      	        maxHeight         : 160
-      	      }
-      	    }
-      	  },
-      	  function(stream) {
-      	    video.src = window.URL.createObjectURL(stream);
-      	    video.play();
-      	  },
-      	  function(error) {
-      	    console.error(error.code, 'connection failed');
-      	  }
-     		 );
-   		});
-			jointFlag = 1;
-		}
-		else {
-			localVideo.src = saveLocalVideo;
-			localVideo.play();
-			jointFlag = 0;
-			saveLocalVideo = null;
-		}
-	}
-									
  
   // ---------------------- connection handling -----------------------
   function prepareNewConnection(id) {
@@ -1000,6 +962,5 @@ function extractSendAudioFlowInfo(res, allStats) {
     },1000);       
   }
 </script>
-<video id="joint_video" width="640" height="360"></video>
 </body>
 </html>
