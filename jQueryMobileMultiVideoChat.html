@@ -31,7 +31,7 @@
 		<div data-role="controlgroup" data-type="horizontal" data-inline="true" data-mini="true">
 			<button class="ui-btn" id="video_on" onclick="restartVideo();">Video ON</button>
 			<button class="ui-btn" id="video_off" onclick="stopVideo();">Video OFF</button>
-		  <button class="ui-btn" id="画面共有" onclick="jointWindow()();">Connect</button>
+		  <button class="ui-btn" id="joint_window" onclick="jointWindow();">画面共有</button>
 		  <button class="ui-btn" id="exit" onclick="exit();">Exit</button>
 		</div>  
 		<br />
@@ -530,7 +530,7 @@ footer{
 	function restartVideo() {
 		if(saveLocalVideo != null) {
 			localVideo.src = saveLocalVideo;
-			localVideo.play();
+			startVideo();
 			saveLocalVideo = null;
 		}
 	}
