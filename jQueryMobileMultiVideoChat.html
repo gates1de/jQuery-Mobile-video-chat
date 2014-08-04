@@ -383,7 +383,7 @@ footer{
     } else if (event.type === 'candidate' && isPeerStarted()) { // **
       console.log('Received ICE candidate...');
       onCandidate(event);
-		}	else if (event.type === 'video_on') {
+		}	else if (event.type === 'video_on' && isPeerStarted()) {
 			restartRemoteVideo(id);
 		}	else if (event.type === 'video_off' && isPeerStarted()) {
 			stopRemoteVideo(id);
@@ -537,16 +537,16 @@ footer{
   function stopRemoteVideo(id) {
     var videoElement = popVideoInUse(id);
     if (videoElement) {
+    	pushVideoStandBy(videoElement);
       videoElement.pause();
 			videoElement.style.display = 'none';
-      pushVideoStandBy(videoElement);
 		}
   }
 
 	function restartLocalVideo() {
 		if (stopFlag == 1) {
-			localVideo.play();
 			localVideo.style.display = 'block';
+			localVideo.play();
 			socket.json.send({type: "video_on"});
 			stopFlag = 0;
 		}
@@ -556,9 +556,9 @@ footer{
     var videoElement = popVideoInUse(id);
     console.log("videoElement.id = " + videoElement.id);
 		if (videoElement) {
-      videoElement.play();
+    	pushVideoStandBy(videoElement);
 			videoElement.style.display = 'block';
-      pushVideoStandBy(videoElement);
+      videoElement.play();
 		}
 	}
 
