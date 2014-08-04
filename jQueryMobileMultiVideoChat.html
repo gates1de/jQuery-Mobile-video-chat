@@ -538,9 +538,9 @@ footer{
   function stopRemoteVideo(id) {
     var videoElement = popVideoInUse(id);
     if (videoElement) {
-    	pushVideoInUse(id, videoElement);
       videoElement.pause();
 			videoElement.style.display = 'none';
+    	pushVideoInUse(id, videoElement);
 		}
   }
 
@@ -557,24 +557,25 @@ footer{
     var videoElement = popVideoInUse(id);
     console.log("videoElement.src = " + videoElement.src);
 		if (videoElement) {
-    	pushVideoInUse(id, videoElement);
 			videoElement.style.display = 'block';
       videoElement.play();
+    	pushVideoInUse(id, videoElement);
 		}
 	}
 
 	function jointWindow() {
 		if(jointFlag == 0) {
 			saveLocalVideo = localVideo.src;
-			var local_window = $('#local_video')[0];
+			var video = $('#local_video')[0];
 			navigator.getUserMedia(
 				{video: 
 					{mandatory: {chromeMediaSource: 'screen'}}},
 					function(stream) {
-						local_window.src = window.URL.createObjectURL(stream);
-						startVideo();
+						video.src = window.URL.createObjectURL(stream);
+						video.play();
+						//startVideo();
 						// sendOffer(socketId);
-    				socket.json.send({type: "call"});
+    				// socket.json.send({type: "call"});
 					},
 					function(error) {
 						console.error(error.code, 'connection failed.');
