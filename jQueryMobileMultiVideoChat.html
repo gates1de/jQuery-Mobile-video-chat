@@ -314,7 +314,6 @@ footer{
 	var socketId;
 	var remoteSocketId;
   // socket: channel connected
-	console.log("start socket");
   socket.on('connect', onOpened)
         .on('message', onMessage);
 
@@ -385,6 +384,7 @@ footer{
       console.log('Received ICE candidate...');
       onCandidate(event);
 		}	else if (event.type === 'video_on' && isPeerStarted()) {
+			console.log("restartRemoteVideo");
 			restartRemoteVideo(id);
 		}	else if (event.type === 'video_off' && isPeerStarted()) {
 			stopRemoteVideo(id);
@@ -397,6 +397,7 @@ footer{
 			detachVideo(id);	
       stopConnection(id);
 		}
+		console.log("onMessage end");
   }
 
 	function onClosed(id) {
