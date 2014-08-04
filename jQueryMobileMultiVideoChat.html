@@ -383,7 +383,7 @@ footer{
     } else if (event.type === 'candidate' && isPeerStarted()) { // **
       console.log('Received ICE candidate...');
       onCandidate(event);
-		}	else if (event.type === 'video_on' && isPeerStarted()) {
+		}	else if (event.type === 'video_on') {
 			restartRemoteVideo(id);
 		}	else if (event.type === 'video_off' && isPeerStarted()) {
 			stopRemoteVideo(id);
