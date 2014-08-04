@@ -538,8 +538,9 @@ footer{
     if (videoElementsInUse[id]) {
       videoElementsInUse[id].pause();
 			videoElementsInUse[id].style.display = 'none';
-			videoElementsStandBy[videoElementsInUse[id].id].pause();
-			videoElementsStandBy[videoElementsInUse[id].id].style.display = 'none';
+    	console.log("1, videoElementsInUse[id].id = " + videoElementsInUse[id].id);
+			//videoElementsStandBy[videoElementsInUse[id].id].pause();
+			//videoElementsStandBy[videoElementsInUse[id].id].style.display = 'none';
 		}
   }
 
@@ -554,12 +555,12 @@ footer{
 
 	function restartRemoteVideo(id) {
     //var videoElement = popVideoInUse(id);
-    //console.log("videoElement.src = " + videoElement.src);
 		if (videoElementsInUse[id]) {
 			videoElementsInUse[id].style.display = 'block';
       videoElementsInUse[id].play();
-			videoElementsStandBy[videoElementsInUse[id].id].style.display = 'block';
-			videoElementsStandBy[videoElementsInUse[id].id].play();
+    	console.log("2, videoElementsInUse[id].id = " + videoElementsInUse[id].id);
+			//videoElementsStandBy[videoElementsInUse[id].id].style.display = 'block';
+			//videoElementsStandBy[videoElementsInUse[id].id].play();
     	//pushVideoInUse(id, videoElement);
 		}
 	}
