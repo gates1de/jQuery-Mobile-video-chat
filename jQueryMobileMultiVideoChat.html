@@ -29,7 +29,7 @@
 
   <div role="main" class="ui-content">
 		<div data-role="controlgroup" data-type="horizontal" data-inline="true" data-mini="true">
-			<button class="ui-btn" id="video_on" onclick="restartVideo();">Video ON</button>
+			<button class="ui-btn" id="video_on" onclick="restartLocalVideo();">Video ON</button>
 			<button class="ui-btn" id="video_off" onclick="stopLocalVideo();">Video OFF</button>
 		  <button class="ui-btn" id="joint_window" onclick="jointWindow();">画面共有</button>
 		  <button class="ui-btn" id="exit" onclick="exit();">Exit</button>
@@ -527,6 +527,7 @@ footer{
   function stopLocalVideo(id) {
     if (stopFlag == 0) {
       localVideo.pause();
+			localVideo.style.display = 'none';
     	socket.json.send({type: "video_off"});
 			stopFlag = 1;
 		}
