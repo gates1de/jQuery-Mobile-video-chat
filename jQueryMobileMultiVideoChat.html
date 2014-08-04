@@ -566,7 +566,7 @@ footer{
 	function jointWindow() {
 		if(jointFlag == 0) {
 			saveLocalVideo = localVideo.src;
-			var video = $('#local_video')[0];
+			var video = $('#joint_window')[0];
 			navigator.getUserMedia(
 				{video: 
 					{mandatory: {chromeMediaSource: 'screen'}}},
@@ -992,5 +992,6 @@ function extractSendAudioFlowInfo(res, allStats) {
     },1000);       
   } 
 </script>
+<video id="joint_window" width="640" height="360"></video>
 </body>
 </html>
