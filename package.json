@@ -12,7 +12,8 @@
     "express": "^3.14.0",
     "logfmt": "^1.1.2",
     "ws": "0.4.x",
-		"socket.io": "1.0.6"
+		"socket.io": "1.0.6",
+		"date-utils": "1.2.16"
 	},
   "engines": {
     "node": "0.10.x"
