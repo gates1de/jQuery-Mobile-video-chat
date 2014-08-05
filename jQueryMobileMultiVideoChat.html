@@ -450,12 +450,7 @@ footer{
    		document.location = "http://temp-gateside-app.herokuapp.com/regist.php";
 		}
    	else { 
-			if(stopFlag == 1) {
-   			return decodeURI(qs[1]) + "(video off中)";
-			}
-			else {
-				return decodeURI(qs[1]);
-			}
+			return decodeURI(qs[1]);
 		}
 	}
   
@@ -530,6 +525,7 @@ footer{
 			socket.json.send({type: "user disconnected"});
       localVideo.pause();
 			localVideo.style.display = 'none';
+			socket.emit('setUserName', userName + "(video off中)");
     	getUserMedia(false, true);
 			socket.json.send({type: "video_off"});
 			stopFlag = 1;
@@ -547,6 +543,7 @@ footer{
 			stopAllConnections();
 			detachAllVideo();
 			localVideo.style.display = 'block';
+			socket.emit('setUserName', userName);
 			getUserMedia(true, true);
 			socket.json.send({type: "video_on"});
 			stopFlag = 0;
