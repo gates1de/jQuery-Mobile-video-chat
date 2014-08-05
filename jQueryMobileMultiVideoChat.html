@@ -522,10 +522,9 @@ footer{
       localVideo.pause();
 			localVideo.style.display = 'none';
 			//stopAllConnections();
-			socket.emit('disconnect');
+			socket.json.send({type: "user disconnected"});
     	getUserMedia(false, true);
 			call();
-			//socket.json.send({type: "video_off"});
 			stopFlag = 1;
 		}
   }
