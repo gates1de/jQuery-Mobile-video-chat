@@ -388,9 +388,9 @@ footer{
     } else if (event.type === 'candidate' && isPeerStarted()) { // **
       console.log('Received ICE candidate...');
       onCandidate(event);
-		}	else if (event.type === 'video_on' && isPeerStarted()) {
+		}	else if (event.type === 'video_on') {
 			restartRemoteVideo();
-		}	else if (event.type === 'video_off' && isPeerStarted()) {
+		}	else if (event.type === 'video_off') {
 			stopRemoteVideo();
     } else if (event.type === 'user disconnected' && isPeerStarted()) { // **
       console.log("disconnected");
