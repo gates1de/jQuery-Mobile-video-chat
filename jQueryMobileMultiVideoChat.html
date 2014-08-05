@@ -661,6 +661,7 @@ footer{
     }
     else {
       console.error('peerConnection already exist!');
+      conn.peerconnection.setRemoteDescription(new RTCSessionDescription(event));
     }
   }
   
