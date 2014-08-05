@@ -294,7 +294,7 @@ footer{
 		}
 		$("#user_name_remote_video" + num).draggable();
 		$("#remote_ui-bar" + num).resizable({ alsoResize: '#remote_video' + num });	
-		setTimeout("pushVideoStandBy(getVideoForRemote(' + num + '))", 1000);
+		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
 
