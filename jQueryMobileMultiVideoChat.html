@@ -541,7 +541,7 @@ footer{
 			localVideo.style.display = 'block';
 			localVideo.play();
 			getUserMedia(true, true);
-			for(var id in connections)
+			for(var id in connections) {
 				sendOffer(connections[id]);
 			}
 			//socket.json.send({type: "video_on"});
