@@ -546,7 +546,8 @@ footer{
 			videoElementsInUse[remote_id].style.display = 'none';
     	console.log("1, videoElementsInUse[remote_id].id = " + videoElementsInUse[remote_id].id);
 			console.log(videoElementsStandBy);
-			//videoElementsStandBy[videoElementsInUse[remote_id].id].style.display = 'none';
+			videoElementsStandBy[videoElementsInUse[remote_id].id].pause();
+			videoElementsStandBy[videoElementsInUse[remote_id].id].style.display = 'none';
 		}
   }
 
@@ -565,8 +566,8 @@ footer{
 			videoElementsInUse[remote_id].style.display = 'block';
       videoElementsInUse[remote_id].play();
     	console.log("2, videoElementsInUse[remote_id].id = " + videoElementsInUse[remote_id].id);
-			//videoElementsStandBy["remote_video1"].style.display = 'block';
-			//videoElementsStandBy[videoElementsInUse[remote_id].id].play();
+			videoElementsStandBy["remote_video1"].style.display = 'block';
+			videoElementsStandBy[videoElementsInUse[remote_id].id].play();
     	//pushVideoInUse(id, videoElement);
 		}
 	}
