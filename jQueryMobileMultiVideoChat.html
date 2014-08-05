@@ -521,7 +521,8 @@ footer{
     if (stopFlag == 0) {
       localVideo.pause();
 			localVideo.style.display = 'none';
-			stopConnection(socketId);	
+			//stopAllConnections();
+			socket.emit('disconnect');
     	getUserMedia(false, true);
 			call();
 			//socket.json.send({type: "video_off"});
