@@ -522,20 +522,15 @@ footer{
 			socket.json.send({type: "user disconnected"});
       localVideo.pause();
 			localVideo.style.display = 'none';
-			//stopAllConnections();
     	getUserMedia(false, true);
+			socket.json.send({type: "video_off"});
 			stopFlag = 1;
 		}
   }
  
   // stop remote video
   function stopRemoteVideo(remote_id) {
-    //var videoElement = popVideoInUse(remote_id);
-    if (videoElementsInUse[remote_id]) {
-			setTimeout("call()", 2000);
-      videoElementsInUse[remote_id].pause();
-			videoElementsInUse[remote_id].style.display = 'none';
-		}
+		setTimeout("call()", 2000);
   }
 
 	function restartLocalVideo() {
@@ -543,18 +538,13 @@ footer{
 			socket.json.send({type: "user disconnected"});
 			localVideo.style.display = 'block';
 			getUserMedia(true, true);
-			//socket.json.send({type: "video_on"});
+			socket.json.send({type: "video_on"});
 			stopFlag = 0;
 		}
 	}
 
 	function restartRemoteVideo(remote_id) {
-    //var videoElement = popVideoInUse(remote_id);
-		if (videoElementsInUse[remote_id]) {	
-			setTimeout("call()", 2000);
-			videoElementsInUse[remote_id].style.display = 'block';
-      videoElementsInUse[remote_id].play();
-		}
+		setTimeout("call()", 2000);
 	}
 	
 	function getUserMedia(video_bool, audio_bool) {
