@@ -535,7 +535,8 @@ footer{
     if (stopFlag == 0) {
       localVideo.pause();
 			localVideo.style.display = 'none';
-    	socket.json.send({type: "video_off"});
+    	getUserMedia();
+			socket.json.send({type: "video_off"});
 			stopFlag = 1;
 		}
   }
@@ -557,6 +558,7 @@ footer{
 		if (stopFlag == 1) {
 			localVideo.style.display = 'block';
 			localVideo.play();
+			getUserMedia();
 			socket.json.send({type: "video_on"});
 			stopFlag = 0;
 		}
