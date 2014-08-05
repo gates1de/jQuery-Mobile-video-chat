@@ -128,7 +128,7 @@ footer{
 			$("#" + videoElement.id).height(ui_height - 30);
 			console.log("videoElement.src=" + videoElement.src);
 			pushVideoInUse(id, videoElement);
-			popVideoStandBy(videoElement);
+			pushVideoStandBy(videoElement);
 			if(videoElement.style.display != 'none') {
 				//$("video:hidden:first").fadeIn("1500");
 				$("#" + videoElement.id).fadeIn("1500");
