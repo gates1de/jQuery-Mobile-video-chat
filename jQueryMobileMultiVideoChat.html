@@ -635,6 +635,7 @@ footer{
  
   function sendOffer(id) {
     var conn = getConnection(id);
+		console.log(conn);
     if (!conn) {
       conn = prepareNewConnection(id);	
     }
