@@ -536,14 +536,14 @@ footer{
   }
  
   // stop remote video
-  function stopRemoteVideo(id) {
-    //var videoElement = popVideoInUse(id);
-    if (videoElementsInUse[id]) {
-      videoElementsInUse[id].pause();
-			videoElementsInUse[id].style.display = 'none';
-    	console.log("1, videoElementsInUse[id].id = " + videoElementsInUse[id].id);
-			//videoElementsStandBy[videoElementsInUse[id].id].pause();
-			//videoElementsStandBy[videoElementsInUse[id].id].style.display = 'none';
+  function stopRemoteVideo(remote_id) {
+    //var videoElement = popVideoInUse(remote_id);
+    if (videoElementsInUse[remote_id]) {
+      videoElementsInUse[remote_id].pause();
+			videoElementsInUse[remote_id].style.display = 'none';
+    	console.log("1, videoElementsInUse[remote_id].id = " + videoElementsInUse[id].id);
+			videoElementsStandBy[videoElementsInUse[remote_id].id].pause();
+			videoElementsStandBy[videoElementsInUse[remote_id].id].style.display = 'none';
 		}
   }
 
@@ -562,8 +562,8 @@ footer{
 			videoElementsInUse[id].style.display = 'block';
       videoElementsInUse[id].play();
     	console.log("2, videoElementsInUse[id].id = " + videoElementsInUse[id].id);
-			//videoElementsStandBy[videoElementsInUse[id].id].style.display = 'block';
-			//videoElementsStandBy[videoElementsInUse[id].id].play();
+			videoElementsStandBy[videoElementsInUse[id].id].style.display = 'block';
+			videoElementsStandBy[videoElementsInUse[id].id].play();
     	//pushVideoInUse(id, videoElement);
 		}
 	}
@@ -601,7 +601,6 @@ footer{
         conn.established = true;
       }
     };
-     attachMediaStream(localVideo, localStream);
     console.log('Adding local stream...');
     peer.addStream(localStream);
  
