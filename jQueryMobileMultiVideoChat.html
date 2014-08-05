@@ -83,7 +83,7 @@ footer{
 	function getVideoForRemote(index) {
     var elementID = 'remote_video' + index;
     var element = document.getElementById(elementID);
-    console.log(element);
+    console.log("getVideoForRemote" + index);
 		return element;
   }
  
@@ -293,8 +293,8 @@ footer{
 			$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + num + '"><center><video id="remote_video' + num + '" autoplay style="width: ' + remoteVideoWidth + '; height: ' + remoteVideoHeight + ';"></video>' + user_name  + '</center></div></div>'); 
 		}
 		$("#user_name_remote_video" + num).draggable();
-		$("#remote_ui-bar" + num).resizable({ alsoResize: '#remote_video' + num });
-		pushVideoStandBy(getVideoForRemote(num));
+		$("#remote_ui-bar" + num).resizable({ alsoResize: '#remote_video' + num });	
+		setTimeout("pushVideoStandBy(getVideoForRemote(num))", 1000);
 		remote_video_num++;
 	}
 
