@@ -519,10 +519,10 @@ footer{
   // stop local video
   function stopLocalVideo(id) {
     if (stopFlag == 0) {
+			socket.json.send({type: "user disconnected"});
       localVideo.pause();
 			localVideo.style.display = 'none';
 			//stopAllConnections();
-			socket.json.send({type: "user disconnected"});
     	getUserMedia(false, true);
 			setTimeout("call()", 1000);
 			stopFlag = 1;
@@ -540,12 +540,11 @@ footer{
 
 	function restartLocalVideo() {
 		if (stopFlag == 1) {
+			socket.json.send({type: "user disconnected"});
 			localVideo.style.display = 'block';
 			localVideo.play();
 			getUserMedia(true, true);
-			for(var id in connections) {
-				sendOffer(connections[id].id);
-			}
+			setTimeout("call()", 1000);
 			//socket.json.send({type: "video_on"});
 			stopFlag = 0;
 		}
