@@ -519,6 +519,7 @@ footer{
   // stop local video
   function stopLocalVideo(id) {
     if (stopFlag == 0) {
+			localStream.stop();
 			socket.json.send({type: "user disconnected"});
       localVideo.pause();
 			localVideo.style.display = 'none';
