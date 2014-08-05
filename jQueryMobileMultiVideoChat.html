@@ -521,6 +521,7 @@ footer{
     if (stopFlag == 0) {
 			localStream.stop();
 			stopAllConnections();
+			detachAllVideo();
 			socket.json.send({type: "user disconnected"});
       localVideo.pause();
 			localVideo.style.display = 'none';
@@ -532,12 +533,14 @@ footer{
  
   // stop remote video
   function stopRemoteVideo() {
-		setTimeout("call()", 2000);
+		setTimeout("call()", 1000);
   }
 
 	function restartLocalVideo() {
 		if (stopFlag == 1) {
 			socket.json.send({type: "user disconnected"});
+			stopAllConnections();
+			detachAllVideo();
 			localVideo.style.display = 'block';
 			getUserMedia(true, true);
 			socket.json.send({type: "video_on"});
@@ -546,7 +549,7 @@ footer{
 	}
 
 	function restartRemoteVideo() {
-		setTimeout("call()", 2000);
+		setTimeout("call()", 1000);
 	}
 	
 	function getUserMedia(video_bool, audio_bool) {
