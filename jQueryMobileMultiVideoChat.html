@@ -520,6 +520,7 @@ footer{
   function stopLocalVideo(id) {
     if (stopFlag == 0) {
 			localStream.stop();
+			delete connections[socketId];
 			socket.json.send({type: "user disconnected"});
       localVideo.pause();
 			localVideo.style.display = 'none';
