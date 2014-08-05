@@ -122,7 +122,6 @@ footer{
     if (videoElement) {
       // videoElement.src = window.URL.createObjectURL(stream);
 			attachMediaStream(videoElement, stream);
-      console.log(videoElement);
 			var ui_width = remoteVideoWidth;
       var ui_height = remoteVideoHeight;
 			console.log("ui_width = " + ui_width);
@@ -514,21 +513,7 @@ footer{
 		$("#user_name_local_video").draggable();
 		$(".ui-bar-a").resizable({ alsoResize: '#local_video' });
 		}
-		getUserMedia();
-//		navigator.getUserMedia({video: true, audio: true},
-//    	function (stream) { // success
-//      	localStream = stream;
-//      	// localVideo.src = window.webkitURL.createObjectURL(stream);
-//      	attachMediaStream(localVideo, stream);
-//				localVideo.play();
-//      	localVideo.volume = 0;
-//     	},
-//     	function (error) { // error
-//      	console.error('An error occurred:');
-//      	console.error(error);
-//      	return;
-//     	}
-//    );
+		getUserMedia(true, true);
   }
 
   // stop local video
@@ -536,7 +521,7 @@ footer{
     if (stopFlag == 0) {
       localVideo.pause();
 			localVideo.style.display = 'none';
-    	getUserMedia();
+    	getUserMedia(video, true);
 			socket.json.send({type: "video_off"});
 			stopFlag = 1;
 		}
@@ -555,7 +540,7 @@ footer{
 		if (stopFlag == 1) {
 			localVideo.style.display = 'block';
 			localVideo.play();
-			getUserMedia();
+			getUserMedia(true, true);
 			socket.json.send({type: "video_on"});
 			stopFlag = 0;
 		}
@@ -569,8 +554,8 @@ footer{
 		}
 	}
 	
-	function getUserMedia() {
-		navigator.getUserMedia({video: true, audio: true},
+	function getUserMedia(video_bool, audio_bool) {
+		navigator.getUserMedia({video: video_bool, audio: audio_bool},
     	function (stream) { // success
       	localStream = stream;
       	// localVideo.src = window.webkitURL.createObjectURL(stream);
