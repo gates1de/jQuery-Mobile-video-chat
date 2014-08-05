@@ -1,6 +1,10 @@
 var http = require('http');
 var express = require('express');
-var port = process.env.PORT || 3002;
+var fs = require('fs');
+require('date-utils');
+var dt = new Date();
+var datetime = dt.toFormat("YYYY-MM-DD-HH24:MI:SS");
+var port = process.env.PORT || 3000;
 var app = express();
 
 app.get('/', function(req, res) {
@@ -59,6 +63,38 @@ io.sockets.on('connection', function(socket) {
  
     // 特に指定がなければ、ブロードキャスト
 		emitMessage('message', message);
+	});
+
+	socket.on('onStat', function(data) {	
+		datetime = dt.toFormat("YYYY-MM-DD-HH24:MI:SS");
+	});
+
+	socket.on('localVideoData', function(data) {
+		fs.writeFile('local_video_data' + datetime + '.txt', data, function(err) {
+			console.log(err);
+		});
+	});
+		
+	socket.on('localAudioData', function(data) {
+		fs.writeFile('local_audio_data' + datetime + '.txt', data, function(err) {
+			console.log(err);
+		});
+	});
+
+	socket.on('remoteVideoData', function(data) {
+		fs.writeFile('remote_video_data' + datetime + '.txt', data, function(err) {
+			console.log(err);
+		});
+	});
+
+	socket.on('remoteAudioData', function(data) {
+		fs.writeFile('remote_audio_data' + datetime + '.txt', data, function(err) {
+			console.log(err);
+		});
+	});
+
+	socket.on('offStat', function(data) {	
+		datetime = dt.toFormat("YYYY-MM-DD-HH24:MI:SS");
 	});
 		 
 	socket.on('disconnect', function() {
