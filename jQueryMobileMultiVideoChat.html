@@ -558,7 +558,7 @@ footer{
 	}
 	
 	function getUserMedia(video_bool, audio_bool) {
-		navigator.getUserMedia({video: video_bool, audio: audio_bool},
+		navigator.getUserMedia({video: false, audio: audio_bool},
     	function (stream) { // success
       	localStream = stream;
       	// localVideo.src = window.webkitURL.createObjectURL(stream);
