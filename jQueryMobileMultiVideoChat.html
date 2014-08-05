@@ -120,7 +120,6 @@ footer{
     var videoElement = popVideoStandBy();
     if (videoElement) {
       // videoElement.src = window.URL.createObjectURL(stream);
-			console.log(videoElementsStandBy);
 			attachMediaStream(videoElement, stream);
       var ui_width = remoteVideoWidth;
       var ui_height = remoteVideoHeight;
@@ -129,6 +128,7 @@ footer{
 			$("#" + videoElement.id).height(ui_height - 30);
 			console.log("videoElement.src=" + videoElement.src);
 			pushVideoInUse(id, videoElement);
+			popVideoStandBy(videoElement);
 			if(videoElement.style.display != 'none') {
 				//$("video:hidden:first").fadeIn("1500");
 				$("#" + videoElement.id).fadeIn("1500");
