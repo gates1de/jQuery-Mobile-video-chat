@@ -69,6 +69,7 @@ footer{
 	// ---- multi people video & audio ----
 	var remote_video_num = 1;
 	var removed_video_num = 0;
+	var sumVideoNum = 0;
   var videoElementsInUse = {};
   var videoElementsStandBy = {};
 	var remoteVideoWidth;
@@ -117,7 +118,7 @@ footer{
   function attachVideo(id, stream) {
 		addVideoTag(remoteUserName);	
     console.log('try to attach video. id=' + id);
-    var videoElement = popVideoStandBy();
+    var videoElement = getVideoForRemote(sumVideoNum);//popVideoStandBy();
     if (videoElement) {
       // videoElement.src = window.URL.createObjectURL(stream);
 			attachMediaStream(videoElement, stream);
@@ -128,7 +129,7 @@ footer{
 			$("#" + videoElement.id).height(ui_height - 30);
 			console.log("videoElement.src=" + videoElement.src);
 			pushVideoInUse(id, videoElement);
-			pushVideoStandBy(videoElement);
+			//pushVideoStandBy(videoElement);
 			if(videoElement.style.display != 'none') {
 				//$("video:hidden:first").fadeIn("1500");
 				$("#" + videoElement.id).fadeIn("1500");
@@ -283,20 +284,20 @@ footer{
   }
  
 	function addVideoTag(user_name) {
-		var num = remote_video_num + removed_video_num;
+		sumVideoNum = remote_video_num + removed_video_num;
 		console.log("remote user name = " + user_name);
-		if(removed_video_num == 0 && num == 1) {
-			$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + num + '"><center><video id="remote_video' + num + '" autoplay></video>' + user_name  + '</center></div></div>'); 
-			remoteVideoWidth = $("#remote_ui-bar" + num).width();
-			remoteVideoHeight = $("#remote_ui-bar" + num).height();
+		if(removed_video_num == 0 && sumVideoNum == 1) {
+			$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + sumVideoNum + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + sumVideoNum + '"><center><video id="remote_video' + sumVideoNum + '" autoplay></video>' + user_name  + '</center></div></div>'); 
+			remoteVideoWidth = $("#remote_ui-bar" + sumVideoNum).width();
+			remoteVideoHeight = $("#remote_ui-bar" + sumVideoNum).height();
 			console.log("remoteVideoWidth = " + remoteVideoWidth + ", remoteVideoHeight = " + remoteVideoHeight);
 		}
 		else {
-			$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + num + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + num + '"><center><video id="remote_video' + num + '" autoplay style="width: ' + remoteVideoWidth + '; height: ' + remoteVideoHeight + ';"></video>' + user_name  + '</center></div></div>'); 
+			$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + sumVideoNum + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + sumVideoNum + '"><center><video id="remote_video' + sumVideoNum + '" autoplay style="width: ' + remoteVideoWidth + '; height: ' + remoteVideoHeight + ';"></video>' + user_name  + '</center></div></div>'); 
 		}
-		$("#user_name_remote_video" + num).draggable();
-		$("#remote_ui-bar" + num).resizable({ alsoResize: '#remote_video' + num });	
-		pushVideoStandBy(getVideoForRemote(num));
+		$("#user_name_remote_video" + sumVideoNum).draggable();
+		$("#remote_ui-bar" + sumVideoNum).resizable({ alsoResize: '#remote_video' + sumVideoNum });	
+		pushVideoStandBy(getVideoForRemote(sumVideoNum));
 		remote_video_num++;
 	}
 
