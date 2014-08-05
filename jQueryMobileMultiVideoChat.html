@@ -89,10 +89,7 @@ footer{
  
   // ---- video element management ---
   function pushVideoStandBy(element) {
-    var video_object = {};
-		video_object[element.id] = element;
-		return video_object;
-		// videoElementsStandBy[element.id] = element;
+		videoElementsStandBy[element.id] = element;
 		console.log(videoElementsStandBy);
 		console.log('element.id = ' + element.id);
   }
@@ -123,6 +120,7 @@ footer{
     var videoElement = popVideoStandBy();
     if (videoElement) {
       // videoElement.src = window.URL.createObjectURL(stream);
+			console.log(videoElementsStandBy);
 			attachMediaStream(videoElement, stream);
       var ui_width = remoteVideoWidth;
       var ui_height = remoteVideoHeight;
@@ -298,7 +296,7 @@ footer{
 		}
 		$("#user_name_remote_video" + num).draggable();
 		$("#remote_ui-bar" + num).resizable({ alsoResize: '#remote_video' + num });	
-		videoElementsStandBy = pushVideoStandBy(getVideoForRemote(num));
+		pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
 
