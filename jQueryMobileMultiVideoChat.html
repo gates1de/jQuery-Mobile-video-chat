@@ -601,7 +601,7 @@ footer{
         conn.established = true;
       }
     };
- 
+     attachMediaStream(localVideo, localStream);
     console.log('Adding local stream...');
     peer.addStream(localStream);
  
