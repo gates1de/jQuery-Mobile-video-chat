@@ -389,9 +389,9 @@ footer{
       console.log('Received ICE candidate...');
       onCandidate(event);
 		}	else if (event.type === 'video_on' && isPeerStarted()) {
-			restartRemoteVideo(id);
+			restartRemoteVideo();
 		}	else if (event.type === 'video_off' && isPeerStarted()) {
-			stopRemoteVideo(id);
+			stopRemoteVideo();
     } else if (event.type === 'user disconnected' && isPeerStarted()) { // **
       console.log("disconnected");
       //stop();
@@ -529,7 +529,7 @@ footer{
   }
  
   // stop remote video
-  function stopRemoteVideo(remote_id) {
+  function stopRemoteVideo() {
 		setTimeout("call()", 2000);
   }
 
@@ -543,7 +543,7 @@ footer{
 		}
 	}
 
-	function restartRemoteVideo(remote_id) {
+	function restartRemoteVideo() {
 		setTimeout("call()", 2000);
 	}
 	
