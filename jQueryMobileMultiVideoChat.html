@@ -513,20 +513,21 @@ footer{
 		$("#user_name_local_video").draggable();
 		$(".ui-bar-a").resizable({ alsoResize: '#local_video' });
 		}
-		navigator.getUserMedia({video: true, audio: true},
-    	function (stream) { // success
-      	localStream = stream;
-      	// localVideo.src = window.webkitURL.createObjectURL(stream);
-      	attachMediaStream(localVideo, stream);
-				localVideo.play();
-      	localVideo.volume = 0;
-     	},
-     	function (error) { // error
-      	console.error('An error occurred:');
-      	console.error(error);
-      	return;
-     	}
-    );
+		getUserMedia();
+//		navigator.getUserMedia({video: true, audio: true},
+//    	function (stream) { // success
+//      	localStream = stream;
+//      	// localVideo.src = window.webkitURL.createObjectURL(stream);
+//      	attachMediaStream(localVideo, stream);
+//				localVideo.play();
+//      	localVideo.volume = 0;
+//     	},
+//     	function (error) { // error
+//      	console.error('An error occurred:');
+//      	console.error(error);
+//      	return;
+//     	}
+//    );
   }
 
   // stop local video
@@ -572,14 +573,24 @@ footer{
     	//pushVideoInUse(id, videoElement);
 		}
 	}
+	
+	function getUserMedia() {
+		navigator.getUserMedia({video: true, audio: true},
+    	function (stream) { // success
+      	localStream = stream;
+      	// localVideo.src = window.webkitURL.createObjectURL(stream);
+      	attachMediaStream(localVideo, stream);
+				localVideo.play();
+      	localVideo.volume = 0;
+     	},
+     	function (error) { // error
+      	console.error('An error occurred:');
+      	console.error(error);
+      	return;
+     	}
+    );
+	}
 
-	function printProperties(obj) {
-    var properties = '';
-    for (var prop in obj){
-        properties += prop + "=" + obj[prop] + "\n";
-    }
-    alert(properties);
-	} 
   // ---------------------- connection handling -----------------------
   function prepareNewConnection(id) {
     var pc_config = {"iceServers":[ {"url":"stun:stun.220.110.149.250:3478"}, 
