@@ -122,7 +122,8 @@ footer{
     if (videoElement) {
       // videoElement.src = window.URL.createObjectURL(stream);
 			attachMediaStream(videoElement, stream);
-      var ui_width = remoteVideoWidth;
+      console.log(videoElement);
+			var ui_width = remoteVideoWidth;
       var ui_height = remoteVideoHeight;
 			console.log("ui_width = " + ui_width);
 			$("#" + videoElement.id).width(ui_width);
@@ -547,10 +548,6 @@ footer{
     if (videoElementsInUse[remote_id]) {
       videoElementsInUse[remote_id].pause();
 			videoElementsInUse[remote_id].style.display = 'none';
-    	console.log("1, videoElementsInUse[remote_id].id = " + videoElementsInUse[remote_id].id);
-			console.log(videoElementsStandBy);
-			videoElementsStandBy[videoElementsInUse[remote_id].id].pause();
-			videoElementsStandBy[videoElementsInUse[remote_id].id].style.display = 'none';
 		}
   }
 
@@ -569,10 +566,6 @@ footer{
 		if (videoElementsInUse[remote_id]) {
 			videoElementsInUse[remote_id].style.display = 'block';
       videoElementsInUse[remote_id].play();
-    	console.log("2, videoElementsInUse[remote_id].id = " + videoElementsInUse[remote_id].id);
-			videoElementsStandBy["remote_video1"].style.display = 'block';
-			videoElementsStandBy[videoElementsInUse[remote_id].id].play();
-    	//pushVideoInUse(id, videoElement);
 		}
 	}
 	
