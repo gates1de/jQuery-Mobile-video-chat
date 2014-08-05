@@ -541,7 +541,8 @@ footer{
 			localVideo.style.display = 'block';
 			localVideo.play();
 			getUserMedia(true, true);
-			socket.json.send({type: "video_on"});
+			sendOffer(socketId);
+			//socket.json.send({type: "video_on"});
 			stopFlag = 0;
 		}
 	}
@@ -559,7 +560,8 @@ footer{
     	function (stream) { // success
       	localStream = stream;
       	// localVideo.src = window.webkitURL.createObjectURL(stream);
-      	attachMediaStream(localVideo, stream);
+      	console.log(localStream);
+				attachMediaStream(localVideo, stream);
 				localVideo.play();
       	localVideo.volume = 0;
      	},
