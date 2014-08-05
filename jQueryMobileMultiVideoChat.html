@@ -522,7 +522,11 @@ footer{
       localVideo.pause();
 			localVideo.style.display = 'none';
     	getUserMedia(false, true);
-			socket.json.send({type: "video_off"});
+			
+			for(var id in connections) {
+				sendOffer(connections[id].id);
+			}
+			//socket.json.send({type: "video_off"});
 			stopFlag = 1;
 		}
   }
@@ -558,7 +562,7 @@ footer{
 	}
 	
 	function getUserMedia(video_bool, audio_bool) {
-		navigator.getUserMedia({video: false, audio: audio_bool},
+		navigator.getUserMedia({video: video_bool, audio: audio_bool},
     	function (stream) { // success
       	localStream = stream;
       	// localVideo.src = window.webkitURL.createObjectURL(stream);
