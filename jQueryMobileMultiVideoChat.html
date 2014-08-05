@@ -89,7 +89,10 @@ footer{
  
   // ---- video element management ---
   function pushVideoStandBy(element) {
-    videoElementsStandBy[element.id] = element;
+    var video_object = {};
+		video_object[element.id] = element;
+		return video_object;
+		// videoElementsStandBy[element.id] = element;
 		console.log(videoElementsStandBy);
 		console.log('element.id = ' + element.id);
   }
@@ -295,7 +298,7 @@ footer{
 		}
 		$("#user_name_remote_video" + num).draggable();
 		$("#remote_ui-bar" + num).resizable({ alsoResize: '#remote_video' + num });	
-		pushVideoStandBy(getVideoForRemote(num));
+		videoElementsStandBy = pushVideoStandBy(getVideoForRemote(num));
 		remote_video_num++;
 	}
 
