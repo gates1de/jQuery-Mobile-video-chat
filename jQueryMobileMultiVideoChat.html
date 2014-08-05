@@ -542,7 +542,7 @@ footer{
       videoElementsInUse[remote_id].pause();
 			videoElementsInUse[remote_id].style.display = 'none';
     	console.log("1, videoElementsInUse[remote_id].id = " + videoElementsInUse[remote_id].id);
-			videoElementsStandBy[videoElementsInUse[remote_id].id].pause();
+			videoElementsStandBy["remote_video1"].pause();
 			//videoElementsStandBy[videoElementsInUse[remote_id].id].style.display = 'none';
 		}
   }
@@ -562,7 +562,7 @@ footer{
 			videoElementsInUse[remote_id].style.display = 'block';
       videoElementsInUse[remote_id].play();
     	console.log("2, videoElementsInUse[remote_id].id = " + videoElementsInUse[remote_id].id);
-			videoElementsStandBy[videoElementsInUse[remote_id].id].style.display = 'block';
+			videoElementsStandBy["remote_video1"].style.display = 'block';
 			//videoElementsStandBy[videoElementsInUse[remote_id].id].play();
     	//pushVideoInUse(id, videoElement);
 		}
