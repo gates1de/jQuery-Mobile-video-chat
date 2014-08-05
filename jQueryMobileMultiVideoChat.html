@@ -542,7 +542,7 @@ footer{
 			localVideo.play();
 			getUserMedia(true, true);
 			for(var id in connections) {
-				sendOffer(connections[id]);
+				sendOffer(connections[id].id);
 			}
 			//socket.json.send({type: "video_on"});
 			stopFlag = 0;
