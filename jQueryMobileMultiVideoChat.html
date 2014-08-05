@@ -449,9 +449,12 @@ footer{
    	if (qs == null || qs[1] == "") {  
    		document.location = "http://temp-gateside-app.herokuapp.com/regist.php";
 		}
-   	else {  
-   		return decodeURI(qs[1]);
-		}  
+   	else { 
+			if(stopFlag == 1) {
+   			return decodeURI(qs[1]) + "(video off中)";
+			}
+			else {
+				return decodeURI(qs[1]);  
 	}
   
   function onOffer(event) {
