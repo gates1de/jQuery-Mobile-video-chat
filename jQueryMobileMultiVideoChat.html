@@ -524,7 +524,7 @@ footer{
 			//stopAllConnections();
 			socket.json.send({type: "user disconnected"});
     	getUserMedia(false, true);
-			setTime("call()", 1000);
+			setTimeout("call()", 1000);
 			stopFlag = 1;
 		}
   }
