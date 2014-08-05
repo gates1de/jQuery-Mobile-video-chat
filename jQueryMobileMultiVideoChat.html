@@ -524,7 +524,7 @@ footer{
 			localVideo.style.display = 'none';
 			//stopAllConnections();
     	getUserMedia(false, true);
-			setTimeout("call()", 1000);
+			setTimeout("call()", 2000);
 			stopFlag = 1;
 		}
   }
@@ -542,9 +542,8 @@ footer{
 		if (stopFlag == 1) {
 			socket.json.send({type: "user disconnected"});
 			localVideo.style.display = 'block';
-			localVideo.play();
 			getUserMedia(true, true);
-			setTimeout("call()", 1000);
+			setTimeout("call()", 2000);
 			//socket.json.send({type: "video_on"});
 			stopFlag = 0;
 		}
