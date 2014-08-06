@@ -743,10 +743,12 @@ footer{
 			statistics();
 			socket.on('onStat');
 			statFlag = 1;
+			document.getElementById('stat_button').innerHTML = "計測をやめる";
 		}
 		else if(statFlag == 1) {
 			clearInterval(timer);
 			statFlag = 0;
+			document.getElementById('stat_button').innerHTML = "通信量計測";
 		}
 	}
 

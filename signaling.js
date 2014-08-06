@@ -66,7 +66,7 @@ io.sockets.on('connection', function(socket) {
 	});
 
 	socket.on('onStat', function(data) {	
-		datetime = dt.toFormat("YYYY-MM-DD-HH24:MI:SS");
+		datetime = dt.toFormat("YYYY-MM-DD-HH24hMImSSs");
 	});
 
 	socket.on('localVideoData', function(data) {
