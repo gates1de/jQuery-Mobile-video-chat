@@ -3,7 +3,7 @@ var express = require('express');
 var fs = require('fs');
 require('date-utils');
 var dt = new Date();
-var datetime = dt.toFormat("YYYY-MM-DD-HH24:MI:SS");
+var datetime = dt.toFormat("YYYY-MM-DD-HH24hMImSSs");
 var port = process.env.PORT || 3000;
 var app = express();
 
@@ -65,36 +65,44 @@ io.sockets.on('connection', function(socket) {
 		emitMessage('message', message);
 	});
 
-	socket.on('onStat', function(data) {	
+	socket.on('onStat', function(data) {
+		dt = new Date();
 		datetime = dt.toFormat("YYYY-MM-DD-HH24hMImSSs");
+		console.log("onStat" + datetime);
 	});
 
 	socket.on('localVideoData', function(data) {
-		fs.writeFile('local_video_data' + datetime + '.txt', data, function(err) {
-			console.log(err);
+		console.log(data);
+		fs.appendFile('stat_data/local_video_data' + datetime + '.txt', data + "\n", function(err) {
+			// console.log(err);
 		});
 	});
 		
 	socket.on('localAudioData', function(data) {
-		fs.writeFile('local_audio_data' + datetime + '.txt', data, function(err) {
-			console.log(err);
+		console.log(data);
+		fs.appendFile('stat_data/local_audio_data' + datetime + '.txt', data + "\n", function(err) {
+			// console.log(err);
 		});
 	});
 
 	socket.on('remoteVideoData', function(data) {
-		fs.writeFile('remote_video_data' + datetime + '.txt', data, function(err) {
-			console.log(err);
+		console.log(data);
+		fs.appendFile('stat_data/remote_video_data' + datetime + '.txt', data + "\n", function(err) {
+			// console.log(err);
 		});
 	});
 
 	socket.on('remoteAudioData', function(data) {
-		fs.writeFile('remote_audio_data' + datetime + '.txt', data, function(err) {
-			console.log(err);
+		console.log(data);
+		fs.appendFile('stat_data/remote_audio_data' + datetime + '.txt', data + "\n", function(err) {
+			// console.log(err);
 		});
 	});
 
 	socket.on('offStat', function(data) {	
-		datetime = dt.toFormat("YYYY-MM-DD-HH24:MI:SS");
+		dt = new Date();
+		datetime = dt.toFormat("YYYY-MM-DD-HH24hMImSSs");
+		console.log("offStat" + datetime);
 	});
 		 
 	socket.on('disconnect', function() {

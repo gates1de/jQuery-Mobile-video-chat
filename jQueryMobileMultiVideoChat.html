@@ -69,8 +69,8 @@ footer{
   navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.msGetUserMedia;
 	 
 	// ---- multi people video & audio ----
-	var remote_video_num = 1;
-	var removed_video_num = 0;
+	var remoteVideoNum = 0;
+	var removedVideoNum = 0;
 	var sumVideoNum = 0;
   var videoElementsInUse = {};
   var videoElementsStandBy = {};
@@ -286,15 +286,10 @@ footer{
   }
  
 	function addVideoTag(user_name) {
-		sumVideoNum = remote_video_num + removed_video_num;
-		if(sumVideoNum > 1) {	
-			$('#stat_button').attr('disabled', 'disabled');
-		}
-		else {	
-			$('#stat_button').removeAttr('disabled');
-		}
+		remoteVideoNum++;
+		sumVideoNum = remoteVideoNum + removedVideoNum;
 		console.log("remote user name = " + user_name);
-		if(removed_video_num == 0 && sumVideoNum == 1) {
+		if(removedVideoNum == 0 && sumVideoNum == 1) {
 			$('#all_video').append('<div class="ui-block-a" id="user_name_remote_video' + sumVideoNum + '"><div class="ui-bar ui-bar-b" id="remote_ui-bar' + sumVideoNum + '"><center><video id="remote_video' + sumVideoNum + '" autoplay></video>' + user_name  + '</center></div></div>'); 
 			remoteVideoWidth = $("#remote_ui-bar" + sumVideoNum).width();
 			remoteVideoHeight = $("#remote_ui-bar" + sumVideoNum).height();
@@ -306,15 +301,14 @@ footer{
 		$("#user_name_remote_video" + sumVideoNum).draggable();
 		$("#remote_ui-bar" + sumVideoNum).resizable({ alsoResize: '#remote_video' + sumVideoNum });	
 		pushVideoStandBy(getVideoForRemote(sumVideoNum));
-		remote_video_num++;
 	}
 
 	function removeVideoTag(video_id) {
 		console.log("remove " + video_id);
 		$('#' + video_id).remove();
 		$('#user_name_' + video_id).remove();
-		remote_video_num--;
-		removed_video_num++;
+		remoteVideoNum--;
+		removedVideoNum++;
 	}
 
   // ---- socket ------
@@ -380,7 +374,7 @@ footer{
     }
 		else if (event.type === 'response') {
 			if(localStream) {
-				sendOffer(id);
+				sendOffer(id);	
       	console.log("Send offer.");
 				return;
 			}
@@ -409,6 +403,7 @@ footer{
 			detachVideo(id);	
       stopConnection(id);
 		}
+		setTimeout("stat_disabled()", 1000);
   }
 
 	function onClosed(id) {
@@ -561,6 +556,15 @@ footer{
 	function restartRemoteVideo() {
 		setTimeout("call()", 1000);
 	}
+
+	function stat_disabled() {
+		if(sumVideoNum == 1) {
+			$('#stat_button').removeAttr('disabled');
+		}
+		else {
+			$('#stat_button').attr('disabled', 'disabled');
+		}
+	}
 	
 	function getUserMedia(video_bool, audio_bool) {
 		navigator.getUserMedia({video: video_bool, audio: audio_bool},
@@ -635,6 +639,7 @@ footer{
       console.log("Remove remote stream");
       detachVideo(this.id);
     }
+
  
     return conn;
   }
@@ -741,12 +746,13 @@ footer{
 	function stat_switch() {
 		if(statFlag == 0)	{
 			statistics();
-			socket.on('onStat');
+			socket.emit('onStat');
 			statFlag = 1;
 			document.getElementById('stat_button').innerHTML = "計測をやめる";
 		}
 		else if(statFlag == 1) {
 			clearInterval(timer);
+			socket.emit('offStat');
 			statFlag = 0;
 			document.getElementById('stat_button').innerHTML = "通信量計測";
 		}
@@ -938,6 +944,8 @@ function extractSendAudioFlowInfo(res, allStats) {
   }
 
   function statistics() {
+		sendaudioFlowInfo = null;
+		sendvideoFlowInfo = null;
     timer = setInterval(function() {
       peerConnection.getStats(function(report) {
         stats = new AugumentedStatsResponse(report);
